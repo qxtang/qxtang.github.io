@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my-book - Nginx 笔记</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- 编译时间：11/15/2022, 12:34:44 PM -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="079c4846f4492de09e5c456d89c26df5" class="dir" title="工作沉淀">
+                <span>工作沉淀</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="cc58154c2ed8a033e1bdab835838c37a" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="9c3ac40fb9238d39f71c7af6bc753354" class="children" title="CSS">
+            <a href="/9c3ac40fb9238d39f71c7af6bc753354.html">CSS</a>
+          </li>
+        
+          <li id="89c03bcf1c767af492556c4e3bee49b2" class="children" title="Javascript">
+            <a href="/89c03bcf1c767af492556c4e3bee49b2.html">Javascript</a>
+          </li>
+        
+          <li id="46ad0cb0a383a9a3d8534d3bb1701115" class="children" title="React">
+            <a href="/46ad0cb0a383a9a3d8534d3bb1701115.html">React</a>
+          </li>
+        
+          <li id="83df3dda341d59711de1066064258cc3" class="children" title="Typescript">
+            <a href="/83df3dda341d59711de1066064258cc3.html">Typescript</a>
+          </li>
+        
+          <li id="97fb86e95104d50c595636e7074a4977" class="children" title="指引">
+            <a href="/97fb86e95104d50c595636e7074a4977.html">指引</a>
+          </li>
+        
+          <li id="e0832f81d6fa5851a6a1b32edc71d1ab" class="children" title="通用">
+            <a href="/e0832f81d6fa5851a6a1b32edc71d1ab.html">通用</a>
+          </li>
+        
+            </ul>
+          
+          <li id="c259441ba1b59e345b9198134fbe688a" class="children" title="ADB 通过 Wi-Fi 调试手机">
+            <a href="/c259441ba1b59e345b9198134fbe688a.html">ADB 通过 Wi-Fi 调试手机</a>
+          </li>
+        
+          <li id="18ee921cd515e914d7e5a89fd6bba176" class="children" title="GitFlow 笔记">
+            <a href="/18ee921cd515e914d7e5a89fd6bba176.html">GitFlow 笔记</a>
+          </li>
+        
+          <li id="e9a2550e8c53d313e8e31853512a444e" class="children" title="Nginx 笔记">
+            <a href="/e9a2550e8c53d313e8e31853512a444e.html">Nginx 笔记</a>
+          </li>
+        
+          <li id="3b0a71df838e15d30317921a3fd409de" class="children" title="web应用登录方案">
+            <a href="/3b0a71df838e15d30317921a3fd409de.html">web应用登录方案</a>
+          </li>
+        
+          <li id="a7aff4b7b9eea3d879a7aad0c984a6fb" class="children" title="为什么前端团队要统一技术栈">
+            <a href="/a7aff4b7b9eea3d879a7aad0c984a6fb.html">为什么前端团队要统一技术栈</a>
+          </li>
+        
+          <li id="15c0a89ff7639100c849b3d0090fd083" class="children" title="动态校验企微应用可信域名">
+            <a href="/15c0a89ff7639100c849b3d0090fd083.html">动态校验企微应用可信域名</a>
+          </li>
+        
+          <li id="b113ce2d11fb3ad7fc3a16d27da51e74" class="children" title="工作中遇到问题汇总">
+            <a href="/b113ce2d11fb3ad7fc3a16d27da51e74.html">工作中遇到问题汇总</a>
+          </li>
+        
+          <li id="418a1beec827be890faf7fef2fdb59d8" class="children" title="敏捷迭代模型">
+            <a href="/418a1beec827be890faf7fef2fdb59d8.html">敏捷迭代模型</a>
+          </li>
+        
+          <li id="cdc10d3ed389a940115d2c0e55b9f2c9" class="children" title="真机调试微信 h5 页面">
+            <a href="/cdc10d3ed389a940115d2c0e55b9f2c9.html">真机调试微信 h5 页面</a>
+          </li>
+        
+          <li id="2c345830cc8d387301b8b41dde257133" class="children" title="设计稿多端适配方案">
+            <a href="/2c345830cc8d387301b8b41dde257133.html">设计稿多端适配方案</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="07405a1e638d890ec4968814c210740b" class="dir" title="前端技术">
+                <span>前端技术</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="65251720ce93a86e0baf484ea8ff1fd2" class="children" title="AST抽象语法树">
+            <a href="/65251720ce93a86e0baf484ea8ff1fd2.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="4f33420293c9962d59b3bea05fc9da86" class="children" title="Babel">
+            <a href="/4f33420293c9962d59b3bea05fc9da86.html">Babel</a>
+          </li>
+        
+          <li id="da1cb124c51c98d0dd90ce9db78aa2dc" class="children" title="React源码学习">
+            <a href="/da1cb124c51c98d0dd90ce9db78aa2dc.html">React源码学习</a>
+          </li>
+        
+          <li id="d3c9e089dd008e2d59c32305f690bbb7" class="children" title="微前端">
+            <a href="/d3c9e089dd008e2d59c32305f690bbb7.html">微前端</a>
+          </li>
+        
+          <li id="2227cf216416fc887bc6ecb4f95596a7" class="children" title="性能优化">
+            <a href="/2227cf216416fc887bc6ecb4f95596a7.html">性能优化</a>
+          </li>
+        
+            </ul>
+          
+          <li id="6e812ab51a7eb39b3c4495548c8b8868" class="children" title="css世界、css新世界读书笔记">
+            <a href="/6e812ab51a7eb39b3c4495548c8b8868.html">css世界、css新世界读书笔记</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="nginx-%E7%AC%94%E8%AE%B0" tabindex="-1"><a class="header-anchor" href="#nginx-%E7%AC%94%E8%AE%B0">Nginx 笔记</a></h1>
+<blockquote>
+<p>工作中经常用的，简单记录一下。</p>
+</blockquote>
+<h2 id="%E5%AE%9E%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E7%94%A8">实用</a></h2>
+<ul>
+<li>跨域</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-comment"># 这里约定代理请求url path是以/apis/开头</span>
+<span class="hljs-section">location</span><span class="hljs-regexp"> ^~/apis/</span> {
+    <span class="hljs-comment"># 这里重写了请求，将正则匹配中的第一个()中$1的path，拼接到真正的请求后面，并用break停止后续匹配</span>
+    <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^/apis/(.*)$</span> /<span class="hljs-variable">$1</span> <span class="hljs-literal">break</span>;
+    ...
+    <span class="hljs-attribute">proxy_pass</span> https://www.tianqiapi.com/;
+}
+</code></pre>
+<ul>
+<li>处理前端单页应用的 history 路由模式</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> / {
+    <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;
+}
+</code></pre>
+<ul>
+<li>适配 PC 和移动环境</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> / {
+    <span class="hljs-comment"># 移动、pc设备适配</span>
+    <span class="hljs-attribute">if</span> (<span class="hljs-variable">$http_user_agent</span> <span class="hljs-regexp">~* &#x27;(Android|webOS|iPhone|iPod|BlackBerry)&#x27;)</span> {
+        <span class="hljs-attribute">set</span> <span class="hljs-variable">$mobile_request</span> <span class="hljs-string">&#x27;1&#x27;</span>;
+    }
+    <span class="hljs-attribute">if</span> (<span class="hljs-variable">$mobile_request</span> = <span class="hljs-string">&#x27;1&#x27;</span>) {
+        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^.+</span> http://mysite-base-H5.com;
+    }
+}
+
+</code></pre>
+<ul>
+<li>端口转发</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">http</span> {
+    ...
+    <span class="hljs-section">upstream</span> dmp8001 {
+        <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8001</span>;
+    }
+    <span class="hljs-section">server</span> {
+        <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;
+        <span class="hljs-attribute">server_name</span>  abc.com;
+
+        <span class="hljs-section">location</span> / {
+            ...
+            <span class="hljs-attribute">proxy_pass</span> http://dmp8001;
+        }
+    }
+    ...
+}
+</code></pre>
+<ul>
+<li>善用正则</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-comment"># 动态校验企业微信 h5 应用可信域名</span>
+<span class="hljs-section">location</span> <span class="hljs-regexp">~ WW_verify_(.*).txt</span> {
+    <span class="hljs-attribute">return</span> <span class="hljs-number">200</span> <span class="hljs-variable">$1</span>;
+}
+</code></pre>
+<ul>
+<li>虚拟主机</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">server</span> {
+    <span class="hljs-attribute">listen</span> <span class="hljs-number">12332</span>;
+    <span class="hljs-attribute">server_name</span> <span class="hljs-number">127.0.0.1</span>;
+
+    <span class="hljs-section">location</span> / {
+        <span class="hljs-attribute">root</span> D:/Desktop/test;
+        <span class="hljs-attribute">index</span> index.html index.htm;
+    }
+}
+</code></pre>
+<ul>
+<li>防媒体文件盗链</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(gif|jpg|png|jpeg|mp4)$</span> {
+
+    <span class="hljs-attribute">expires</span> <span class="hljs-number">30d</span>;
+    <span class="hljs-attribute">valid_referers</span> <span class="hljs-regexp">*.hugao</span>8.com www.hugao8.com m.hugao8.com <span class="hljs-regexp">*.baidu.com</span> <span class="hljs-regexp">*.google.com</span>;
+
+    <span class="hljs-attribute">if</span> (<span class="hljs-variable">$invalid_referer</span>) {
+        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^/</span> http://ww4.sinaimg.cn/bmiddle/051bbed1gw1egjc4xl7srj20cm08aaa6.jpg;
+        <span class="hljs-comment"># return 404;</span>
+    }
+
+}
+</code></pre>
+<h2 id="%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1" tabindex="-1"><a class="header-anchor" href="#%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1">简单实现负载均衡</a></h2>
+<ul>
+<li>轮询（默认），请求过来后，Nginx 随机分配流量到任一服务器</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">upstream</span> backend {
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3000</span>;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3001</span>;
+}
+</code></pre>
+<ul>
+<li>weight=number 设置服务器的权重，默认为 1，权重大的会被优先分配</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">upstream</span> backend {
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3000</span> weight=<span class="hljs-number">2</span>;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3001</span> weight=<span class="hljs-number">1</span>;
+}
+</code></pre>
+<ul>
+<li>backup 标记为备份服务器。当主服务器不可用时，将传递与备份服务器的连接</li>
+</ul>
+<pre><code class="language-nginx"><span class="hljs-section">upstream</span> backend {
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3000</span> backup;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:3001</span>;
+}
+</code></pre>
+<p>代理这个集群</p>
+<pre><code class="language-nginx"><span class="hljs-section">server</span> {
+    <span class="hljs-attribute">listen</span>      <span class="hljs-number">9000</span>;
+    <span class="hljs-attribute">server_name</span> localhost;
+
+    <span class="hljs-section">location</span> / {
+        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>;
+        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;
+        <span class="hljs-attribute">proxy_set_header</span> X-Scheme <span class="hljs-variable">$scheme</span>;
+
+        <span class="hljs-attribute">proxy_pass</span> backend;
+    }
+}
+</code></pre>
+<h2 id="%E5%85%B3%E4%BA%8E-location-%E7%9A%84%E5%8C%B9%E9%85%8D" tabindex="-1"><a class="header-anchor" href="#%E5%85%B3%E4%BA%8E-location-%E7%9A%84%E5%8C%B9%E9%85%8D">关于 location 的匹配</a></h2>
+<h3 id="location-%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F" tabindex="-1"><a class="header-anchor" href="#location-%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F">location 的几种匹配方式</a></h3>
+<p>普通匹配：</p>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> = URI { <span class="hljs-attribute">configuration</span> } <span class="hljs-comment">#精确匹配</span>
+location<span class="hljs-regexp"> ^~</span> URI { <span class="hljs-attribute">configuration</span> } <span class="hljs-comment">#非正则匹配</span>
+location [空格] URI { <span class="hljs-attribute">configuration</span> } <span class="hljs-comment">#前缀匹配</span>
+</code></pre>
+<p>正则匹配：</p>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> <span class="hljs-regexp">~ URI</span> { <span class="hljs-attribute">configuration</span> } <span class="hljs-comment">#区分大小写</span>
+location <span class="hljs-regexp">~* URI</span> { <span class="hljs-attribute">configuration</span> } <span class="hljs-comment">#不区分大小写</span>
+</code></pre>
+<h3 id="%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%B4%E6%98%8E%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7" tabindex="-1"><a class="header-anchor" href="#%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%B4%E6%98%8E%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7">几种匹配方式的说明与优先级</a></h3>
+<p>整体规则按照先普通匹配，然后再正则匹配，如果正则不匹配，则回退至上一个普通匹配。其中普通匹配没有顺序之分，哪个匹配最精确，就使用哪个 location，正则匹配按照<mark>规则的书写顺序</mark>进行。</p>
+<ul>
+<li><code>=</code> 精确匹配，匹配后停止后续匹配，直接执行该匹配后的 configuration。</li>
+<li><code>[空格]</code> 前缀匹配，匹配后，继续更长前缀匹配和正则匹配。</li>
+<li><code>^~</code> <mark>不属于正则匹配</mark>，匹配该规则后，停止继续正则匹配。</li>
+<li><code>~</code> 区分大小写的正则匹配，按顺序匹配，一旦匹配即停止后续匹配。</li>
+<li><code>~*</code> 不区分大小写的正则匹配，按顺序匹配，一旦匹配即停止后续匹配。</li>
+</ul>
+<h3 id="%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E7%A4%BA%E4%BE%8B">示例</a></h3>
+<pre><code class="language-nginx"><span class="hljs-section">location</span> = / {
+    [ <span class="hljs-attribute">configuration</span> A ]
+}
+
+location / {
+    [ <span class="hljs-attribute">configuration</span> B ]
+}
+
+location /user/ {
+    [ <span class="hljs-attribute">configuration</span> C ]
+}
+
+location<span class="hljs-regexp"> ^~</span> /images/ {
+    [ <span class="hljs-attribute">configuration</span> D ]
+}
+
+location <span class="hljs-regexp">~* \.(gif|jpg|jpeg)$</span> {
+    [ <span class="hljs-attribute">configuration</span> E ]
+}
+</code></pre>
+<ul>
+<li>请求<code>/</code>精准匹配 A，不再往下查找。</li>
+<li>请求<code>/index.html</code>匹配 B。首先查找匹配的前缀字符，找到最长匹配是配置 B，接着又按照顺序查找匹配的正则。结果没有找到，因此使用先前标记的最长匹配，即配置 B。</li>
+<li>请求<code>/user/index.html</code>匹配 C。首先找到最长匹配 C，由于后面没有匹配的<mark>正则</mark>，所以使用最长匹配 C。</li>
+<li>请求<code>/user/1.jpg</code>匹配 E。首先进行前缀字符的查找，找到最长匹配项 C，继续进行正则查找，找到匹配项 E。因此使用 E。</li>
+<li>请求<code>/images/1.jpg</code>匹配 D。首先进行前缀字符的查找，找到最长匹配 D。但是，特殊的是它使用了^~修饰符，<mark>不再进行接下来的正则的匹配查找</mark>，因此使用 D。这里，如果没有前面的修饰符，其实最终的匹配是 E。大家可以想一想为什么。</li>
+<li>请求<code>/documents/about.html</code>匹配 B。因为 B 表示任何以/开头的 URL 都匹配。在上面的配置中，只有 B 能满足，所以匹配 B。</li>
+</ul>
+<h3 id="%E6%80%BB%E7%BB%93" tabindex="-1"><a class="header-anchor" href="#%E6%80%BB%E7%BB%93">总结</a></h3>
+<ul>
+<li>location 的配置有两种形式，普通和正则。</li>
+<li>查找匹配的时候，先查找普通，选择最长匹配项，再查找正则。</li>
+<li>正则的优先级高于普通。</li>
+<li>正则查找是<mark>按照在配置文件中的顺序</mark>进行的，因此正则顺序很重要，建议越精细的放的越靠前。</li>
+<li>使用<code>=</code>精准匹配可以加快查找的效率，如果经常被访问建议使用精确匹配<code>=</code>。</li>
+</ul>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="Nginx 笔记"><a href="#nginx-%E7%AC%94%E8%AE%B0" data-anchor="#nginx-%E7%AC%94%E8%AE%B0">Nginx 笔记</a><ul><li title="实用"><a href="#%E5%AE%9E%E7%94%A8" data-anchor="#%E5%AE%9E%E7%94%A8">实用</a></li><li title="简单实现负载均衡"><a href="#%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1" data-anchor="#%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1">简单实现负载均衡</a></li><li title="关于 location 的匹配"><a href="#%E5%85%B3%E4%BA%8E-location-%E7%9A%84%E5%8C%B9%E9%85%8D" data-anchor="#%E5%85%B3%E4%BA%8E-location-%E7%9A%84%E5%8C%B9%E9%85%8D">关于 location 的匹配</a><ul><li title="location 的几种匹配方式"><a href="#location-%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F" data-anchor="#location-%E7%9A%84%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F">location 的几种匹配方式</a></li><li title="几种匹配方式的说明与优先级"><a href="#%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%B4%E6%98%8E%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7" data-anchor="#%E5%87%A0%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%B4%E6%98%8E%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7">几种匹配方式的说明与优先级</a></li><li title="示例"><a href="#%E7%A4%BA%E4%BE%8B" data-anchor="#%E7%A4%BA%E4%BE%8B">示例</a></li><li title="总结"><a href="#%E6%80%BB%E7%BB%93" data-anchor="#%E6%80%BB%E7%BB%93">总结</a></li></ul></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>
