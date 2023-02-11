@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qxtang.github.io - Javascript</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
+  <!-- version：1.3.2 -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="cfc6762313c8fadde407c043154409f7" data-href="/6b4ced9d2ef205d68999ba7579eb19ac.html" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
+            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
+          </li>
+        
+          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
+            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          </li>
+        
+          <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
+            <a href="/90c722fcc7f93ea31011ef4abc7f384d.html">Javascript</a>
+          </li>
+        
+          <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
+            <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
+            <a href="/d02c013ecd23b0f2469dc30db74d4108.html">git 实践</a>
+          </li>
+        
+          <li id="c2c219ec3e49af8600bee1b4870aeb5e" class="children" title="为什么前端团队要统一技术栈">
+            <a href="/c2c219ec3e49af8600bee1b4870aeb5e.html">为什么前端团队要统一技术栈</a>
+          </li>
+        
+          <li id="5b64f73b8f42d8bb71575d11527c2b1a" class="children" title="其他">
+            <a href="/5b64f73b8f42d8bb71575d11527c2b1a.html">其他</a>
+          </li>
+        
+          <li id="3e08f87fd663eba276f17e91f87d0536" class="children" title="调试排错技巧">
+            <a href="/3e08f87fd663eba276f17e91f87d0536.html">调试排错技巧</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e3db49d633625ac1552e7dca23fb879e" class="children" title="AST抽象语法树">
+            <a href="/e3db49d633625ac1552e7dca23fb879e.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="fcd42fc1afe1592eb752d49cc60a4157" class="children" title="Babel">
+            <a href="/fcd42fc1afe1592eb752d49cc60a4157.html">Babel</a>
+          </li>
+        
+          <li id="14168fa339500eb086fd9bc8c3f8933c" class="children" title="Nginx 笔记">
+            <a href="/14168fa339500eb086fd9bc8c3f8933c.html">Nginx 笔记</a>
+          </li>
+        
+          <li id="5f790d5210162408a9db03617bd7a1d9" class="children" title="工作中遇到问题汇总">
+            <a href="/5f790d5210162408a9db03617bd7a1d9.html">工作中遇到问题汇总</a>
+          </li>
+        
+          <li id="f74ed6e9a871231e00a91b8bfe9c171b" class="children" title="性能优化">
+            <a href="/f74ed6e9a871231e00a91b8bfe9c171b.html">性能优化</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="javascript" tabindex="-1"><a class="header-anchor" href="#javascript">Javascript</a></h1>
+<ul>
+<li>先声明后调用</li>
+<li>const 优先</li>
+<li>常量大写</li>
+<li>不要忽略抛异常、不要忘了在 Promise\async await 抛异常</li>
+<li>缓存耗时的计算，比如 dom 节点查找结果、设备信息查询结果等</li>
+<li>尽可能使用原生方法，因为原生方法是用低级语言写的（C/C++），并且被编译成机器码，效率更高，比如 Array 的 filter</li>
+<li>少用 for-in，慢，for-in 要搜索原型属性</li>
+<li>使用枚举或策略模式减少 elseif，使用 Map、Object 优化 switch-case</li>
+<li>?? 空值合并操作符、?. 链合并运算符</li>
+<li>使用双取反运算符将变量转为 boolean 类型</li>
+<li>提交代码时请删除自己临时加的日志，项目跑起来一堆的日志让队友很头疼</li>
+<li>多元判断时，可将条件拼接成字符串存到 Object 里</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">/**
+ * 按钮点击事件
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} status 活动状态：1未开始 2进行中 3结束
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} identity 身份标识：guest游客 admin管理员
+ */</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">onButtonClick</span> = (<span class="hljs-params">status, identity</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (identity == <span class="hljs-string">&#x27;guest&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (status == <span class="hljs-number">1</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == <span class="hljs-number">2</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == <span class="hljs-number">3</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">//do sth</span>
+    }
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (identity == <span class="hljs-string">&#x27;admin&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (status == <span class="hljs-number">1</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == <span class="hljs-number">2</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (status == <span class="hljs-number">3</span>) {
+      <span class="hljs-comment">//do sth</span>
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">//do sth</span>
+    }
+  }
+};
+
+<span class="hljs-comment">// 可优化为</span>
+<span class="hljs-keyword">const</span> actions = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>([
+  [<span class="hljs-string">&#x27;guest_1&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;guest_2&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;guest_3&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;admin_1&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;admin_2&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;admin_3&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+  [<span class="hljs-string">&#x27;default&#x27;</span>, <span class="hljs-function">() =&gt;</span> {} <span class="hljs-comment">/*do sth*/</span>],
+]);
+
+<span class="hljs-comment">/**
+ * 按钮点击事件
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">string</span>} identity 身份标识：guest游客 admin管理员
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">number</span>} status 活动状态：1未开始 2进行中 3 结束
+ */</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">onButtonClick</span> = (<span class="hljs-params">identity, status</span>) =&gt; {
+  <span class="hljs-keyword">let</span> action = actions.<span class="hljs-title function_">get</span>(<span class="hljs-string">`<span class="hljs-subst">${identity}</span>_<span class="hljs-subst">${status}</span>`</span>) || actions.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;default&#x27;</span>);
+  action.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>);
+};
+</code></pre>
+<ul>
+<li>可适当使用对象区分作用域</li>
+<li>使用 Array.includes 来优化多个条件的判断</li>
+<li>使用 Array.every 和 Array.some 来处理全部/部分满足条件</li>
+<li>减少嵌套，提前使用 return 语句</li>
+<li>用有意义且常用的单词命名变量</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-keyword">const</span> yyyymmdstr = <span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>(<span class="hljs-string">&#x27;YYYY/MM/DD&#x27;</span>);
+<span class="hljs-comment">// 正确:</span>
+<span class="hljs-keyword">const</span> currentDate = <span class="hljs-title function_">moment</span>().<span class="hljs-title function_">format</span>(<span class="hljs-string">&#x27;YYYY/MM/DD&#x27;</span>);
+</code></pre>
+<ul>
+<li>保持统一命名<br>
+可能同一个项目对于获取用户信息，会有三个不一样的命名，应该保持统一。</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-title function_">getUserInfo</span>();
+<span class="hljs-title function_">getClientData</span>();
+<span class="hljs-title function_">getCustomerRecord</span>();
+
+<span class="hljs-comment">// 正确：</span>
+<span class="hljs-title function_">getUser</span>();
+</code></pre>
+<ul>
+<li>尽量少写魔法值，每个常量都该命名</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-comment">// 三个月之后你还能知道 86400000 是什么吗?</span>
+<span class="hljs-built_in">setTimeout</span>(doSomeThing, <span class="hljs-number">86400000</span>);
+
+<span class="hljs-comment">// 正确：</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">MILLISECOND_IN_A_DAY</span> = <span class="hljs-number">86400000</span>;
+<span class="hljs-built_in">setTimeout</span>(doSomeThing, <span class="hljs-variable constant_">MILLISECOND_IN_A_DAY</span>);
+</code></pre>
+<ul>
+<li>避免无意义的前缀<br>
+如果创建了一个对象 car，就没有必要把它的颜色命名为 carColor。</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-keyword">const</span> car = {
+  <span class="hljs-attr">carMake</span>: <span class="hljs-string">&#x27;Honda&#x27;</span>,
+  <span class="hljs-attr">carModel</span>: <span class="hljs-string">&#x27;Accord&#x27;</span>,
+  <span class="hljs-attr">carColor</span>: <span class="hljs-string">&#x27;Blue&#x27;</span>,
+};
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">paintCar</span>(<span class="hljs-params">car</span>) {
+  car.<span class="hljs-property">carColor</span> = <span class="hljs-string">&#x27;Red&#x27;</span>;
+}
+
+<span class="hljs-comment">// 正确：</span>
+<span class="hljs-keyword">const</span> car = {
+  <span class="hljs-attr">make</span>: <span class="hljs-string">&#x27;Honda&#x27;</span>,
+  <span class="hljs-attr">model</span>: <span class="hljs-string">&#x27;Accord&#x27;</span>,
+  <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;Blue&#x27;</span>,
+};
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">paintCar</span>(<span class="hljs-params">car</span>) {
+  car.<span class="hljs-property">color</span> = <span class="hljs-string">&#x27;Red&#x27;</span>;
+}
+</code></pre>
+<ul>
+<li>使用函数参数默认值</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">doSomeThing</span>(<span class="hljs-params">name</span>) {
+  <span class="hljs-keyword">const</span> username = name || <span class="hljs-string">&#x27;tony&#x27;</span>;
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// 正确：</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">doSomeThing</span>(<span class="hljs-params">name = <span class="hljs-string">&#x27;tony&#x27;</span></span>) {
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+<ul>
+<li>参数越少越好<br>
+如果参数超过两个，使用解构语法，不用考虑参数的顺序。</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createMenu</span>(<span class="hljs-params">title, body, buttonText, cancellable</span>) {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// 正确：</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createMenu</span>(<span class="hljs-params">{ title, body, buttonText, cancellable }</span>) {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-title function_">createMenu</span>({
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Foo&#x27;</span>,
+  <span class="hljs-attr">body</span>: <span class="hljs-string">&#x27;Bar&#x27;</span>,
+  <span class="hljs-attr">buttonText</span>: <span class="hljs-string">&#x27;Baz&#x27;</span>,
+  <span class="hljs-attr">cancellable</span>: <span class="hljs-literal">true</span>,
+});
+</code></pre>
+<ul>
+<li>
+<p>抽象重复代码<br>
+很多时候虽然是同一个功能，但由于一两个不同点，让你不得不写两个几乎相同的函数，要想优化重复代码需要有较强的抽象能力。</p>
+</li>
+<li>
+<p>不传 flag 参数<br>
+不要通过 flag 的 true 或 false，来判断执行逻辑。</p>
+</li>
+<li>
+<p>不污染全局<br>
+在 JavaScript 中不要污染全局，会容易产生难以预料的 bug。</p>
+</li>
+<li>
+<p>删除弃用代码<br>
+可以在代码库历史版本中找到它。</p>
+</li>
+<li>
+<p>使用 class</p>
+</li>
+<li>
+<p>链式调用<br>
+这种模式让的代码简洁优雅，在类的方法最后返回 this 就可以了。</p>
+</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">make, model, color</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">make</span> = make;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">model</span> = model;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> = color;
+  }
+
+  <span class="hljs-title function_">setMake</span>(<span class="hljs-params">make</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">make</span> = make;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+  }
+
+  <span class="hljs-title function_">setModel</span>(<span class="hljs-params">model</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">model</span> = model;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+  }
+
+  <span class="hljs-title function_">setColor</span>(<span class="hljs-params">color</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> = color;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+  }
+
+  <span class="hljs-title function_">save</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">make</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">model</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+  }
+}
+
+<span class="hljs-keyword">const</span> car = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(<span class="hljs-string">&#x27;Ford&#x27;</span>, <span class="hljs-string">&#x27;F-150&#x27;</span>, <span class="hljs-string">&#x27;red&#x27;</span>).<span class="hljs-title function_">setColor</span>(<span class="hljs-string">&#x27;pink&#x27;</span>).<span class="hljs-title function_">save</span>();
+</code></pre>
+<ul>
+<li>
+<p>单一功能原则<br>
+如果一个类干的事情太多太杂，会导致后期很难维护。我们应该厘清职责，各司其职减少相互之间依赖。</p>
+</li>
+<li>
+<p>封闭开放原则</p>
+<p>当需要改变一个程序的功能或者给这个程序增加新功能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码
+比如我想修改一个公共组件的样式来适配自己的页面，但又需要保证其他使用这个组件的页面不受影响，可以通过增加一个主题参数，根据该参数加载一份新的样式文件</p>
+</li>
+</ul>
+<h1 id="typescript" tabindex="-1"><a class="header-anchor" href="#typescript">Typescript</a></h1>
+<ul>
+<li>接口命名以大写字母“I”开头，来自：<a href="http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces" target="_blank">http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces</a></li>
+<li>type 类型以大写字母“T”开头</li>
+</ul>
+<h2 id="%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" tabindex="-1"><a class="header-anchor" href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></h2>
+<ul>
+<li>临时的类型，直接在使用时定义</li>
+<li>组件个性化类型，直接定义在 ts(x) 文件中</li>
+<li>范围/全局数据，定义在 global.d.ts 文件中，并在 tsconfig.json 配置让其生效</li>
+</ul>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="Javascript"><a href="#javascript" data-anchor="#javascript">Javascript</a></li><li title="Typescript"><a href="#typescript" data-anchor="#typescript">Typescript</a><ul><li title="类型定义文件(.d.ts)如何放置"><a href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" data-anchor="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>
