@@ -16,7 +16,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install @qxtang/doc-builder@latest
-          npx doc-builder build --title="my-book"
+          npx doc-builder build --title="qxtang.github.io"
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.0
