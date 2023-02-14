@@ -1,10 +1,10 @@
 # React
 
-- hooks 优先
+- 使用 hooks
 - 使用 styled-components <https://medium.com/building-crowdriff/styled-components-to-use-or-not-to-use-a6bb4a7ffc21>
-- 不要所有状态都通过类似 Redux 或 Mobx 等状态管理器去管理
-- 定义类组件时，使用 PropTypes 对属性进行类型检查和赋予默认值
-- 使用 unstated-next 代替 redux
+- 考虑使用 unstated-next 代替 redux
+- 组件属性超过 3 个则换行
+- 没有子元素的组件写成自闭合
 - 多用函数组件，更小的打包体积，更高的执行效率
 - 多用 PureComponent，PureComponent 会先对 state 和 props 进行浅比较，不同的时候才会 render
 - 遵循单一职责原则，使用 HOC / 装饰器 / Render Props 增加职责
@@ -13,13 +13,21 @@
 - 每个文件只写一个组件，但是多个无状态组件可以放在单个文件中，文件名要与默认导出的类名一致
 - 组合优于继承
 - 性能原因尽量不写内联函数，比如点击事件
-- 封装切换类型的组件时，使用一个配置数组来减少判断（策略模式）
+- React 应用中的权限管理：https://isamatov.com/react-permissions-and-roles/
 - 多使用解构，例如声明函数组件的 props 和 默认值
-- 没有子元素的组件写成自闭合
+
+```jsx
+export default ({ name = '小明', sex = '男' }) => (
+  <>
+    我叫 {name}，性别 {sex}
+  </>
+);
+```
+
 - 组件属性命名保持统一，使兼容性良好，避免无意义前缀
 
 ```jsx
-// 错误，心塞
+// 错误
 <MyInput inputValue onInputChange wrapStyle wrapClassName />
 
 // 正确
@@ -58,7 +66,7 @@ render() {
 ```jsx
 // 正确：
 f() {
-    ...
+  // ...
 }
 
 render() {
@@ -74,7 +82,7 @@ render() {
 }
 ```
 
-- 使用运算符&&简化三元运算  
+- 使用运算符`&&`简化三元运算  
   在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false，因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
 
 例如：
@@ -96,7 +104,7 @@ render() {
 - 尽量避免使用展开运算符来展开 props  
   变得难以理解和维护，容易出 bug
 
-- 遇到事件处理，使用一个返回新函数的方法  
+- 遇到事件处理，可以使用一个返回新函数的方法  
   例如：
 
 ```jsx
@@ -116,8 +124,6 @@ export default function SampleComponent({ onValueChange }) {
   );
 }
 ```
-
-这样看起来比较简洁
 
 - 使用 Hook components  
   比如要封装一个弹窗组件：
@@ -238,4 +244,4 @@ export default function SampleComponent() {
   高耦合  
   影响性能，A 每一次渲染都会重新声明一遍 B
 
-- 避免为了优化少量性能过度设计代码，牺牲了代码的可维护性、易读性，浪费时间
+- 避免为了优化少量性能过度设计代码，牺牲代码的可维护性、易读性，浪费时间
