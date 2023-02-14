@@ -21,8 +21,8 @@
   <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
   <link rel="apple-touch-icon" href="/resource/favicon.ico" />
 
-  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
-  <!-- version：1.3.2 -->
+  <!-- 编译时间：2/14/2023, 9:39:17 AM -->
+  <!-- version：1.3.3 -->
 
   <script>
     window.root = '';
@@ -60,12 +60,8 @@
                 <div class="triangle"></div>
               </li>
               
-          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
-            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
-          </li>
-        
-          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
-            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          <li id="ebf2402bd9434a155afe3ebfdc48703c" class="children" title="CSS">
+            <a href="/ebf2402bd9434a155afe3ebfdc48703c.html">CSS</a>
           </li>
         
           <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
@@ -74,6 +70,10 @@
         
           <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
             <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="ba10a4620326524d5d0bbd415c89547d" class="children" title="Typescript">
+            <a href="/ba10a4620326524d5d0bbd415c89547d.html">Typescript</a>
           </li>
         
           <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
@@ -127,34 +127,36 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h1>
-<h2 id="%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%80%9A%E7%94%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%80%9A%E7%94%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">业务项目通用目录结构</a></h2>
+      <h1 id="%E9%80%9A%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E9%80%9A%E7%94%A8">通用</a></h1>
+<h2 id="%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></h2>
 <pre><code class="language-text">├─assets 静态资源
 ├─service 业务逻辑封装
 ├─components 组件
   ├─business 业务组件
   ├─common 通用组件
 ├─constants 常量
-├─store redux
+├─store 全局状态
 ├─pages 页面
 ├─types 通用类型
 ├─utils 工具
 </code></pre>
 <h2 id="npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" tabindex="-1"><a class="header-anchor" href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></h2>
 <ul>
-<li>同一系列行为的脚本，但是命令行参数、环境变量有差异，用冒号区分，比如<pre><code class="language-text">&quot;scripts&quot;: {
-  &quot;build:test&quot;: &quot;tsc &amp;&amp; vite build --mode test&quot;,
-  &quot;build:prod&quot;: &quot;tsc &amp;&amp; vite build --mode production&quot;,
-}
+<li>同一系列行为的脚本，命令行参数、环境变量有差异，用冒号区分，比如<pre><code class="language-json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;build:test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode test&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;build:prod&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode production&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 </li>
 </ul>
 <h2 id="%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></h2>
-<p>如登录、获取用户信息、权限检查等任务，放在根组件（App.tsx、App.vue）中执行，执行结束再渲染路由组件，保证业务接口能正确获取业务参数</p>
+<p>如登录、获取用户信息、权限检查等任务，放在根组件（App.tsx、App.vue）中执行，执行结束再渲染路由组件，保证业务接口能正确获取参数</p>
 <div class="tip">
-<p>在使用 Taro 框架开发的小程序中，由于入口组件 app.js 不会渲染任何内容，必须同步返回 props.children，<br>
+<h3 id="%E5%B0%8F%E7%A8%8B%E5%BA%8F" tabindex="-1"><a class="header-anchor" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F">小程序</a></h3>
+<p>小程序入口组件不会渲染任何内容，<br>
+例如 Taro 框架，必须同步返回 props.children，<br>
 所以对前置操作的处理，可以将首页设置为一个 loading 页，在 loading 页中显示加载中且进行前置操作后，<br>
-再跳转到普通业务页面（可为 loading 页设置如 redirectUrl 参数，选择要跳转的页面）。</p>
+再跳转到业务页面（为 loading 页设置如 redirectUrl 参数设置跳转页面）。</p>
 </div>
 <h2 id="%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a></h2>
 <p>应使用 devops 系统</p>
@@ -184,15 +186,14 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="%E5%85%B6%E4%BB%96-1" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96-1">其他</a></h2>
+<h2 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h2>
 <ul>
 <li>动态 polyfill</li>
 <li>尽量不要污染全局 window 对象</li>
 <li>通过封装解决浏览器差异兼容性问题</li>
 <li>为项目配置代码引用路径别名 alias</li>
-<li>项目不要添加任何与开发工具强耦合的设置（比如某个地方必须借助 vscode 的某个插件才能运行）</li>
+<li>项目不要添加任何与开发环境强耦合的设置（比如某个地方必须借助 vscode 的某个插件才能运行）</li>
 <li>禁止安装私人依赖包</li>
-<li>客户端缓存的键值写成常量，不要写死魔法值字符串</li>
 <li>使用 Webpack Bundle Analyzer 分析包大小组成</li>
 <li>函数遵循单一职责原则</li>
 <li>只导入类型，使用 import type<pre><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">DependencyList</span>, useEffect, useLayoutEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
@@ -201,12 +202,14 @@
 <li>想要在 chrome 移动设备模拟器上添加某个自定义设备型号，需要知道该设备的分辨率<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientWidth</span>, <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientHeight</span>);
 </code></pre>
 </li>
-<li>通过定义环境变量、判断环境变量的方式，区分执行环境差异代码，借助 DefinePlugin 将环境变量静态嵌入客户端代码</li>
+<li>通过判断环境变量的方式，区分执行环境差异代码，借助 DefinePlugin 将环境变量静态嵌入客户端代码</li>
 <li>开发环境 node 和 npm 版本需要一致，因为不同版本 node、npm 行为不一样</li>
-<li>移除生产环境的 console.log</li>
 <li>第三方库按需加载</li>
-<li>抽奖，支付类的操作，请务必做防抖，保证只有一个请求在进行</li>
-<li>React 应用中的权限管理：<a href="https://isamatov.com/react-permissions-and-roles/" target="_blank">https://isamatov.com/react-permissions-and-roles/</a></li>
+</ul>
+<h2 id="%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" tabindex="-1"><a class="header-anchor" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></h2>
+<ul>
+<li><a href="https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000" target="_blank">https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000</a></li>
+<li><a href="https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013" target="_blank">https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013</a></li>
 </ul>
 
       
@@ -214,7 +217,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a><ul><li title="业务项目通用目录结构"><a href="#%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%80%9A%E7%94%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84" data-anchor="#%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E9%80%9A%E7%94%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">业务项目通用目录结构</a></li><li title="npm 脚本命名"><a href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" data-anchor="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></li><li title="前置操作的处理"><a href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" data-anchor="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></li><li title="不建议在本地构建部署代码"><a href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" data-anchor="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a><ul><li title="前端项目的一般部署流程"><a href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" data-anchor="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></li><li title="本地部署的优势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></li><li title="本地部署的劣势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96-1" data-anchor="#%E5%85%B6%E4%BB%96-1">其他</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="通用"><a href="#%E9%80%9A%E7%94%A8" data-anchor="#%E9%80%9A%E7%94%A8">通用</a><ul><li title="业务代码分层习惯"><a href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" data-anchor="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></li><li title="npm 脚本命名"><a href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" data-anchor="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></li><li title="前置操作的处理"><a href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" data-anchor="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a><ul><li title="小程序"><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F" data-anchor="#%E5%B0%8F%E7%A8%8B%E5%BA%8F">小程序</a></li></ul></li><li title="不建议在本地构建部署代码"><a href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" data-anchor="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a><ul><li title="前端项目的一般部署流程"><a href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" data-anchor="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></li><li title="本地部署的优势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></li><li title="本地部署的劣势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="小程序环境判断"><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" data-anchor="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

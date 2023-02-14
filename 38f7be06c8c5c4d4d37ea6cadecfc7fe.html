@@ -21,8 +21,8 @@
   <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
   <link rel="apple-touch-icon" href="/resource/favicon.ico" />
 
-  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
-  <!-- version：1.3.2 -->
+  <!-- 编译时间：2/14/2023, 9:39:17 AM -->
+  <!-- version：1.3.3 -->
 
   <script>
     window.root = '';
@@ -60,12 +60,8 @@
                 <div class="triangle"></div>
               </li>
               
-          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
-            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
-          </li>
-        
-          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
-            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          <li id="ebf2402bd9434a155afe3ebfdc48703c" class="children" title="CSS">
+            <a href="/ebf2402bd9434a155afe3ebfdc48703c.html">CSS</a>
           </li>
         
           <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
@@ -74,6 +70,10 @@
         
           <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
             <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="ba10a4620326524d5d0bbd415c89547d" class="children" title="Typescript">
+            <a href="/ba10a4620326524d5d0bbd415c89547d.html">Typescript</a>
           </li>
         
           <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
@@ -129,11 +129,11 @@
     <div class="content markdown-body">
       <h1 id="react" tabindex="-1"><a class="header-anchor" href="#react">React</a></h1>
 <ul>
-<li>hooks 优先</li>
+<li>使用 hooks</li>
 <li>使用 styled-components <a href="https://medium.com/building-crowdriff/styled-components-to-use-or-not-to-use-a6bb4a7ffc21" target="_blank">https://medium.com/building-crowdriff/styled-components-to-use-or-not-to-use-a6bb4a7ffc21</a></li>
-<li>不要所有状态都通过类似 Redux 或 Mobx 等状态管理器去管理</li>
-<li>定义类组件时，使用 PropTypes 对属性进行类型检查和赋予默认值</li>
-<li>使用 unstated-next 代替 redux</li>
+<li>考虑使用 unstated-next 代替 redux</li>
+<li>组件属性超过 3 个则换行</li>
+<li>没有子元素的组件写成自闭合</li>
 <li>多用函数组件，更小的打包体积，更高的执行效率</li>
 <li>多用 PureComponent，PureComponent 会先对 state 和 props 进行浅比较，不同的时候才会 render</li>
 <li>遵循单一职责原则，使用 HOC / 装饰器 / Render Props 增加职责</li>
@@ -142,12 +142,19 @@
 <li>每个文件只写一个组件，但是多个无状态组件可以放在单个文件中，文件名要与默认导出的类名一致</li>
 <li>组合优于继承</li>
 <li>性能原因尽量不写内联函数，比如点击事件</li>
-<li>封装切换类型的组件时，使用一个配置数组来减少判断（策略模式）</li>
+<li>React 应用中的权限管理：<a href="https://isamatov.com/react-permissions-and-roles/" target="_blank">https://isamatov.com/react-permissions-and-roles/</a></li>
 <li>多使用解构，例如声明函数组件的 props 和 默认值</li>
-<li>没有子元素的组件写成自闭合</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ name = <span class="hljs-string">&#x27;小明&#x27;</span>, sex = <span class="hljs-string">&#x27;男&#x27;</span> }) =&gt; (
+  <span class="language-xml"><span class="hljs-tag">&lt;&gt;</span>
+    我叫 {name}，性别 {sex}
+  <span class="hljs-tag">&lt;/&gt;</span></span>
+);
+</code></pre>
+<ul>
 <li>组件属性命名保持统一，使兼容性良好，避免无意义前缀</li>
 </ul>
-<pre><code class="language-jsx"><span class="hljs-comment">// 错误，心塞</span>
+<pre><code class="language-jsx"><span class="hljs-comment">// 错误</span>
 &lt;<span class="hljs-title class_">MyInput</span> inputValue onInputChange wrapStyle wrapClassName /&gt;
 
 <span class="hljs-comment">// 正确</span>
@@ -182,7 +189,7 @@
 </code></pre>
 <pre><code class="language-jsx"><span class="hljs-comment">// 正确：</span>
 <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>) {
-    ...
+  <span class="hljs-comment">// ...</span>
 }
 
 <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
@@ -198,7 +205,7 @@
 }
 </code></pre>
 <ul>
-<li>使用运算符&amp;&amp;简化三元运算<br>
+<li>使用运算符<code>&amp;&amp;</code>简化三元运算<br>
 在 JavaScript 中，true &amp;&amp; expression 总是会返回 expression, 而 false &amp;&amp; expression 总是会返回 false，因此，如果条件是 true，&amp;&amp; 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。</li>
 </ul>
 <p>例如：</p>
@@ -217,7 +224,7 @@
 变得难以理解和维护，容易出 bug</p>
 </li>
 <li>
-<p>遇到事件处理，使用一个返回新函数的方法<br>
+<p>遇到事件处理，可以使用一个返回新函数的方法<br>
 例如：</p>
 </li>
 </ul>
@@ -237,7 +244,6 @@
   );
 }
 </code></pre>
-<p>这样看起来比较简洁</p>
 <ul>
 <li>使用 Hook components<br>
 比如要封装一个弹窗组件：</li>
@@ -355,7 +361,7 @@
 影响性能，A 每一次渲染都会重新声明一遍 B</p>
 </li>
 <li>
-<p>避免为了优化少量性能过度设计代码，牺牲了代码的可维护性、易读性，浪费时间</p>
+<p>避免为了优化少量性能过度设计代码，牺牲代码的可维护性、易读性，浪费时间</p>
 </li>
 </ul>
 

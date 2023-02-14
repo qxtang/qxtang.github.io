@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - ADB 通过 Wi-Fi 调试手机</title>
+  <title>qxtang.github.io - Typescript</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -21,8 +21,8 @@
   <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
   <link rel="apple-touch-icon" href="/resource/favicon.ico" />
 
-  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
-  <!-- version：1.3.2 -->
+  <!-- 编译时间：2/14/2023, 9:39:17 AM -->
+  <!-- version：1.3.3 -->
 
   <script>
     window.root = '';
@@ -60,12 +60,8 @@
                 <div class="triangle"></div>
               </li>
               
-          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
-            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
-          </li>
-        
-          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
-            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          <li id="ebf2402bd9434a155afe3ebfdc48703c" class="children" title="CSS">
+            <a href="/ebf2402bd9434a155afe3ebfdc48703c.html">CSS</a>
           </li>
         
           <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
@@ -74,6 +70,10 @@
         
           <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
             <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="ba10a4620326524d5d0bbd415c89547d" class="children" title="Typescript">
+            <a href="/ba10a4620326524d5d0bbd415c89547d.html">Typescript</a>
           </li>
         
           <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
@@ -127,18 +127,24 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="adb-%E9%80%9A%E8%BF%87-wi-fi-%E8%B0%83%E8%AF%95%E6%89%8B%E6%9C%BA" tabindex="-1"><a class="header-anchor" href="#adb-%E9%80%9A%E8%BF%87-wi-fi-%E8%B0%83%E8%AF%95%E6%89%8B%E6%9C%BA">ADB 通过 Wi-Fi 调试手机</a></h1>
+      <h1 id="typescript" tabindex="-1"><a class="header-anchor" href="#typescript">Typescript</a></h1>
 <ul>
-<li>手机和电脑需连接在同一 WiFi 下</li>
-<li>手机启用开发者选项和无线调试模式</li>
-<li>允许无线调试后，选择使用配对码配对，<code>adb pair ip:port</code>，填写显示的配对码、IP 地址和端口号</li>
-<li>运行 <code>adb connect ip:port</code></li>
+<li>接口命名以大写字母“I”开头，来自：<a href="http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces" target="_blank">http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces</a></li>
+<li>type 类型以大写字母“T”开头</li>
+</ul>
+<h2 id="%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" tabindex="-1"><a class="header-anchor" href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></h2>
+<ul>
+<li>临时的类型，直接在使用时定义</li>
+<li>组件个性化类型，直接定义在 ts(x) 文件中</li>
+<li>范围/全局数据，定义在 global.d.ts 文件中，并在 tsconfig.json 配置让其生效</li>
 </ul>
 
       
-        <div class="btt" id="btt"></div>
+        <div class="btt withToc" id="btt"></div>
       
     </div>
+    
+    <div class="table-of-contents"><ul><li title="Typescript"><a href="#typescript" data-anchor="#typescript">Typescript</a><ul><li title="类型定义文件(.d.ts)如何放置"><a href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" data-anchor="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

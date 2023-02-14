@@ -21,8 +21,8 @@
   <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
   <link rel="apple-touch-icon" href="/resource/favicon.ico" />
 
-  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
-  <!-- version：1.3.2 -->
+  <!-- 编译时间：2/14/2023, 9:39:17 AM -->
+  <!-- version：1.3.3 -->
 
   <script>
     window.root = '';
@@ -60,12 +60,8 @@
                 <div class="triangle"></div>
               </li>
               
-          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
-            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
-          </li>
-        
-          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
-            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          <li id="ebf2402bd9434a155afe3ebfdc48703c" class="children" title="CSS">
+            <a href="/ebf2402bd9434a155afe3ebfdc48703c.html">CSS</a>
           </li>
         
           <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
@@ -74,6 +70,10 @@
         
           <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
             <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="ba10a4620326524d5d0bbd415c89547d" class="children" title="Typescript">
+            <a href="/ba10a4620326524d5d0bbd415c89547d.html">Typescript</a>
           </li>
         
           <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
@@ -130,16 +130,18 @@
       <h1 id="javascript" tabindex="-1"><a class="header-anchor" href="#javascript">Javascript</a></h1>
 <ul>
 <li>先声明后调用</li>
-<li>const 优先</li>
+<li>优先 const</li>
 <li>常量大写</li>
+<li>少写魔法值，常量需要命名</li>
+<li>不污染全局</li>
 <li>不要忽略抛异常、不要忘了在 Promise\async await 抛异常</li>
-<li>缓存耗时的计算，比如 dom 节点查找结果、设备信息查询结果等</li>
+<li>缓存耗时的计算，比如 dom 查找、设备信息查询等</li>
 <li>尽可能使用原生方法，因为原生方法是用低级语言写的（C/C++），并且被编译成机器码，效率更高，比如 Array 的 filter</li>
 <li>少用 for-in，慢，for-in 要搜索原型属性</li>
+<li>基于函数的迭代 forEach 比一般的循环要慢，如果对运行速度要求很严格，不要使用</li>
 <li>使用枚举或策略模式减少 elseif，使用 Map、Object 优化 switch-case</li>
 <li>?? 空值合并操作符、?. 链合并运算符</li>
-<li>使用双取反运算符将变量转为 boolean 类型</li>
-<li>提交代码时请删除自己临时加的日志，项目跑起来一堆的日志让队友很头疼</li>
+<li>少写 console（或提交代码时删除 console），项目跑起来一堆的日志让队友很头疼</li>
 <li>多元判断时，可将条件拼接成字符串存到 Object 里</li>
 </ul>
 <pre><code class="language-js"><span class="hljs-comment">/**
@@ -196,7 +198,7 @@
 <li>可适当使用对象区分作用域</li>
 <li>使用 Array.includes 来优化多个条件的判断</li>
 <li>使用 Array.every 和 Array.some 来处理全部/部分满足条件</li>
-<li>减少嵌套，提前使用 return 语句</li>
+<li>减少嵌套，提前使用 return</li>
 <li>用有意义且常用的单词命名变量</li>
 </ul>
 <pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
@@ -217,18 +219,7 @@
 <span class="hljs-title function_">getUser</span>();
 </code></pre>
 <ul>
-<li>尽量少写魔法值，每个常量都该命名</li>
-</ul>
-<pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
-<span class="hljs-comment">// 三个月之后你还能知道 86400000 是什么吗?</span>
-<span class="hljs-built_in">setTimeout</span>(doSomeThing, <span class="hljs-number">86400000</span>);
-
-<span class="hljs-comment">// 正确：</span>
-<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">MILLISECOND_IN_A_DAY</span> = <span class="hljs-number">86400000</span>;
-<span class="hljs-built_in">setTimeout</span>(doSomeThing, <span class="hljs-variable constant_">MILLISECOND_IN_A_DAY</span>);
-</code></pre>
-<ul>
-<li>避免无意义的前缀<br>
+<li>避免无意义前缀<br>
 如果创建了一个对象 car，就没有必要把它的颜色命名为 carColor。</li>
 </ul>
 <pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
@@ -269,7 +260,7 @@
 </code></pre>
 <ul>
 <li>参数越少越好<br>
-如果参数超过两个，使用解构语法，不用考虑参数的顺序。</li>
+如果参数超过两个，使用解构语法，不用考虑参数顺序。</li>
 </ul>
 <pre><code class="language-js"><span class="hljs-comment">// 错误：</span>
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">createMenu</span>(<span class="hljs-params">title, body, buttonText, cancellable</span>) {
@@ -296,10 +287,6 @@
 <li>
 <p>不传 flag 参数<br>
 不要通过 flag 的 true 或 false，来判断执行逻辑。</p>
-</li>
-<li>
-<p>不污染全局<br>
-在 JavaScript 中不要污染全局，会容易产生难以预料的 bug。</p>
 </li>
 <li>
 <p>删除弃用代码<br>
@@ -349,29 +336,16 @@
 如果一个类干的事情太多太杂，会导致后期很难维护。我们应该厘清职责，各司其职减少相互之间依赖。</p>
 </li>
 <li>
-<p>封闭开放原则</p>
-<p>当需要改变一个程序的功能或者给这个程序增加新功能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码
+<p>封闭开放原则<br>
+“当需要改变一个程序的功能或者给这个程序增加新功能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码”<br>
 比如我想修改一个公共组件的样式来适配自己的页面，但又需要保证其他使用这个组件的页面不受影响，可以通过增加一个主题参数，根据该参数加载一份新的样式文件</p>
 </li>
 </ul>
-<h1 id="typescript" tabindex="-1"><a class="header-anchor" href="#typescript">Typescript</a></h1>
-<ul>
-<li>接口命名以大写字母“I”开头，来自：<a href="http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces" target="_blank">http://wiki.eclipse.org/Naming_Conventions#Classes_and_Interfaces</a></li>
-<li>type 类型以大写字母“T”开头</li>
-</ul>
-<h2 id="%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" tabindex="-1"><a class="header-anchor" href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></h2>
-<ul>
-<li>临时的类型，直接在使用时定义</li>
-<li>组件个性化类型，直接定义在 ts(x) 文件中</li>
-<li>范围/全局数据，定义在 global.d.ts 文件中，并在 tsconfig.json 配置让其生效</li>
-</ul>
 
       
-        <div class="btt withToc" id="btt"></div>
+        <div class="btt" id="btt"></div>
       
     </div>
-    
-    <div class="table-of-contents"><ul><li title="Javascript"><a href="#javascript" data-anchor="#javascript">Javascript</a></li><li title="Typescript"><a href="#typescript" data-anchor="#typescript">Typescript</a><ul><li title="类型定义文件(.d.ts)如何放置"><a href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE" data-anchor="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6(.d.ts)%E5%A6%82%E4%BD%95%E6%94%BE%E7%BD%AE">类型定义文件(.d.ts)如何放置</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

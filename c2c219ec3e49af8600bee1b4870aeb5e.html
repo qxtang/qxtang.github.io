@@ -21,8 +21,8 @@
   <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
   <link rel="apple-touch-icon" href="/resource/favicon.ico" />
 
-  <!-- 编译时间：2/11/2023, 3:52:06 AM -->
-  <!-- version：1.3.2 -->
+  <!-- 编译时间：2/14/2023, 9:39:17 AM -->
+  <!-- version：1.3.3 -->
 
   <script>
     window.root = '';
@@ -60,12 +60,8 @@
                 <div class="triangle"></div>
               </li>
               
-          <li id="4562f30482b70f8bd77c200554db28f7" class="children" title="ADB 通过 Wi-Fi 调试手机">
-            <a href="/4562f30482b70f8bd77c200554db28f7.html">ADB 通过 Wi-Fi 调试手机</a>
-          </li>
-        
-          <li id="f5cb7f8fe7650524ad7dd0b14d2745ac" class="children" title="GitFlow 笔记">
-            <a href="/f5cb7f8fe7650524ad7dd0b14d2745ac.html">GitFlow 笔记</a>
+          <li id="ebf2402bd9434a155afe3ebfdc48703c" class="children" title="CSS">
+            <a href="/ebf2402bd9434a155afe3ebfdc48703c.html">CSS</a>
           </li>
         
           <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
@@ -74,6 +70,10 @@
         
           <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
             <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="ba10a4620326524d5d0bbd415c89547d" class="children" title="Typescript">
+            <a href="/ba10a4620326524d5d0bbd415c89547d.html">Typescript</a>
           </li>
         
           <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
@@ -129,6 +129,11 @@
     <div class="content markdown-body">
       <h1 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88">为什么前端团队要统一技术栈</a></h1>
 <p>公司前端团队建议应该尽可能统一技术栈、统一开发框架。</p>
+<h2 id="%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></h2>
+<ul>
+<li>断崖效应：团队决策者通常会从自身利益考量，希望尽量减少对外部门的依赖，无论是技术选型，规范建立，组件选取，运行环境都能够自行掌控，项目技术栈由单个员工决定的话，单个员工对单个项目的影响变的非常巨大。一个产品经常会因为一两个核心员工的离职难以为继，最后不得不重新开发新的产品。</li>
+<li>当一位核心员工构建了一些基础的平台工具后，往往随着他的离开把之前的技术积累全部丢弃掉，而更严重的情况会导致整个项目的持续运行都成了问题，比如有的前端会自己偷偷开发一个 npm 包做为项目依赖。</li>
+</ul>
 <h2 id="%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF">统一开发框架的优势</a></h2>
 <ul>
 <li>
@@ -149,11 +154,6 @@
 <p>当存在公司级别的统一开发框架（平台），项目团队基于该平台进行自身项目的研发，不再需要关注于底层技术实现，只需要关注业务即可。当存在核心同事离职时，平台的研发同事可以对新进入项目的同事进行相关培训，不会导致青黄不接的事情发生。而且，专注于平台的同事为了更好的满足项目组的技术需求，对平台进行不断的改进，从而达到技术积累和沉淀的目标。</p>
 </li>
 </ul>
-<h2 id="%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></h2>
-<ul>
-<li>断崖效应：团队决策者通常会从自身利益考量，希望尽量减少对外部门的依赖，无论是技术选型，规范建立，组件选取，运行环境都能够自行掌控，项目技术栈由单个员工决定的话，单个员工对单个项目的影响变的非常巨大。一个产品经常会因为一两个核心员工的离职难以为继，最后不得不重新开发新的产品。</li>
-<li>当一位核心员工构建了一些基础的平台工具后，往往随着他的离开把之前的技术积累全部丢弃掉，而更严重的情况会导致整个项目的持续运行都成了问题，比如有的前端会自己偷偷开发一个 npm 包做为项目依赖。</li>
-</ul>
 <h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
 <ul>
 <li><a href="https://juejin.cn/post/6844903925947039757" target="_blank">https://juejin.cn/post/6844903925947039757</a></li>
@@ -164,7 +164,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="为什么前端团队要统一技术栈"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88">为什么前端团队要统一技术栈</a><ul><li title="统一开发框架的优势"><a href="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF">统一开发框架的优势</a></li><li title="不统一开发框架的弊端"><a href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" data-anchor="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="为什么前端团队要统一技术栈"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88">为什么前端团队要统一技术栈</a><ul><li title="不统一开发框架的弊端"><a href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" data-anchor="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></li><li title="统一开发框架的优势"><a href="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF">统一开发框架的优势</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->
