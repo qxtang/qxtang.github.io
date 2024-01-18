@@ -2,7 +2,24 @@
 
 > 工作中经常用的，简单记录一下。
 
-## 实用
+## 常用命令
+
+- nginx 启动
+- nginx -c filename 指定配置文件启动
+- nginx -s stop 快速关闭，可能不保存相关信息，并迅速终止 web 服务
+- nginx -s quit 平稳关闭 Nginx，保存相关信息，有安排的结束 web 服务
+- nginx -s reload 重启
+- nginx -t 测试配置文件
+- nginx -t -c xxx.conf 测试指定配置文件
+
+## 实用配置
+
+- 修改用户
+
+```nginx
+# 往往在第一行
+user root;
+```
 
 - 跨域
 
