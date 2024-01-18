@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 前端</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,157 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E5%89%8D%E7%AB%AF" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%AB%AF">前端</a></h1>
+<h2 id="%E5%B8%A7%E5%8A%A8%E7%94%BB" tabindex="-1"><a class="header-anchor" href="#%E5%B8%A7%E5%8A%A8%E7%94%BB">帧动画</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>概念：每隔一个短暂时间进行图像替代，使其连续播放而成动画</li>
+<li>可以自由控制播放、暂停和停止</li>
+<li>可以控制播放次数，播放速度</li>
+<li>可以添加交互，在播放完成后添加事件</li>
+<li>浏览器兼容性好</li>
+<li><a href="https://juejin.cn/post/6844903790370357262" target="_blank">https://juejin.cn/post/6844903790370357262</a></li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<div class="note">
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>CSS3 阶梯函数：<a href="https://codesandbox.io/s/jie-ti-han-shu-shi-xian-zheng-dong-hua-shi-li-8r65b1" target="_blank">https://codesandbox.io/s/jie-ti-han-shu-shi-xian-zheng-dong-hua-shi-li-8r65b1</a></li>
+<li>通过 JS 来控制 img 的 src 属性切换（不推荐）</li>
+<li>通过 JS 来控制 Canvas 图像绘制，用 drawImage 方法将图片绘制到 Canvas 上，不断擦除和重绘</li>
+<li>通过 JS 来控制 CSS 属性值变化</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
-</ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
-</ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
-</ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
-<ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
-</ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
-<ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
 </div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<h2 id="browserslist" tabindex="-1"><a class="header-anchor" href="#browserslist">Browserslist</a></h2>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>用特定的语句来查询浏览器列表<pre><code class="language-sh"><span class="hljs-comment"># 查询 Chrome 最后的两个版本</span>
+npx browserslist <span class="hljs-string">&quot;last 2 Chrome versions&quot;</span>
+chrome 96
+chrome 95
+</code></pre>
+</li>
+<li>autoprefixer 和 babel 都会用到</li>
+<li>开发过程中为了减小垫片的体积，避免使用过多没必要的垫片</li>
+<li>当我们确认的浏览器版本号，那么它的垫片体积就可以确认</li>
+<li>例如：当我们确认的浏览器版本号，那么它的垫片体积就会确认</li>
+</ul>
+<h3 id="caniuse-lite-%E4%B8%8E-caniuse-db" tabindex="-1"><a class="header-anchor" href="#caniuse-lite-%E4%B8%8E-caniuse-db">caniuse-lite 与 caniuse-db</a></h3>
+<ul>
+<li>browserslist 是从 caniuse-lite 这个库中查询数据的，caniuse-lite 是 caniuse-db 的精简版本，对 caniuse-db 的数据按一定规则做了简化，减少了库的大小</li>
+<li>caniuse-db 则是 can i use 网站的数据源，提供了网站查询所需的所有数据，caniuse-db 发布时会同步发布 caniuse-lite</li>
+<li>caniuse-lite 这个库也由 browserslist 团队进行维护</li>
+<li>由于它们都不属于线上数据库，使用时会将数据克隆至本地，所以可能会存在本地数据不是最新的情况，browserslist 提供了更新 caniuse-lite 的命令，可定期运行以获取最新数据<pre><code class="language-sh">npx browserslist@latest --update-db
+</code></pre>
+</li>
+</ul>
+<h3 id="%E5%8E%9F%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E7%90%86">原理</a></h3>
+<ul>
+<li>browserslist 根据正则解析查询语句，对浏览器版本数据库 caniuse-lite 进行查询，返回所得的浏览器版本列表</li>
+<li>因为 browserslist 并不维护数据库，因此它会经常提醒你去更新 caniuse-lite 这个库</li>
+</ul>
+<h2 id="%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8" tabindex="-1"><a class="header-anchor" href="#%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8">虚拟列表</a></h2>
+<ul>
+<li>不能分页的情况下渲染多条（上万级别）数据</li>
+<li>只对可见区域进行渲染，对非可见区域中的数据不渲染或部分渲染的技术，从而达到极高的渲染性能</li>
+</ul>
+<h3 id="%E5%AE%9E%E7%8E%B0%E6%8F%8F%E8%BF%B0" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E7%8E%B0%E6%8F%8F%E8%BF%B0">实现描述</a></h3>
+<ul>
+<li>首屏加载时，只加载可视区域内需要的列表项</li>
+<li>滚动发生时，计算出可视区域内的列表项，并将非可视区域内存在的列表项销毁</li>
+</ul>
+<div class="note">
+<ul>
+<li>列表项包含文字或图片，图片加载完成是异步的，无法预判高度</li>
+<li>对组件属性 itemSize 进行扩展，支持传递类型为数字、数组、函数</li>
+<li>将列表项渲染到屏幕外，对其高度进行测量并缓存，然后再将其渲染至可视区域内</li>
+<li>以预估高度先行渲染，然后获取真实高度并缓存</li>
+<li>使用新 api：ResizeObserver 监听图片尺寸变化，但需要考虑浏览器兼容性</li>
+</ul>
+</div>
+<div class="note">
+<ul>
+<li>IntersectionObserver</li>
+</ul>
+</div>
+<h2 id="%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a></h2>
+<h3 id="%E6%98%AF%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a></h3>
+<ul>
+<li>函数式编程是一种编程范式，目标是使用函数来抽象作用在数据之上的控制流与操作，从而在系统中消除副作用并减少对状态的改变，</li>
+<li>旨在尽可能地提高代码的无状态性和不变性</li>
+<li>主要思想是把运算过程尽量写成一系列嵌套的函数调用，比如柯里化、react 的高阶函数</li>
+</ul>
+<h3 id="%E5%87%BD%E6%95%B0%E5%BC%8F%E5%BA%93%EF%BC%9Aramda.js%E3%80%81lodash%E3%80%81rxjs" tabindex="-1"><a class="header-anchor" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%BA%93%EF%BC%9Aramda.js%E3%80%81lodash%E3%80%81rxjs">函数式库：Ramda.js、lodash、RxJS</a></h3>
+<h3 id="%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%AD-run-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%BD%E5%A4%84" tabindex="-1"><a class="header-anchor" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%AD-run-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%BD%E5%A4%84">命令模式中 run 函数的好处</a></h3>
+<ul>
+<li>将函数本身参数化，非侵入式的修改函数，无需重写任何内部逻辑</li>
+</ul>
+<h3 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%AF%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%AF%E5%87%BD%E6%95%B0">为什么纯函数</a></h3>
+<ul>
+<li>易于维护：无状态的代码不会改变或破坏全局的状态</li>
+<li>易于测试：不依赖外部资源的算法</li>
+<li>灵活便于重用、保持业务逻辑代码的纯净</li>
+<li>任务分解，一定程度增加代码可读性</li>
+<li>函数式的控制流能够在不需要研究任何内部细节的条件下提供该程序意图的清晰结构，这样就能更深刻地了解代码，并获知数据在不同阶段是如何流入和流出的</li>
+</ul>
+<h2 id="%E5%A4%9A%E5%8C%85%E9%A1%B9%E7%9B%AE" tabindex="-1"><a class="header-anchor" href="#%E5%A4%9A%E5%8C%85%E9%A1%B9%E7%9B%AE">多包项目</a></h2>
+<ul>
+<li><a href="https://juejin.cn/post/6844903568751722509" target="_blank">https://juejin.cn/post/6844903568751722509</a></li>
+</ul>
+<h2 id="blob" tabindex="-1"><a class="header-anchor" href="#blob">Blob</a></h2>
+<ul>
+<li>表示二进制类型的大对象，不可变的类似文件对象的原始数据</li>
+<li>含有两个属性：size 和 type，size 属性表示数据大小（以字节为单位），type 是 MIME 类型的字符串</li>
+</ul>
+<h2 id="file" tabindex="-1"><a class="header-anchor" href="#file">File</a></h2>
+<ul>
+<li>基于 Blob，继承了 Blob 的功能并将其扩展使其支持用户系统上的文件</li>
+<li>提供有关文件的信息，并允许网页中的 JavaScript 访问其内容，比如 input 上传文件返回的 FileList 中的元素</li>
+</ul>
+<h2 id="%E5%90%8E%E7%AB%AF%E4%B8%80%E6%AC%A1%E7%BB%99-10-%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%B1%95%E7%A4%BA" tabindex="-1"><a class="header-anchor" href="#%E5%90%8E%E7%AB%AF%E4%B8%80%E6%AC%A1%E7%BB%99-10-%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%B1%95%E7%A4%BA">后端一次给 10 万条数据，如何处理展示</a></h2>
+<ul>
+<li>直接遍历渲染（耗时最高，不推荐）</li>
+<li>setTimeout 分页渲染：把 10w 按照每页数量 limit 分成总共 Math.ceil(total / limit)页，然后利用 setTimeout，每次渲染 1 页数据</li>
+<li>使用 requestAnimationFrame 代替上一条的 setTimeout</li>
+<li>文档碎片(createDocumentFragment) + requestAnimationFrame</li>
+<li>懒加载：在列表尾部放一个空节点 blank，等到 blank 出现在视图中（使用 getBoundingClientRect），就说明到底了，这时候再加载第二页，以此类推</li>
+<li>虚拟列表</li>
+</ul>
+<h2 id="%E5%A6%82%E4%BD%95%E6%8B%BF%E5%88%B0%E5%8A%A8%E7%94%BB%E5%B8%A7%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#%E5%A6%82%E4%BD%95%E6%8B%BF%E5%88%B0%E5%8A%A8%E7%94%BB%E5%B8%A7%E6%95%B0">如何拿到动画帧数</a></h2>
+<ul>
+<li><a href="https://www.cnblogs.com/coco1s/p/8029582.html" target="_blank">https://www.cnblogs.com/coco1s/p/8029582.html</a></li>
+</ul>
+<h2 id="sourcemap" tabindex="-1"><a class="header-anchor" href="#sourcemap">sourceMap</a></h2>
+<ul>
+<li>
+<p>将编译、打包、压缩后的代码映射回源代码的技术</p>
+</li>
+<li>
+<p>由于打包压缩后的代码并没有阅读性可言，一旦在开发中报错或者遇到问题，直接在混淆代码中 debug 问题会带来非常糟糕的体验</p>
+</li>
+<li>
+<p>sourceMap 可以帮助我们快速定位到源代码的位置，提高我们的开发效率</p>
+</li>
+<li>
+<p>需要浏览器支持</p>
+</li>
+<li>
+<p>在压缩代码的末端加上，即可让 sourceMap 生效</p>
+<pre><code class="language-javascript"><span class="hljs-comment">//# sourceURL=/path/to/file.js.map</span>
+</code></pre>
+</li>
+<li>
+<p>有了这段注释后，浏览器就会通过 sourceURL 去获取这份映射文件</p>
+</li>
+</ul>
+<h2 id="%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%EF%BC%88spa%EF%BC%89%E4%BC%98%E7%BC%BA%E7%82%B9" tabindex="-1"><a class="header-anchor" href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%EF%BC%88spa%EF%BC%89%E4%BC%98%E7%BC%BA%E7%82%B9">单页应用（SPA）优缺点</a></h2>
+<p>优点：</p>
+<ul>
+<li>内容的改变不需要重新加载整个页面，用户体验好</li>
+<li>相对对服务器压力小</li>
+<li>前后端职责分离，架构清晰，前端进行交互逻辑，后端负责数据处理</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>首屏加载慢</li>
+<li>前进后退路由需要自己管理，不能使用浏览器的前进后退功能</li>
+<li>SEO（搜索优化）难度大</li>
 </ul>
 
       
@@ -576,7 +641,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="前端"><a href="#%E5%89%8D%E7%AB%AF" data-anchor="#%E5%89%8D%E7%AB%AF">前端</a><ul><li title="帧动画"><a href="#%E5%B8%A7%E5%8A%A8%E7%94%BB" data-anchor="#%E5%B8%A7%E5%8A%A8%E7%94%BB">帧动画</a></li><li title="Browserslist"><a href="#browserslist" data-anchor="#browserslist">Browserslist</a><ul><li title="caniuse-lite 与 caniuse-db"><a href="#caniuse-lite-%E4%B8%8E-caniuse-db" data-anchor="#caniuse-lite-%E4%B8%8E-caniuse-db">caniuse-lite 与 caniuse-db</a></li><li title="原理"><a href="#%E5%8E%9F%E7%90%86" data-anchor="#%E5%8E%9F%E7%90%86">原理</a></li></ul></li><li title="虚拟列表"><a href="#%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8" data-anchor="#%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8">虚拟列表</a><ul><li title="实现描述"><a href="#%E5%AE%9E%E7%8E%B0%E6%8F%8F%E8%BF%B0" data-anchor="#%E5%AE%9E%E7%8E%B0%E6%8F%8F%E8%BF%B0">实现描述</a></li></ul></li><li title="函数式编程"><a href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B" data-anchor="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a><ul><li title="是什么"><a href="#%E6%98%AF%E4%BB%80%E4%B9%88" data-anchor="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a></li><li title="函数式库：Ramda.js、lodash、RxJS"><a href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%BA%93%EF%BC%9Aramda.js%E3%80%81lodash%E3%80%81rxjs" data-anchor="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%BA%93%EF%BC%9Aramda.js%E3%80%81lodash%E3%80%81rxjs">函数式库：Ramda.js、lodash、RxJS</a></li><li title="命令模式中 run 函数的好处"><a href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%AD-run-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%BD%E5%A4%84" data-anchor="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E4%B8%AD-run-%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%BD%E5%A4%84">命令模式中 run 函数的好处</a></li><li title="为什么纯函数"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%AF%E5%87%BD%E6%95%B0" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%AF%E5%87%BD%E6%95%B0">为什么纯函数</a></li></ul></li><li title="多包项目"><a href="#%E5%A4%9A%E5%8C%85%E9%A1%B9%E7%9B%AE" data-anchor="#%E5%A4%9A%E5%8C%85%E9%A1%B9%E7%9B%AE">多包项目</a></li><li title="Blob"><a href="#blob" data-anchor="#blob">Blob</a></li><li title="File"><a href="#file" data-anchor="#file">File</a></li><li title="后端一次给 10 万条数据，如何处理展示"><a href="#%E5%90%8E%E7%AB%AF%E4%B8%80%E6%AC%A1%E7%BB%99-10-%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%B1%95%E7%A4%BA" data-anchor="#%E5%90%8E%E7%AB%AF%E4%B8%80%E6%AC%A1%E7%BB%99-10-%E4%B8%87%E6%9D%A1%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%B1%95%E7%A4%BA">后端一次给 10 万条数据，如何处理展示</a></li><li title="如何拿到动画帧数"><a href="#%E5%A6%82%E4%BD%95%E6%8B%BF%E5%88%B0%E5%8A%A8%E7%94%BB%E5%B8%A7%E6%95%B0" data-anchor="#%E5%A6%82%E4%BD%95%E6%8B%BF%E5%88%B0%E5%8A%A8%E7%94%BB%E5%B8%A7%E6%95%B0">如何拿到动画帧数</a></li><li title="sourceMap"><a href="#sourcemap" data-anchor="#sourcemap">sourceMap</a></li><li title="单页应用（SPA）优缺点"><a href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%EF%BC%88spa%EF%BC%89%E4%BC%98%E7%BC%BA%E7%82%B9" data-anchor="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%EF%BC%88spa%EF%BC%89%E4%BC%98%E7%BC%BA%E7%82%B9">单页应用（SPA）优缺点</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

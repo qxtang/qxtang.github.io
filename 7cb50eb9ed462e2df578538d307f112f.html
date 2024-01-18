@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - Hooks</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,100 +483,187 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="hooks" tabindex="-1"><a class="header-anchor" href="#hooks">Hooks</a></h1>
+<h2 id="%E4%B8%BA%E4%BB%80%E4%B9%88-hooks" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-hooks">为什么 hooks</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>类组件性能消耗较大，类组件需要创建实例，而且不能销毁</li>
+<li>函数组件性能消耗小，不需要创建实例，得到返回的 react 元素后就直接把中间量全部都销毁</li>
+<li>复用状态逻辑：Hook 使你在无需修改组件结构的情况下复用状态逻辑，可以将含有 state 的逻辑从组件中抽象出来，这将可以让这些逻辑容易被测试，在组件之间复用状态逻辑很难，如果要增加职责的话，就要加一层 HOC，容易形成“嵌套地狱”，一个套一个</li>
+<li>复杂 class 组件会变得难以理解，比如 componentDidMount 和 componentWillUnmount 是区分开的，Hook 可以将组件中相互关联的部分拆分成更小的函数</li>
+<li>class 比普通函数更难理解和使用，尤其是 this</li>
+<li>代码组织上，hooks 将业务逻辑聚合后，整个工程可阅读性大大增加</li>
+<li>友好渐进式的，项目中可以同时使用 class 和 hooks</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="class-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%BC%BA%E7%82%B9" tabindex="-1"><a class="header-anchor" href="#class-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%BC%BA%E7%82%B9">class 组件的缺点</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>大型组件难拆分和重构，难测试</li>
+<li>业务逻辑分散在组件的各个方法之中，导致重复逻辑或关联逻辑</li>
+<li>组件类引入了复杂的编程模式，比如 render props 和高阶组件</li>
+<li>难以理解的 class，理解 JavaScript 中 this 的工作方式</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="hook-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%94%BE%E5%9C%A8%E5%BE%AA%E7%8E%AF%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E9%A1%BA%E5%BA%8F%E8%B0%83%E7%94%A8%E5%AF%B9-react-hooks-%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#hook-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%94%BE%E5%9C%A8%E5%BE%AA%E7%8E%AF%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E9%A1%BA%E5%BA%8F%E8%B0%83%E7%94%A8%E5%AF%B9-react-hooks-%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F%EF%BC%89">hook 为什么不能放在循环、条件、嵌套函数执行（为什么顺序调用对 React Hooks 很重要？）</a></h2>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
-</ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
-</ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
-</ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
-<ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
-</ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
-<ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
+<li>Not Magic, just Arrays</li>
+<li>Hook 通过数组实现的，每次 useState 都会改变下标，React 需要利用调用顺序来正确更新相应的状态，否则会引起调用顺序的错乱，从而造成意想不到的错误</li>
+<li>能确保 Hook 在每一次渲染中都按照同样的顺序被调用，让 React 能够在多次的 useState 和 useEffect 调用之间保持 hook 状态的正确</li>
+<li>React 依靠 Hook 调用的顺序来知道哪个 state 对应哪个 useState，Hook 的调用顺序在每次渲染中都是相同的，只要 Hook 的调用顺序在多次渲染之间保持一致，React 就能正确地将内部 state 和对应的 Hook 进行关联</li>
+<li>Hook 需要在我们组件的最顶层调用</li>
+<li>Hook 重渲染时是依赖于固定顺序调用，来保证被正确识别，依赖数组来维护，有一个 setter 数组和一个索引，该索引在每个 hooks 被调用时递增，并在组件 render 时重置</li>
+<li>用数组解构语法来命名 useState() 返回的 state 变量，但这些变量不会连接到 React 组件上，数据的存储是独立于组件之外的</li>
 </ul>
 <div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<p>步骤：</p>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>初始化：创建两个空数组 setters 与 states，创建一个指针设置为 0</li>
+<li>首次渲染：每当 useState() 被调用时，如果它是首次渲染，它会通过 push 将一个 setter 方法（绑定了指针“cursor”位置）放进 setters 数组中，同时，也会将另一个对应的状态放进 states 数组中去</li>
+<li>后续渲染：每次的后续渲染都会重置指针“cursor”的位置，并会从每个数组中读取对应的值</li>
+<li>处理设置事件：每个 setter 对应一个指针位置的引用，当触发任何 setter 调用的时候，会去改变状态数组中对应索引的值</li>
+<li>开发工作中可以使用 eslint 配置相关规则发现这一错误</li>
 </ul>
+</div>
+<h2 id="hooks-%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%95%B0%E7%BB%84%E4%B8%8D%E7%94%A8-map" tabindex="-1"><a class="header-anchor" href="#hooks-%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%95%B0%E7%BB%84%E4%B8%8D%E7%94%A8-map">hooks 实现为什么用数组不用 map</a></h2>
+<ul>
+<li>使用 key 值取映射 hook 的话，自定义的 hook 被多个组件调用的话，很难不保证之前有没有同名的 key 在其他组件内</li>
+<li>用 Symbol：不能很好地复用了，因为 key 值的唯一性使得总是同一个 key 调用了 hook</li>
+</ul>
+<h2 id="react-%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86-class-%E7%BB%84%E4%BB%B6%E5%92%8C-function-%E7%BB%84%E4%BB%B6" tabindex="-1"><a class="header-anchor" href="#react-%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86-class-%E7%BB%84%E4%BB%B6%E5%92%8C-function-%E7%BB%84%E4%BB%B6">React 如何区分 Class 组件和 Function 组件</a></h2>
+<ul>
+<li>instanceof 检查这个函数/类是否是 React.Component 的继承类</li>
+<li>检查 <code>函数/类.prototype.isReactComponent</code> 属性</li>
+</ul>
+<h2 id="hooks-%E7%89%B9%E6%80%A7" tabindex="-1"><a class="header-anchor" href="#hooks-%E7%89%B9%E6%80%A7">hooks 特性</a></h2>
+<ul>
+<li>Effect 拿到的总是定义它的那次渲染中的 props 和 state，在任意一次渲染中，props 和 state 是始终保持不变的，它们都属于一次特定的渲染，同样，每次渲染都有它自己的 Effects</li>
+<li>可通过 ref 来保存值，实现在所有的渲染帧中共享</li>
+<li>React 会记住我们设置的 effect 函数，并且会在每次 DOM 更改后、浏览器绘制屏幕后，去调用，这使得应用更流畅，不会阻塞屏幕的更新，上一次的 effect 会在重新渲染后被清除</li>
+<li>依赖项不要对 React 撒谎：effect 中用到的所有组件内的值都应该包含在依赖中</li>
+<li>可以使用 setState 的函数形式，获取上一次调用对应 setter 时传的状态值</li>
+<li>如果某些函数仅在 effect 中调用，可以把它们的定义移到 effect 中，这样可以不再需要去考虑依赖</li>
+<li>如果一个函数没有使用组件内的任何值，可以把它提到组件外面去定义成纯函数，然后就可以自由地在 effects 中使用（或者把它包装成 useCallback）</li>
+<li>useEffect 第一个参数，不能返回 Promise，所以不能传递异步函数，可以自己在里面声明再执行</li>
+</ul>
+<h2 id="%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BE%8B%E5%AD%90" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BE%8B%E5%AD%90">定时器的例子</a></h2>
+<pre><code class="language-jsx"><span class="hljs-comment">// 先点击 alert，再点击几次 add 增加 count，3 秒后弹出的是点击 alert 时的状态</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Counter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleAlertClick</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;You clicked on: &#x27;</span> + count);
+    }, <span class="hljs-number">3000</span>);
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked {count} times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleAlertClick}</span>&gt;</span>alert<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-comment">// 而如果是在类组件中，则会正确弹出状态的当前值</span>
+<span class="hljs-comment">// 因为类组件的状态保存在实例属性上，状态改变实例不会销毁</span>
+</code></pre>
+<h2 id="hooks-%E7%BC%BA%E7%82%B9" tabindex="-1"><a class="header-anchor" href="#hooks-%E7%BC%BA%E7%82%B9">hooks 缺点</a></h2>
+<ul>
+<li>useEffect 写函数组件时，必须清楚代码中 useEffect 和 useCallback 的“依赖项数组”的改变时机</li>
+<li>有时候，useEffect 依赖某个函数的不可变性，这个函数的不可变性又依赖于另一个函数的不可变性，这样便形成了一条依赖链</li>
+<li>一旦这条依赖链的某个节点意外地被改变了，useEffect 就被意外地触发了</li>
+</ul>
+<h2 id="%E8%BF%87%E5%BA%A6%E4%BD%BF%E7%94%A8-usememo-%E5%90%8E%E6%9E%9C" tabindex="-1"><a class="header-anchor" href="#%E8%BF%87%E5%BA%A6%E4%BD%BF%E7%94%A8-usememo-%E5%90%8E%E6%9E%9C">过度使用 useMemo 后果</a></h2>
+<ul>
+<li>useMemo 本身也有开销</li>
+<li>useMemo 会「记住」一些值，同时在后续 render 时，将依赖数组中的值取出来和上一次记录的值进行比较，如果不相等才会重新执行回调函数，否则直接返回「记住」的值。这个过程本身就会消耗一定的内存和计算资源</li>
+<li>如果执行的操作开销不大，那么就不需要记住返回值。使用 useMemo 的成本可能会超过重新评估该函数的成本</li>
+</ul>
+<div class="tip">
+<p>使用前应该先思考三个问题：</p>
+<ul>
+<li>传递给 useMemo 的函数开销大不大</li>
+<li>返回的值是否原始值：如果计算出来的是基本类型的值，那么每次比较都是相等的，下游组件就不会重新渲染；如果计算出来的是复杂类型的值（object、array），哪怕值不变，但是地址会发生变化，导致下游组件重新渲染。所以我们也需要「记住」这个值。</li>
+<li>返回值要保持引用一致性：在编写自定义 Hook 时，因为无法确定外部要如何使用它的返回值。如果返回值被用做其他 Hook 的依赖，并且每次 re-render 时引用不一致（当值相等的情况），就可能会产生 bug。所以如果自定义 Hook 中暴露出来的值是 object、array、函数等，都应该使用 useMemo。以确保当值相同时，引用不发生变化。</li>
+</ul>
+</div>
+<h2 id="hooks-%E5%B8%B8%E7%94%A8-api" tabindex="-1"><a class="header-anchor" href="#hooks-%E5%B8%B8%E7%94%A8-api">hooks 常用 API</a></h2>
+<ul>
+<li>useCallback：返回一个记忆函数，缓存了每次渲染时那些回调函数的实例，可以配合 React.memo 起到减少不必要的渲染的作用</li>
+<li>useMemo：返回一个记忆值，传递一个工厂函数和数组。useMemo 只会在数组其中一个输入发生更改时重新调用工厂函数去计算这个值。此优化有助于避免在每个渲染上进行高开销的计算。</li>
+<li>useRef：useRef 返回一个可变的 ref 对象，其 current 属性被初始化为传递的参数。返回的对象将存留在整个组件的生命周期中。useRef 在 react hook 中的作用, 正如官网说的，像一个变量，类似于 this，可以存放任何东西，createRef 每次渲染都会返回一个新的引用，而 useRef 每次都会返回相同的引用</li>
+<li>useImperativeHandle：自定义使用 ref 时公开给父组件的实例值，往往与 forwardRef 一起使用</li>
+<li>useLayoutEffect：签名与 useEffect 相同，但在所有 DOM 变化后同步触发</li>
+</ul>
+<h2 id="hook-%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99%E5%92%8C%E6%B3%A8%E6%84%8F" tabindex="-1"><a class="header-anchor" href="#hook-%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99%E5%92%8C%E6%B3%A8%E6%84%8F">Hook 使用规则和注意</a></h2>
+<ul>
+<li>约定以 use 开头并且紧跟大写字母（因为约定的力量在于：我们不用细看实现，也能通过命名来了解一个它是什么）</li>
+<li>只在最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook，能确保 Hook 在每一次渲染中都按照同样的顺序被调用</li>
+<li>只在 React 函数中调用 Hook，不要在普通的 JavaScript 函数中调用 Hook，确保组件的状态逻辑在代码中清晰可见（eslint 通过判断一个方法是不是大坨峰命名来判断它是否是 React 函数）</li>
+</ul>
+<h2 id="%E8%87%AA%E5%AE%9A%E4%B9%89-hooks" tabindex="-1"><a class="header-anchor" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks">自定义 hooks</a></h2>
+<ul>
+<li>一种自然遵循 Hook 设计的约定，而并不是 React 的特性</li>
+<li>必须以 “use” 开头，不遵循的话，由于无法判断某个函数是否包含对其内部 Hook 的调用，React 将无法自动检查你的 Hook 是否违反了 Hook 的使用规则</li>
+<li>在两个组件中使用相同的 Hook 不会共享 state，自定义 Hook 是一种重用状态逻辑的机制，所以每次使用自定义 Hook 时，其中的所有 state 和副作用都是完全隔离的</li>
+</ul>
+<h2 id="useeffect-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BC%A0%E5%85%A5%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#useeffect-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BC%A0%E5%85%A5%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0">useEffect 为什么不能传入异步函数</a></h2>
+<p>理由是 effect function 应该返回一个销毁函数，如果 useEffect 第一个参数传入 async，返回值则变成了 Promise，会导致 react 在调用销毁函数的时候报错：function.apply is undefined</p>
+<div class="tip">
+<p>为什么这样设计：</p>
+<p>useEffect 的返回值是要在卸载组件时调用的，React 需要在 mount 的时候马上拿到这个值，不能有延迟</p>
+</div>
+<div class="tip">
+<p>解决：</p>
+<ul>
+<li>
+<p>使用 IIFE 或者声明异步函数再执行，推荐使用 IIFE 写法，因为声明的异步函数可能有外部依赖无法及时更新</p>
+<pre><code class="language-jsx"><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  (<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-variable constant_">SOME_API</span>);
+    <span class="hljs-title function_">setValue</span>(res.<span class="hljs-property">data</span>);
+  })();
+}, []);
+</code></pre>
+</li>
+<li>
+<p>编写自定义 hook useAsyncEffect</p>
+<pre><code class="language-typescript"><span class="hljs-comment">// 自定义hook</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useAsyncEffect</span>(<span class="hljs-params">effect: () =&gt; <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span> | (() =&gt; <span class="hljs-built_in">void</span>)&gt;, dependencies?: <span class="hljs-built_in">any</span>[]</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> cleanupPromise = <span class="hljs-title function_">effect</span>();
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {
+      cleanupPromise.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">cleanup</span>) =&gt;</span> cleanup &amp;&amp; <span class="hljs-title function_">cleanup</span>());
+    };
+  }, dependencies);
+}
+
+<span class="hljs-comment">// 使用</span>
+<span class="hljs-title function_">useAsyncEffect</span>(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> count = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchData</span>();
+  <span class="hljs-title function_">setCount</span>(count);
+}, [fetchData]);
+</code></pre>
+</li>
+</ul>
+</div>
+<h2 id="useeffect-%E5%AE%9E%E7%8E%B0%E9%98%B2%E6%8A%96" tabindex="-1"><a class="header-anchor" href="#useeffect-%E5%AE%9E%E7%8E%B0%E9%98%B2%E6%8A%96">useEffect 实现防抖</a></h2>
+<pre><code class="language-javascript"><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetchData</span>(deps);
+  }, <span class="hljs-number">500</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">clearTimeout</span>(timer);
+}, [deps]);
+</code></pre>
+<p>不能直接向 useEffect 传递防抖函数，因为 useEffect 常依赖 props 或者 useState 返回的值，当两种值改变后，都会触发 Function 组件重新渲染，那么 useEffect 又会重新执行一遍，生成一个新的防抖后的函数</p>
+<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<p><a href="https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/" target="_blank">https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/</a></p>
 
       
         <div class="btt withToc" id="btt"></div>
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="Hooks"><a href="#hooks" data-anchor="#hooks">Hooks</a><ul><li title="为什么 hooks"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88-hooks" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88-hooks">为什么 hooks</a></li><li title="class 组件的缺点"><a href="#class-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%BC%BA%E7%82%B9" data-anchor="#class-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%BC%BA%E7%82%B9">class 组件的缺点</a></li><li title="hook 为什么不能放在循环、条件、嵌套函数执行（为什么顺序调用对 React Hooks 很重要？）"><a href="#hook-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%94%BE%E5%9C%A8%E5%BE%AA%E7%8E%AF%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E9%A1%BA%E5%BA%8F%E8%B0%83%E7%94%A8%E5%AF%B9-react-hooks-%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F%EF%BC%89" data-anchor="#hook-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%94%BE%E5%9C%A8%E5%BE%AA%E7%8E%AF%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%88%E4%B8%BA%E4%BB%80%E4%B9%88%E9%A1%BA%E5%BA%8F%E8%B0%83%E7%94%A8%E5%AF%B9-react-hooks-%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F%EF%BC%89">hook 为什么不能放在循环、条件、嵌套函数执行（为什么顺序调用对 React Hooks 很重要？）</a></li><li title="hooks 实现为什么用数组不用 map"><a href="#hooks-%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%95%B0%E7%BB%84%E4%B8%8D%E7%94%A8-map" data-anchor="#hooks-%E5%AE%9E%E7%8E%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E6%95%B0%E7%BB%84%E4%B8%8D%E7%94%A8-map">hooks 实现为什么用数组不用 map</a></li><li title="React 如何区分 Class 组件和 Function 组件"><a href="#react-%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86-class-%E7%BB%84%E4%BB%B6%E5%92%8C-function-%E7%BB%84%E4%BB%B6" data-anchor="#react-%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86-class-%E7%BB%84%E4%BB%B6%E5%92%8C-function-%E7%BB%84%E4%BB%B6">React 如何区分 Class 组件和 Function 组件</a></li><li title="hooks 特性"><a href="#hooks-%E7%89%B9%E6%80%A7" data-anchor="#hooks-%E7%89%B9%E6%80%A7">hooks 特性</a></li><li title="定时器的例子"><a href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BE%8B%E5%AD%90" data-anchor="#%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E4%BE%8B%E5%AD%90">定时器的例子</a></li><li title="hooks 缺点"><a href="#hooks-%E7%BC%BA%E7%82%B9" data-anchor="#hooks-%E7%BC%BA%E7%82%B9">hooks 缺点</a></li><li title="过度使用 useMemo 后果"><a href="#%E8%BF%87%E5%BA%A6%E4%BD%BF%E7%94%A8-usememo-%E5%90%8E%E6%9E%9C" data-anchor="#%E8%BF%87%E5%BA%A6%E4%BD%BF%E7%94%A8-usememo-%E5%90%8E%E6%9E%9C">过度使用 useMemo 后果</a></li><li title="hooks 常用 API"><a href="#hooks-%E5%B8%B8%E7%94%A8-api" data-anchor="#hooks-%E5%B8%B8%E7%94%A8-api">hooks 常用 API</a></li><li title="Hook 使用规则和注意"><a href="#hook-%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99%E5%92%8C%E6%B3%A8%E6%84%8F" data-anchor="#hook-%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99%E5%92%8C%E6%B3%A8%E6%84%8F">Hook 使用规则和注意</a></li><li title="自定义 hooks"><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks" data-anchor="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks">自定义 hooks</a></li><li title="useEffect 为什么不能传入异步函数"><a href="#useeffect-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BC%A0%E5%85%A5%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0" data-anchor="#useeffect-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BC%A0%E5%85%A5%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0">useEffect 为什么不能传入异步函数</a></li><li title="useEffect 实现防抖"><a href="#useeffect-%E5%AE%9E%E7%8E%B0%E9%98%B2%E6%8A%96" data-anchor="#useeffect-%E5%AE%9E%E7%8E%B0%E9%98%B2%E6%8A%96">useEffect 实现防抖</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

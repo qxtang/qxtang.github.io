@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 迭代流程规范</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,100 +483,152 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
-<ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
-</ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
+      <h1 id="%E8%BF%AD%E4%BB%A3%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83" tabindex="-1"><a class="header-anchor" href="#%E8%BF%AD%E4%BB%A3%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83">迭代流程规范</a></h1>
 <blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
+<p>待完善</p>
 </blockquote>
-<p>参考：</p>
+<h2 id="%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E9%98%B6%E6%AE%B5%E6%80%BB%E8%A7%88" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E9%98%B6%E6%AE%B5%E6%80%BB%E8%A7%88">业务流程阶段总览</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>
+<p>产品研发阶段</p>
+<p>做市场调研<br>
+根据调研结果决定是否设计和开发新的产品（或进行产品改良）<br>
+研发/发布</p>
+</li>
+<li>
+<p>日常运营/运维阶段</p>
+<p>产品发布上线后，通过各类运营手段和运维手段向客户提供符合需求的、高可用的产品与服务<br>
+运营常见的活动有拉新、留存、促活等。运维常见的活动有容量规划与实施、服务集群维护、系统容错管理等</p>
+</li>
+<li>
+<p>售后服务阶段</p>
+<p>主要由客服人员或售后工程师主导，包括解答或解决用户在使用产品后产生的疑问和投诉等</p>
+</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83" tabindex="-1"><a class="header-anchor" href="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83">产品研发流程规范</a></h2>
+<p>大体分为需求阶段、研发阶段、测试阶段、发布阶段</p>
+<h3 id="%E5%85%B3%E9%94%AE%E8%A7%92%E8%89%B2" tabindex="-1"><a class="header-anchor" href="#%E5%85%B3%E9%94%AE%E8%A7%92%E8%89%B2">关键角色</a></h3>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>
+<p>项目经理</p>
+<p>日常的项目管理、流程规范制定等工作一般由项目经理来主导<br>
+如果没有设置项目经理这样的角色，流程规范的制定由各协同方共同商议决定，其中产品研发流程的规范绝大多数都由测试部门主导制定，一般由测试部门编写初稿，与协同部门共同商议后确定</p>
+</li>
+<li>
+<p>产品经理</p>
+<p>责对需求进行分析、编写需求文档、组织需求文档的评审、协调项目资源、对交付结果进行验收等工作</p>
+</li>
+<li>
+<p>研发人员</p>
+<p>负责编写技术设计方案、编码（包括与协同方联调和自测），把交付物提交给测试人员进行测试<br>
+测试完成后把交付物发布到线上（发布人员可能有测试人员/研发人员等）</p>
+</li>
+<li>
+<p>质量保障人员（Qualtiy Assurance，简称 QA，很多时候通俗表达为测试人员）</p>
+<p>负责确保该需求的交付物符合产品需求</p>
+</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<h3 id="%E5%85%B3%E9%94%AE%E5%8E%9F%E5%88%99" tabindex="-1"><a class="header-anchor" href="#%E5%85%B3%E9%94%AE%E5%8E%9F%E5%88%99">关键原则</a></h3>
+<p>微服务架构下，一个业务所具有的微服务数量多，服务与服务之间存在着复杂的交互关系<br>
+不同服务分布在不同的团队中维护，一个需求通常需要多个微服务团队参与开发，<br>
+基于这样的背景，在制定流程规范时会有如下考虑：</p>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>各职能角色必须有 Owner 角色</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+<p>一个小型需求的产品研发过程，需要产品经理、研发人员和测试人员等角色的协同。<br>
+一个大型需求，往往是由几个小型需求组成，同一个职能角色之间会有多个人员进行协同，<br>
+因此，为了有利于协同，降低协同风险，应在每一个角色中设置 Owner 角色。<br>
+基于此，Owner 角色在一定程度上需要有一些项目管理的意识、知识和技能。</p>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>重评审和讨论，群策群力</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<p>产品研发过程是一个脑力密集型的工作，复杂度高，<br>
+大量的实践统计表明，在大规模软件开发中超过 50% 的错误来自需求分析和技术设计阶段。<br>
+为了最大程度地降低风险，在其流程中需要加大评审和讨论环节的投入，<br>
+通过多方审查的机制来保证过程质量、提高研发效率，<br>
+所以，需求阶段和研发阶段的早期流程应有好的规范。</p>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>前紧后松，提前应对风险</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+<p>高速迭代的研发过程，需要在研发过程的早期，前置发现更多的问题，使后面过程更顺畅，<br>
+尽量达到“前紧后松”的效果，以降低研发过程的复杂度和风险。</p>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
+<li>关键节点严格把控</li>
 </ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
+<p>产品研发的子阶段之间体现了承上启下的作用，主导方会发生变化，所以对这些节点要严格把控，避免将风险和问题遗漏到以后解决。</p>
+<h3 id="%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%26%E8%90%BD%E5%9C%B0" tabindex="-1"><a class="header-anchor" href="#%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%26%E8%90%BD%E5%9C%B0">规范制定&amp;落地</a></h3>
+<p>规范的制定没有特定的频率限制，<br>
+通常情况下，在刚开始进行产品研发时会制定一个粗颗粒度的规范。<br>
+在之后的项目过程中，出现了现有规范不能解决的问题，则会先商讨出来解决方案，<br>
+再逐步把相应的流程规范明确下来。<br>
+一个规范制定出来后，首先优先在测试部门内部进行评审，然后再与协同方达成共识，最后按照一定的节奏开始推广执行。<br>
+在将规范进行落地后，应不断跟进执行情况，针对执行不到位的地方进行分析和改进，形成 PDCA 循环</p>
 <div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<p><strong>PDCA 循环（戴明环）</strong></p>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>全面质量管理的思想基础和方法依据</li>
+<li>含义：将质量管理分为四个阶段：Plan(计划)、Do(执行)、Check(检查)、Action(处理)</li>
+<li>在质量管理活动中，要求把各项工作按照作出计划、计划实施、检查实施效果，然后将成功的纳入标准，不成功的留待下一循环去解决。这一工作方法是质量管理的基本方法，也是企业管理各项工作的一般规律</li>
 </ul>
+</div>
+<h3 id="%E8%A7%84%E8%8C%83%E5%91%88%E7%8E%B0" tabindex="-1"><a class="header-anchor" href="#%E8%A7%84%E8%8C%83%E5%91%88%E7%8E%B0">规范呈现</a></h3>
+<ul>
+<li>泳道图</li>
+</ul>
+<h2 id="%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5" tabindex="-1"><a class="header-anchor" href="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5">产品研发阶段</a></h2>
+<h3 id="%E9%9C%80%E6%B1%82%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82%E8%AF%84%E5%AE%A1" tabindex="-1"><a class="header-anchor" href="#%E9%9C%80%E6%B1%82%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82%E8%AF%84%E5%AE%A1">需求阶段：产品需求评审</a></h3>
+<p>需求文档通常的表现形式是产品需求文档（PRD）或市场需求文档（MRD），它们也是技术设计文档和测试设计文档的重要输入<br>
+确保对于需求的说明没有二义性<br>
+应满足如下质量要求：</p>
+<ul>
+<li>完备性：需求是否包含了所有正常场景，对异常场景的考虑是否足够，UI 设计图和提示信息等是否完整、友好</li>
+<li>易理解：需求的表述是否具有二义性，是否使用了结构化的描述，流程类需求是否具有清晰的流程图</li>
+<li>可行性：需求中的功能是否具有可操作性，能否通过现有的技术实现</li>
+<li>一致性：需求是否与现有功能存在冲突，存在冲突时是否有兼容逻辑</li>
+<li>可测试性：需求中的功能要求是否有对错的评判，需求中的非功能要求是否具备验证的标准和方法</li>
+</ul>
+<p>测试人员尤其要重视需求的可测性。早期提出可测试性方面的问题和风险，否则，到了后续的环节才发现需求不可测，这可能会导致需求变更或技术实现方案的变更，对质量和效率的影响就太大了<br>
+测试人员如何参与需求评审：强化需求评审或技术设计评审环节，投入较多的精力，前置思考好一个需求中的重点、难点、风险点，提前应对</p>
+<h3 id="%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8A%80%E6%9C%AF%E8%AE%BE%E8%AE%A1%E8%AF%84%E5%AE%A1" tabindex="-1"><a class="header-anchor" href="#%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8A%80%E6%9C%AF%E8%AE%BE%E8%AE%A1%E8%AF%84%E5%AE%A1">研发阶段：技术设计评审</a></h3>
+<p>主要评审是否满足业务需求的功能和非功能质量属性，以及发布方案是否完备<br>
+评审要点：</p>
+<ul>
+<li>正确性：技术设计是否可以满足业务需求中的全部功能要求，对异常情况的考虑是否充分</li>
+<li>可测性：技术设计是否可测，预期结果是否稳定</li>
+<li>非功能性：是否考虑了安全性、性能、稳定性、扩展性、可靠性等非功能质量属性</li>
+<li>兼容性：对不同形态和版本的终端是否兼容，对上下游的服务和数据是否兼容</li>
+<li>发布方案：<br>
+部署逻辑设计是否合理<br>
+是否需要对数据结构、缓存、各类配置等进行操作<br>
+功能是否具备可回滚的能力<br>
+灰度计划是否合理<br>
+对服务的关键业务指标和技术指标是否做了监控和告警配置<br>
+应急预案有哪些，如何应对<br>
+预计的发布时间是如何安排的，需要哪些人员协同，等等</li>
+</ul>
+<h3 id="%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1%26%E8%AF%84%E5%AE%A1" tabindex="-1"><a class="header-anchor" href="#%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1%26%E8%AF%84%E5%AE%A1">测试阶段：测试设计&amp;评审</a></h3>
+<p>测试阶段主要分两部分，测试设计阶段和测试执行阶段，测试设计阶段主要是进行测试方案和用例的设计，测试执行阶段主要是在提测后，对测试方案或用例进行执行的过程</p>
+<p>测试用例评审：</p>
+<ul>
+<li>测试用例的质量关系到测试执行的质量和测试工作本身的质量</li>
+<li>提高测试用例质量，可以通过两种方式，一是尽量将测试用例模板进行标准化；二是对用例进行评审。测试用例评审时间过早和过晚都不好，一般应在提测前 2 天左右的时间完成为宜</li>
+</ul>
+<p>评审要点：</p>
+<ul>
+<li>测试范围：测试用例是否覆盖了业务和技术的需求，对于已有功能是否进行了必要的回归</li>
+<li>异常情况：用例是否考虑了非常规操作或其他异常情况</li>
+<li>易读性：测试用例是否包含前置条件、操作步骤和期望结果等必要信息</li>
+<li>非功能性设计：针对非功能性的需求和技术设计，测试用例是否设计充分</li>
+</ul>
+<h3 id="%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E5%92%8C%E5%8F%91%E5%B8%83%E9%98%B6%E6%AE%B5" tabindex="-1"><a class="header-anchor" href="#%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E5%92%8C%E5%8F%91%E5%B8%83%E9%98%B6%E6%AE%B5">测试执行阶段和发布阶段</a></h3>
+<p>涉及缺陷管理、测试总结与分析、测试报告编写等工作</p>
 
       
         <div class="btt withToc" id="btt"></div>
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="迭代流程规范"><a href="#%E8%BF%AD%E4%BB%A3%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83" data-anchor="#%E8%BF%AD%E4%BB%A3%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83">迭代流程规范</a><ul><li title="业务流程阶段总览"><a href="#%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E9%98%B6%E6%AE%B5%E6%80%BB%E8%A7%88" data-anchor="#%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E9%98%B6%E6%AE%B5%E6%80%BB%E8%A7%88">业务流程阶段总览</a></li><li title="产品研发流程规范"><a href="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83" data-anchor="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83">产品研发流程规范</a><ul><li title="关键角色"><a href="#%E5%85%B3%E9%94%AE%E8%A7%92%E8%89%B2" data-anchor="#%E5%85%B3%E9%94%AE%E8%A7%92%E8%89%B2">关键角色</a></li><li title="关键原则"><a href="#%E5%85%B3%E9%94%AE%E5%8E%9F%E5%88%99" data-anchor="#%E5%85%B3%E9%94%AE%E5%8E%9F%E5%88%99">关键原则</a></li><li title="规范制定&落地"><a href="#%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%26%E8%90%BD%E5%9C%B0" data-anchor="#%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%26%E8%90%BD%E5%9C%B0">规范制定&落地</a></li><li title="规范呈现"><a href="#%E8%A7%84%E8%8C%83%E5%91%88%E7%8E%B0" data-anchor="#%E8%A7%84%E8%8C%83%E5%91%88%E7%8E%B0">规范呈现</a></li></ul></li><li title="产品研发阶段"><a href="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5" data-anchor="#%E4%BA%A7%E5%93%81%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5">产品研发阶段</a><ul><li title="需求阶段：产品需求评审"><a href="#%E9%9C%80%E6%B1%82%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82%E8%AF%84%E5%AE%A1" data-anchor="#%E9%9C%80%E6%B1%82%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82%E8%AF%84%E5%AE%A1">需求阶段：产品需求评审</a></li><li title="研发阶段：技术设计评审"><a href="#%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8A%80%E6%9C%AF%E8%AE%BE%E8%AE%A1%E8%AF%84%E5%AE%A1" data-anchor="#%E7%A0%94%E5%8F%91%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8A%80%E6%9C%AF%E8%AE%BE%E8%AE%A1%E8%AF%84%E5%AE%A1">研发阶段：技术设计评审</a></li><li title="测试阶段：测试设计&评审"><a href="#%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1%26%E8%AF%84%E5%AE%A1" data-anchor="#%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1%26%E8%AF%84%E5%AE%A1">测试阶段：测试设计&评审</a></li><li title="测试执行阶段和发布阶段"><a href="#%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E5%92%8C%E5%8F%91%E5%B8%83%E9%98%B6%E6%AE%B5" data-anchor="#%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E5%92%8C%E5%8F%91%E5%B8%83%E9%98%B6%E6%AE%B5">测试执行阶段和发布阶段</a></li></ul></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

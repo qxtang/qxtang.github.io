@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 为什么前端团队要统一技术栈</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,36 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88">为什么前端团队要统一技术栈</a></h1>
+<p>公司前端团队建议应该尽可能统一技术栈、统一开发框架。</p>
+<h2 id="%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>断崖效应：团队决策者通常会从自身利益考量，希望尽量减少对外部门的依赖，无论是技术选型，规范建立，组件选取，运行环境都能够自行掌控，项目技术栈由单个员工决定的话，单个员工对单个项目的影响变的非常巨大。一个产品经常会因为一两个核心员工的离职难以为继，最后不得不重新开发新的产品。</li>
+<li>当一位核心员工构建了一些基础的平台工具后，往往随着他的离开把之前的技术积累全部丢弃掉，而更严重的情况会导致整个项目的持续运行都成了问题，比如有的前端会自己偷偷开发一个 npm 包做为项目依赖。</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
+<h2 id="%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF">统一开发框架的优势</a></h2>
+<ul>
+<li>
+<p>避免重复性技术研究，节约人力成本，让项目组把精力更多的投入到业务中。</p>
+</li>
+<li>
+<p>标准化技术规范，提升产品项目质量。</p>
+</li>
+</ul>
 <blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
+<p>要千人一面，而不要千人千面。采用统一的开发框架（平台）后，在技术栈，技术组件，技术实现方案，甚至在代码规范上就能形成标准化的技术输出模式，标准化带来的最大效果不仅仅是开发效率的快速提升，还有产品质量的大幅提升，这是显而易见的。</p>
 </blockquote>
-<p>参考：</p>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>
+<p>进行技术沉淀，提升公司整体技术能力，避免陷入一个人的能力决定一个项目。</p>
+</li>
+<li>
+<p>当存在公司级别的统一开发框架（平台），项目团队基于该平台进行自身项目的研发，不再需要关注于底层技术实现，只需要关注业务即可。当存在核心同事离职时，平台的研发同事可以对新进入项目的同事进行相关培训，不会导致青黄不接的事情发生。而且，专注于平台的同事为了更好的满足项目组的技术需求，对平台进行不断的改进，从而达到技术积累和沉淀的目标。</p>
+</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
-</ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
-</ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
-</ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
-<ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
-</ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
-<ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
 <h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li><a href="https://juejin.cn/post/6844903925947039757" target="_blank">https://juejin.cn/post/6844903925947039757</a></li>
 </ul>
 
       
@@ -576,7 +520,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="为什么前端团队要统一技术栈"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%89%8D%E7%AB%AF%E5%9B%A2%E9%98%9F%E8%A6%81%E7%BB%9F%E4%B8%80%E6%8A%80%E6%9C%AF%E6%A0%88">为什么前端团队要统一技术栈</a><ul><li title="不统一开发框架的弊端"><a href="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF" data-anchor="#%E4%B8%8D%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E5%BC%8A%E7%AB%AF">不统一开发框架的弊端</a></li><li title="统一开发框架的优势"><a href="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E7%BB%9F%E4%B8%80%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BC%98%E5%8A%BF">统一开发框架的优势</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

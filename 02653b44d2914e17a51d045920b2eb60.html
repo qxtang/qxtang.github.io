@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 设计稿多端适配方案</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,80 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%A4%9A%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88" tabindex="-1"><a class="header-anchor" href="#%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%A4%9A%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88">设计稿多端适配方案</a></h1>
+<p>如何让不同尺寸的屏幕能以正常比例呈现设计稿？</p>
+<h2 id="%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9-font-size-%2B-rem-%E6%96%B9%E6%A1%88" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9-font-size-%2B-rem-%E6%96%B9%E6%A1%88">动态修改 font-size + rem 方案</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>
+<p>动态修改 html 标签 font-size，样式单位统一用 rem，数值为设计稿尺寸除以 base</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> fn = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">var</span> designWidth = <span class="hljs-number">1920</span>; <span class="hljs-comment">// 设计稿尺寸</span>
+  <span class="hljs-keyword">var</span> base = <span class="hljs-number">16</span>; <span class="hljs-comment">// 1rem 的占比，不要小于 12</span>
+  <span class="hljs-keyword">var</span> html = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">&#x27;html&#x27;</span>)[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">var</span> clientWidth = <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientWidth</span> || <span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>.<span class="hljs-property">clientWidth</span>;
+  html.<span class="hljs-property">style</span>.<span class="hljs-property">fontSize</span> = (clientWidth / designWidth) * base + <span class="hljs-string">&#x27;px&#x27;</span>;
+};
+
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">fn</span>();
+});
+
+<span class="hljs-variable language_">window</span>.<span class="hljs-property">onresize</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">fn</span>();
+};
+</code></pre>
+</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h3 id="%E5%BC%8A%E7%AB%AF" tabindex="-1"><a class="header-anchor" href="#%E5%BC%8A%E7%AB%AF">弊端</a></h3>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>和根元素 font-size 值强耦合，系统字体放大或缩小时，会导致布局错乱</li>
+<li>html 文件头部需插入一段 js 代码</li>
+<li>相较之下，vw 单位兼容性比 rem 稍差，ios8、安卓 4.4 及以上才完全支持。这也是为什么之前 rem 布局一直更流行的原因。目前 ios8、安卓 4.4 以下的用户已经非常少了，caniuse 上面显示，在中国这部分用户只有 1.2%，比例已经非常低了</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="%E8%AE%BE%E8%AE%A1%E7%A8%BF-px-%E8%BD%AC-vw-%E6%96%B9%E6%A1%88%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#%E8%AE%BE%E8%AE%A1%E7%A8%BF-px-%E8%BD%AC-vw-%E6%96%B9%E6%A1%88%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">设计稿 px 转 vw 方案（推荐）</a></h2>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>1vw 表示屏幕宽度的 1%</li>
+<li>把所有需要适配屏幕大小等比缩放的元素都使用 vw 做为单位。不需要缩放的元素使用 px 做单位</li>
+<li>举个例子。设计师交付的设计稿宽度是 750px，设计稿上一个标题的 fontSize 标注尺寸是 32px。<code>(32/750)*100% = 4.27%</code> ，换句话说这个标题的字号占屏幕宽度的占比是 4.27%，不管任何屏幕都是如此。4.27% 即 4.27vw。</li>
+<li>可以使用 post-css 专门的插件做转换，或使用预处理样式语言中的函数</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<pre><code class="language-less"><span class="hljs-variable">@baseScreenWidth:</span> <span class="hljs-number">320</span>;
+<span class="hljs-selector-class">.px2vw</span>(<span class="hljs-variable">@name</span>, <span class="hljs-variable">@px</span>) {
+  @{name}: (<span class="hljs-variable">@px</span> / <span class="hljs-variable">@baseScreenWidth</span>) * <span class="hljs-number">100vw</span>;
+}
+</code></pre>
+<pre><code class="language-scss"><span class="hljs-keyword">@function</span> px2vw(<span class="hljs-variable">$px</span>) {
+  <span class="hljs-keyword">@return</span> <span class="hljs-variable">$px</span> * <span class="hljs-number">100vw</span> / <span class="hljs-number">750</span>;
+}
+
+<span class="hljs-comment">// 以iphone7尺寸@2x 750像素宽的视觉稿为例</span>
+<span class="hljs-keyword">@function</span> vw(<span class="hljs-variable">$px</span>) {
+  <span class="hljs-keyword">@return</span> (<span class="hljs-variable">$px</span> / <span class="hljs-number">750</span>) * <span class="hljs-number">100vw</span>;
+}
+
+<span class="hljs-comment">// 假设一个div元素在视觉稿中，宽度为120px，字体大小为12px</span>
+<span class="hljs-selector-tag">div</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-built_in">vw</span>(<span class="hljs-number">120</span>);
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-built_in">vw</span>(<span class="hljs-number">12</span>);
+}
+</code></pre>
+<h2 id="dpr-%E6%98%AF%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#dpr-%E6%98%AF%E4%BB%80%E4%B9%88">dpr 是什么</a></h2>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>设备像素比，通过 window.devicePixelRatio 获取</li>
+<li>是设备上物理像素和设备独立像素（dips）的比例，window.devicePixelRatio = 物理像素 / dips</li>
+<li>简单的讲其实就是 dpr 决定了 css 1px 等于多少屏幕物理像素</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+<h3 id="%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0" tabindex="-1"><a class="header-anchor" href="#%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0">物理像素</a></h3>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>显示器上最小的物理显示单元，在操作系统的调度下，每一个设备像素都有自己的颜色值和亮度值</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<h3 id="%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0%EF%BC%88dips%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0%EF%BC%88dips%EF%BC%89">设备独立像素（dips）</a></h3>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>也叫密度无关像素，可以认为是计算机坐标系统中得一个点，这个点代表一个可以由程序使用的虚拟像素（比如: css 像素），然后由相关系统转换为物理像素</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+<h2 id="viewport" tabindex="-1"><a class="header-anchor" href="#viewport">viewport</a></h2>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
-<ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>用于定义视口的各种行为：视口宽度、初始缩放、最小最大缩放比例、是否允许用户手动缩放</li>
 </ul>
 
       
@@ -576,7 +564,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="设计稿多端适配方案"><a href="#%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%A4%9A%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88" data-anchor="#%E8%AE%BE%E8%AE%A1%E7%A8%BF%E5%A4%9A%E7%AB%AF%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88">设计稿多端适配方案</a><ul><li title="动态修改 font-size + rem 方案"><a href="#%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9-font-size-%2B-rem-%E6%96%B9%E6%A1%88" data-anchor="#%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9-font-size-%2B-rem-%E6%96%B9%E6%A1%88">动态修改 font-size + rem 方案</a><ul><li title="弊端"><a href="#%E5%BC%8A%E7%AB%AF" data-anchor="#%E5%BC%8A%E7%AB%AF">弊端</a></li></ul></li><li title="设计稿 px 转 vw 方案（推荐）"><a href="#%E8%AE%BE%E8%AE%A1%E7%A8%BF-px-%E8%BD%AC-vw-%E6%96%B9%E6%A1%88%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" data-anchor="#%E8%AE%BE%E8%AE%A1%E7%A8%BF-px-%E8%BD%AC-vw-%E6%96%B9%E6%A1%88%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">设计稿 px 转 vw 方案（推荐）</a></li><li title="dpr 是什么"><a href="#dpr-%E6%98%AF%E4%BB%80%E4%B9%88" data-anchor="#dpr-%E6%98%AF%E4%BB%80%E4%B9%88">dpr 是什么</a><ul><li title="物理像素"><a href="#%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0" data-anchor="#%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0">物理像素</a></li><li title="设备独立像素（dips）"><a href="#%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0%EF%BC%88dips%EF%BC%89" data-anchor="#%E8%AE%BE%E5%A4%87%E7%8B%AC%E7%AB%8B%E5%83%8F%E7%B4%A0%EF%BC%88dips%EF%BC%89">设备独立像素（dips）</a></li></ul></li><li title="viewport"><a href="#viewport" data-anchor="#viewport">viewport</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

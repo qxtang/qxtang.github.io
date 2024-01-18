@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - Webpack</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,100 +483,161 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="webpack" tabindex="-1"><a class="header-anchor" href="#webpack">Webpack</a></h1>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>模块打包工具，处理浏览器不认识的各种资源，让其能够运行在浏览器</li>
+<li>基于入口文件，递归解析入口所需要加载的所有资源，然后用不同的 loader 来处理不同类型的文件，用 Plugin 来扩展 webpack 的功能</li>
+<li>通过分析模块之间的依赖，最终将所有模块打包成一份或者多份代码包，供 HTML 直接引用</li>
+<li>Webpack 仅提供打包功能和文件处理，通过生态中的各种 Loader 和 Plugin 对代码进行预编译和打包</li>
+<li>因此 Webpack 具有高度的可拓展性，能更好的发挥社区生态的力量</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="%E4%BD%9C%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E4%BD%9C%E7%94%A8">作用</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>模块打包</li>
+<li>使我们在开发时可以使用新特性和新语法</li>
+<li>能力扩展：plugin、loader</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="%E6%A6%82%E5%BF%B5" tabindex="-1"><a class="header-anchor" href="#%E6%A6%82%E5%BF%B5">概念</a></h2>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>Entry: 入口文件，Webpack 会从该文件开始进行分析与编译；</li>
+<li>Output: 出口路径，打包后创建 bundler 的文件路径以及文件名；</li>
+<li>Module: 源码目录中的每一个文件，在 Webpack 中任何文件都可以作为一个模块，会根据配置的不同的 Loader 进行加载和打包；</li>
+<li>Chunk: webpack 打包过程中的产物，在进行模块的依赖分析的时候，代码分割出来的代码块，可以根据配置，将所有模块代码合并成一个或多个代码块，以便按需加载，提高性能；</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<div class="note">
+<h3 id="chunk-%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#chunk-%E7%B1%BB%E5%9E%8B">chunk 类型</a></h3>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>Initial Chunk：基于 Entry 配置项生成的 Chunk</li>
+<li>Async Chunk：异步模块引用，如 <code>import()</code> 语句对应的异步 Chunk</li>
+<li>Runtime Chunk：只包含运行时代码的 Chunk</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+</div>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>Loader: 模块加载器，进行各种文件类型的加载与转换，比如 babel-loader 将 jsx 转为 React.createElement；</li>
+<li>Plugin: 拓展插件，可以通过 Webpack 相应的事件钩子，介入到打包过程中的任意环节，从而对代码按需修改；</li>
+<li>Bundle: webpack 打包出来的文件，webpack 最终输出的东西，可以直接在浏览器运行。在抽离 css(当然也可以是图片、字体文件之类的)的情况下，一个 chunk 是会输出多个 bundle 的，但是默认情况下一般一个 chunk 也只是会输出一个 bundle</li>
+<li>vendor: 依赖的第三方库</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<div class="note">
+<h3 id="%E6%96%87%E4%BB%B6%E6%8C%87%E7%BA%B9" tabindex="-1"><a class="header-anchor" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E7%BA%B9">文件指纹</a></h3>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>hash：所有的 bundle 使用同一个 hash 值，跟每一次 webpack 打包的过程有关</li>
+<li>chunkhash：根据每一个 chunk 的内容进行 hash，同一个 chunk 的所有 bundle 产物的 chunkhash 值是一样的。因此若其中一个 bundle 的修改，同一 chunk 的所有产物 hash 也会被修改</li>
+<li>contenthash：与文件内容本身相关</li>
+<li>注意：开发环境热更新下只能使用 hash 或者不使用 hash。在生产环境中我们一般使用 contenthash 或者 chunkhash，因为在热更新模式下，会导致 chunkhash 和 contenthash 计算错误</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+</div>
+<h2 id="%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B">配置示例</a></h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,
+  <span class="hljs-attr">devtool</span>: <span class="hljs-string">&#x27;inline-source-map&#x27;</span>,
+  <span class="hljs-attr">devServer</span>: {
+    <span class="hljs-attr">static</span>: <span class="hljs-string">&#x27;./dist&#x27;</span>,
+  },
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Output Management&#x27;</span>,
+    }),
+  ],
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].[contenthash].js&#x27;</span>,
+    <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+    <span class="hljs-attr">clean</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">publicPath</span>: <span class="hljs-string">&#x27;/&#x27;</span>,
+  },
+  <span class="hljs-attr">externals</span>: {
+    <span class="hljs-attr">lodash</span>: {
+      <span class="hljs-attr">commonjs</span>: <span class="hljs-string">&#x27;lodash&#x27;</span>,
+      <span class="hljs-attr">commonjs2</span>: <span class="hljs-string">&#x27;lodash&#x27;</span>,
+      <span class="hljs-attr">amd</span>: <span class="hljs-string">&#x27;lodash&#x27;</span>,
+      <span class="hljs-attr">root</span>: <span class="hljs-string">&#x27;_&#x27;</span>,
+    },
+  },
+  <span class="hljs-attr">optimization</span>: {
+    <span class="hljs-attr">splitChunks</span>: {
+      <span class="hljs-attr">cacheGroups</span>: {
+        <span class="hljs-attr">vendor</span>: {
+          <span class="hljs-attr">test</span>: <span class="hljs-regexp">/[\\/]node_modules[\\/]/</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vendors&#x27;</span>,
+          <span class="hljs-attr">chunks</span>: <span class="hljs-string">&#x27;all&#x27;</span>,
+        },
+      },
+    },
+  },
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/i</span>,
+        <span class="hljs-attr">use</span>: [<span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-string">&#x27;css-loader&#x27;</span>],
+      },
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|svg|jpg|jpeg|gif)$/i</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;asset/resource&#x27;</span>,
+      },
+    ],
+  },
+};
+</code></pre>
+<h2 id="%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">工作流程</a></h2>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
+<li>
+<p>初始化</p>
+<ol>
+<li>初始化配置参数：从配置文件和 Shell 参数中读取与合并得出参数</li>
+<li>创建编译器对象 Compiler</li>
+<li>初始化编译环境：包括注入内置插件、注册各种模块工厂、加载配置的插件等</li>
+<li>开始编译：执行 compiler 对象的 run 方法</li>
+<li>确定入口：根据配置中的 entry 找出所有的入口文件</li>
+</ol>
+</li>
+<li>
+<p>构建</p>
+<ol>
+<li>编译模块：从入口文件出发，调用 loader 将模块转译为标准 JS 内容，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理，并在合适的时机点触发广播事件，Plugin 收听这些事件执行相应方法</li>
+<li>完成模块编译：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 依赖关系图</li>
+</ol>
+</li>
+<li>
+<p>生成</p>
+<ol>
+<li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会</li>
+<li>写入文件系统：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统</li>
+</ol>
+</li>
+<li>
+<p>以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到事件后会执行特定逻辑，并且插件可以调用 Webpack 提供的 api 改变 Webpack 的运行结果</p>
+</li>
 </ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
+<h2 id="rollup-%E5%92%8C-webpack-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#rollup-%E5%92%8C-webpack-%E5%8C%BA%E5%88%AB">rollup 和 webpack 区别</a></h2>
 <ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
+<li>webpack 支持代码拆分、按需加载</li>
+<li>rollup 所有资源放在同一个地方，一次性加载，利用 tree-shake 特性来剔除项目中未使用的代码，减少冗余</li>
+<li>对于应用使用 webpack，对于类库使用 rollup，rollup 适用于基础库的打包，如 vue、react</li>
+<li>如果你需要代码拆分(Code Splitting)，或者你有很多静态资源需要处理，再或者你构建的项目需要引入很多 CommonJS 模块的依赖，那么 webpack 是个很不错的选择</li>
+<li>如果您的代码库是基于 ES2015 模块的，而且希望你写的代码能够被其他人直接使用，你需要的打包工具可能是 rollup</li>
 </ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
+<h2 id="tree-shaking" tabindex="-1"><a class="header-anchor" href="#tree-shaking">Tree-Shaking</a></h2>
 <ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
+<li>基于 ES Module 规范的死码删除技术</li>
+<li>在运行过程中静态分析模块之间的导入导出，确定 ESM 模块中哪些导出值未曾被其它模块使用，并将其删除，以此实现打包产物的优化</li>
 </ul>
 <div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<h3 id="%E5%AE%9E%E7%8E%B0-tree-shaking-%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E7%8E%B0-tree-shaking-%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6">实现 Tree Shaking 技术的必要条件</a></h3>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>在 CommonJs、AMD、CMD 等旧版本的 JavaScript 模块化方案中，导入导出行为是高度动态，难以预测的</li>
+<li>而 ESM 方案则从规范层面规避这一行为，它要求所有的导入导出语句只能出现在模块顶层，且导入导出的模块名必须为字符串常量</li>
+<li>所以，ESM 下模块之间的依赖关系是高度确定的，与运行状态无关，编译工具只需要对 ESM 模块做静态分析，就可以从代码字面量中推断出哪些模块值未曾被其它模块使用</li>
 </ul>
+</div>
 
       
         <div class="btt withToc" id="btt"></div>
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="Webpack"><a href="#webpack" data-anchor="#webpack">Webpack</a><ul><li title="作用"><a href="#%E4%BD%9C%E7%94%A8" data-anchor="#%E4%BD%9C%E7%94%A8">作用</a></li><li title="概念"><a href="#%E6%A6%82%E5%BF%B5" data-anchor="#%E6%A6%82%E5%BF%B5">概念</a><ul><li title="chunk 类型"><a href="#chunk-%E7%B1%BB%E5%9E%8B" data-anchor="#chunk-%E7%B1%BB%E5%9E%8B">chunk 类型</a></li><li title="文件指纹"><a href="#%E6%96%87%E4%BB%B6%E6%8C%87%E7%BA%B9" data-anchor="#%E6%96%87%E4%BB%B6%E6%8C%87%E7%BA%B9">文件指纹</a></li></ul></li><li title="配置示例"><a href="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B" data-anchor="#%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B">配置示例</a></li><li title="工作流程"><a href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B" data-anchor="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">工作流程</a></li><li title="rollup 和 webpack 区别"><a href="#rollup-%E5%92%8C-webpack-%E5%8C%BA%E5%88%AB" data-anchor="#rollup-%E5%92%8C-webpack-%E5%8C%BA%E5%88%AB">rollup 和 webpack 区别</a></li><li title="Tree-Shaking"><a href="#tree-shaking" data-anchor="#tree-shaking">Tree-Shaking</a><ul><li title="实现 Tree Shaking 技术的必要条件"><a href="#%E5%AE%9E%E7%8E%B0-tree-shaking-%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6" data-anchor="#%E5%AE%9E%E7%8E%B0-tree-shaking-%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6">实现 Tree Shaking 技术的必要条件</a></li></ul></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

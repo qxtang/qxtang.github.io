@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - vue 中的 diff 算法</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,158 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="vue-%E4%B8%AD%E7%9A%84-diff-%E7%AE%97%E6%B3%95" tabindex="-1"><a class="header-anchor" href="#vue-%E4%B8%AD%E7%9A%84-diff-%E7%AE%97%E6%B3%95">vue 中的 diff 算法</a></h1>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>diff 的过程就是调用名为 patch 的函数，比较新旧节点，一边比较一边给真实的 DOM 打补丁</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="diff-%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F" tabindex="-1"><a class="header-anchor" href="#diff-%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F">diff 的比较方式</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>比较新旧节点的时候，比较只会在同层级进行，不会跨层级比较</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
-</ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
-</ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
-</ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
-<ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
-</ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
-<ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
+<h2 id="diff-%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#diff-%E6%B5%81%E7%A8%8B">diff 流程</a></h2>
+<p>当数据发生改变时，set 方法会调用 Dep.notify 通知所有订阅者（Watcher），订阅者就会调用 patch 给真实的 DOM 打补丁，更新相应的视图</p>
+<figure><img src="../../../resource/vue-diff-0.png" alt=""></figure>
+<h2 id="patch-%E5%87%BD%E6%95%B0%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0" tabindex="-1"><a class="header-anchor" href="#patch-%E5%87%BD%E6%95%B0%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0">patch 函数核心实现</a></h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">patch</span>(<span class="hljs-params">oldVnode, vnode</span>) {
+  <span class="hljs-comment">// 判断两节点是否值得比较</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldVnode, vnode)) {
+    <span class="hljs-title function_">patchVnode</span>(oldVnode, vnode);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// 不值得比较则用 Vnode 替换 oldVnode</span>
+    <span class="hljs-keyword">const</span> oEl = oldVnode.<span class="hljs-property">el</span>; <span class="hljs-comment">// 当前 oldVnode 对应的真实元素节点</span>
+    <span class="hljs-keyword">let</span> parentEle = api.<span class="hljs-title function_">parentNode</span>(oEl); <span class="hljs-comment">// 父元素</span>
+    <span class="hljs-title function_">createEle</span>(vnode); <span class="hljs-comment">// 根据 Vnode 生成新元素</span>
+    <span class="hljs-keyword">if</span> (parentEle !== <span class="hljs-literal">null</span>) {
+      api.<span class="hljs-title function_">insertBefore</span>(parentEle, vnode.<span class="hljs-property">el</span>, api.<span class="hljs-title function_">nextSibling</span>(oEl)); <span class="hljs-comment">// 将新元素添加进父元素</span>
+      api.<span class="hljs-title function_">removeChild</span>(parentEle, oldVnode.<span class="hljs-property">el</span>); <span class="hljs-comment">// 移除以前的旧元素节点</span>
+      oldVnode = <span class="hljs-literal">null</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> vnode;
+}
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-comment">// 判断两节点是否值得比较方法</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sameVnode</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">return</span> (
+    a.<span class="hljs-property">key</span> === b.<span class="hljs-property">key</span> &amp;&amp; <span class="hljs-comment">// key 值</span>
+    a.<span class="hljs-property">tag</span> === b.<span class="hljs-property">tag</span> &amp;&amp; <span class="hljs-comment">// 标签名</span>
+    a.<span class="hljs-property">isComment</span> === b.<span class="hljs-property">isComment</span> &amp;&amp; <span class="hljs-comment">// 是否为注释节点</span>
+    <span class="hljs-comment">// 是否都定义了 data，data 包含一些具体信息，例如 onclick，style</span>
+    <span class="hljs-title function_">isDef</span>(a.<span class="hljs-property">data</span>) === <span class="hljs-title function_">isDef</span>(b.<span class="hljs-property">data</span>) &amp;&amp;
+    <span class="hljs-title function_">sameInputType</span>(a, b) <span class="hljs-comment">// 当标签是 &lt;input&gt; 的时候，type 必须相同</span>
+  );
+}
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-comment">/*
+- 值得比较，调用 patchVnode
+- 找到对应的真实 dom，称为 el
+- 判断 Vnode 和 oldVnode 是否指向同一个对象，如果是，那么直接 return
+- 如果他们都有文本节点并且不相等，那么将 el 的文本节点设置为 Vnode 的文本节点
+- 如果 oldVnode 有子节点而 Vnode 没有，则删除 el 的子节点
+- 如果 oldVnode 没有子节点而 Vnode 有，则将 Vnode 的子节点真实化之后添加到 el
+- 如果两者都有子节点，则执行 updateChildren 函数比较子节点，这一步很重要
+*/</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">patchVnode</span>(<span class="hljs-params">oldVnode, vnode</span>) {
+  <span class="hljs-keyword">const</span> el = (vnode.<span class="hljs-property">el</span> = oldVnode.<span class="hljs-property">el</span>);
+  <span class="hljs-keyword">let</span> i,
+    oldCh = oldVnode.<span class="hljs-property">children</span>,
+    ch = vnode.<span class="hljs-property">children</span>;
+  <span class="hljs-keyword">if</span> (oldVnode === vnode) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">if</span> (oldVnode.<span class="hljs-property">text</span> !== <span class="hljs-literal">null</span> &amp;&amp; vnode.<span class="hljs-property">text</span> !== <span class="hljs-literal">null</span> &amp;&amp; oldVnode.<span class="hljs-property">text</span> !== vnode.<span class="hljs-property">text</span>) {
+    api.<span class="hljs-title function_">setTextContent</span>(el, vnode.<span class="hljs-property">text</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-title function_">updateEle</span>(el, vnode, oldVnode);
+    <span class="hljs-keyword">if</span> (oldCh &amp;&amp; ch &amp;&amp; oldCh !== ch) {
+      <span class="hljs-title function_">updateChildren</span>(el, oldCh, ch);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch) {
+      <span class="hljs-title function_">createEle</span>(vnode); <span class="hljs-comment">//create el&#x27;s children dom</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oldCh) {
+      api.<span class="hljs-title function_">removeChildren</span>(el);
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-comment">/* 
+- 将 Vnode 的子节点 Vch 和 oldVnode 的子节点 oldCh 提取出来
+- oldCh 和 vCh 各有两个头尾的变量 StartIdx 和 EndIdx，它们的 2 个变量相互比较，一共有 4 种比较方式。如果 4 种比较都没匹配，如果设置了 key，就会用 key 进行比较，在比较的过程中，变量会往中间靠，一旦 StartIdx &gt; EndIdx 表明 oldCh 和 vCh 至少有一个已经遍历完了，就会结束比较
+*/</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">updateChildren</span>(<span class="hljs-params">parentElm, oldCh, newCh</span>) {
+  <span class="hljs-keyword">let</span> oldStartIdx = <span class="hljs-number">0</span>,
+    newStartIdx = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> oldEndIdx = oldCh.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">let</span> oldStartVnode = oldCh[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">let</span> oldEndVnode = oldCh[oldEndIdx];
+  <span class="hljs-keyword">let</span> newEndIdx = newCh.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">let</span> newStartVnode = newCh[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">let</span> newEndVnode = newCh[newEndIdx];
+  <span class="hljs-keyword">let</span> oldKeyToIdx;
+  <span class="hljs-keyword">let</span> idxInOld;
+  <span class="hljs-keyword">let</span> elmToMove;
+  <span class="hljs-keyword">let</span> before;
+
+  <span class="hljs-keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) {
+    <span class="hljs-keyword">if</span> (oldStartVnode == <span class="hljs-literal">null</span>) {
+      <span class="hljs-comment">// 对于 vnode.key 的比较，会把 oldVnode = null</span>
+      oldStartVnode = oldCh[++oldStartIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oldEndVnode == <span class="hljs-literal">null</span>) {
+      oldEndVnode = oldCh[--oldEndIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newStartVnode == <span class="hljs-literal">null</span>) {
+      newStartVnode = newCh[++newStartIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newEndVnode == <span class="hljs-literal">null</span>) {
+      newEndVnode = newCh[--newEndIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldStartVnode, newStartVnode)) {
+      <span class="hljs-title function_">patchVnode</span>(oldStartVnode, newStartVnode);
+      oldStartVnode = oldCh[++oldStartIdx];
+      newStartVnode = newCh[++newStartIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldEndVnode, newEndVnode)) {
+      <span class="hljs-title function_">patchVnode</span>(oldEndVnode, newEndVnode);
+      oldEndVnode = oldCh[--oldEndIdx];
+      newEndVnode = newCh[--newEndIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldStartVnode, newEndVnode)) {
+      <span class="hljs-title function_">patchVnode</span>(oldStartVnode, newEndVnode);
+      api.<span class="hljs-title function_">insertBefore</span>(parentElm, oldStartVnode.<span class="hljs-property">el</span>, api.<span class="hljs-title function_">nextSibling</span>(oldEndVnode.<span class="hljs-property">el</span>));
+      oldStartVnode = oldCh[++oldStartIdx];
+      newEndVnode = newCh[--newEndIdx];
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-title function_">sameVnode</span>(oldEndVnode, newStartVnode)) {
+      <span class="hljs-title function_">patchVnode</span>(oldEndVnode, newStartVnode);
+      api.<span class="hljs-title function_">insertBefore</span>(parentElm, oldEndVnode.<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>);
+      oldEndVnode = oldCh[--oldEndIdx];
+      newStartVnode = newCh[++newStartIdx];
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// 使用 key 时的比较</span>
+      <span class="hljs-keyword">if</span> (oldKeyToIdx === <span class="hljs-literal">undefined</span>) {
+        oldKeyToIdx = <span class="hljs-title function_">createKeyToOldIdx</span>(oldCh, oldStartIdx, oldEndIdx); <span class="hljs-comment">// 有 key 生成 index 表</span>
+      }
+      idxInOld = oldKeyToIdx[newStartVnode.<span class="hljs-property">key</span>];
+      <span class="hljs-keyword">if</span> (!idxInOld) {
+        api.<span class="hljs-title function_">insertBefore</span>(parentElm, <span class="hljs-title function_">createEle</span>(newStartVnode).<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>);
+        newStartVnode = newCh[++newStartIdx];
+      } <span class="hljs-keyword">else</span> {
+        elmToMove = oldCh[idxInOld];
+        <span class="hljs-keyword">if</span> (elmToMove.<span class="hljs-property">sel</span> !== newStartVnode.<span class="hljs-property">sel</span>) {
+          api.<span class="hljs-title function_">insertBefore</span>(parentElm, <span class="hljs-title function_">createEle</span>(newStartVnode).<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>);
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-title function_">patchVnode</span>(elmToMove, newStartVnode);
+          oldCh[idxInOld] = <span class="hljs-literal">null</span>;
+          api.<span class="hljs-title function_">insertBefore</span>(parentElm, elmToMove.<span class="hljs-property">el</span>, oldStartVnode.<span class="hljs-property">el</span>);
+        }
+        newStartVnode = newCh[++newStartIdx];
+      }
+    }
+  }
+  <span class="hljs-keyword">if</span> (oldStartIdx &gt; oldEndIdx) {
+    before = newCh[newEndIdx + <span class="hljs-number">1</span>] == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : newCh[newEndIdx + <span class="hljs-number">1</span>].<span class="hljs-property">el</span>;
+    <span class="hljs-title function_">addVnodes</span>(parentElm, before, newCh, newStartIdx, newEndIdx);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (newStartIdx &gt; newEndIdx) {
+    <span class="hljs-title function_">removeVnodes</span>(parentElm, oldCh, oldStartIdx, oldEndIdx);
+  }
+}
+</code></pre>
 <h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li><a href="https://juejin.cn/post/6844903607913938951" target="_blank">https://juejin.cn/post/6844903607913938951</a></li>
 </ul>
 
       
@@ -576,7 +642,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="vue 中的 diff 算法"><a href="#vue-%E4%B8%AD%E7%9A%84-diff-%E7%AE%97%E6%B3%95" data-anchor="#vue-%E4%B8%AD%E7%9A%84-diff-%E7%AE%97%E6%B3%95">vue 中的 diff 算法</a><ul><li title="diff 的比较方式"><a href="#diff-%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F" data-anchor="#diff-%E7%9A%84%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F">diff 的比较方式</a></li><li title="diff 流程"><a href="#diff-%E6%B5%81%E7%A8%8B" data-anchor="#diff-%E6%B5%81%E7%A8%8B">diff 流程</a></li><li title="patch 函数核心实现"><a href="#patch-%E5%87%BD%E6%95%B0%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0" data-anchor="#patch-%E5%87%BD%E6%95%B0%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0">patch 函数核心实现</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

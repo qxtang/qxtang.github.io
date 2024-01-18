@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 浏览器缓存</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,142 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98">浏览器缓存</a></h1>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>Web 缓存种类： 数据库缓存，CDN 缓存，服务器缓存（例如 redis），浏览器缓存</li>
+<li>浏览器实现了 http 缓存</li>
+<li>浏览器缓存类型：强缓存，协商缓存</li>
+<li>只有 get 请求会缓存，post 请求不会</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="%E7%BC%93%E5%AD%98%E4%BD%8D%E7%BD%AE" tabindex="-1"><a class="header-anchor" href="#%E7%BC%93%E5%AD%98%E4%BD%8D%E7%BD%AE">缓存位置</a></h2>
+<h3 id="memory-cache" tabindex="-1"><a class="header-anchor" href="#memory-cache">Memory Cache</a></h3>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>内存中缓存</li>
+<li>主要包含的是当前页面中已经抓取到的资源，已经下载的样式、脚本、图片</li>
+<li>读取高效、持续性很短</li>
+<li>随着进程的释放而释放，杀进程或者关闭 Tab 页面会被释放</li>
+<li>对于大文件来说，大概率是不存储在 Memory Cache 的，反之优先</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h3 id="disk-cache" tabindex="-1"><a class="header-anchor" href="#disk-cache">Disk Cache</a></h3>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>磁盘缓存</li>
+<li>浏览器获取当前系统内存使用率，过高的话，优先存储进 Disk Cache</li>
+<li>所有类型资源都可以放</li>
+<li>速度较慢</li>
+<li>不会被释放</li>
+<li>容量大</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<h3 id="service-worker" tabindex="-1"><a class="header-anchor" href="#service-worker">Service Worker</a></h3>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>Service Worker 运行在 JavaScript 主线程之外，虽然由于脱离了浏览器窗体无法直接访问 DOM，但是它可以完成离线缓存、消息推送、网络代理等功能</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+<h2 id="%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B">缓存过程</a></h2>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>每一次请求时，浏览器保存请求结果和缓存标识</li>
+<li>再次请求：存在缓存结果和缓存标识：检查是否命中强缓存，命中则直接使用上次保存的请求结果，返回 200，不向服务器发起请求；否则，使用协商缓存</li>
+<li>不存在该缓存结果和缓存标识：直接向服务器发起请求</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<figure><img src="../../resource/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%A6%96%E6%AC%A1%E8%AF%B7%E6%B1%82.drawio.png" alt=""><figcaption>首次请求</figcaption></figure>
+<figure><img src="../../resource/%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B.png" alt=""><figcaption>总体流程</figcaption></figure>
+<h3 id="%E5%BC%BA%E7%BC%93%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E5%BC%BA%E7%BC%93%E5%AD%98">强缓存</a></h3>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
-</ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
-<ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
-</ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
-<ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
-</ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
-<ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
-</ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
+<li>
+<p>向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程</p>
+</li>
+<li>
+<p>当符合命中强缓存的条件，不向服务器发送请求，直接从缓存中读取资源，返回 200 状态码</p>
+</li>
+<li>
+<p>控制强缓存的 header（按优先级小到大排序）：expires &lt; pragma &lt; cache-control</p>
+</li>
+<li>
+<p>cache-control 优先级最高，当不支持 http1.1 的环境才会使用 expires 或者 pragma</p>
+</li>
+<li>
+<p>expires</p>
+<div class="note">
+<p>资源到期时间、格式为格林尼治时间戳<br>
+如果未超过过期时间，直接使用该缓存<br>
+缺点：要求客户端和服务端时钟严格同步，本地时间可以自己修改</p>
 </div>
+</li>
+<li>
+<p>pragma</p>
+<div class="note">
+<p>HTTP 1.0<br>
+用于禁用网页缓存<br>
+取值为 no-cache，和 cache-control 的 no-cache 效果一样</p>
+</div>
+</li>
+<li>
+<p>cache-control</p>
+<div class="note">
+<p>HTTP 1.1 新增<br>
+取值<br>
+public：资源客户端和服务器都可以缓存<br>
+privite：资源只有客户端可以缓存<br>
+no-cache：客户端缓存资源，但是是否缓存需要经过协商缓存来验证<br>
+no-store：不使用缓存<br>
+max-age：缓存保质期</p>
+</div>
+</li>
+</ul>
+<h3 id="%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98">协商缓存</a></h3>
+<figure><img src="../../resource/%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98.png" alt=""></figure>
+<ul>
+<li>强缓存失效后，浏览器携带缓存标识向服务器发送请求，由服务器根据缓存标识来决定是否使用缓存的过程</li>
+<li>会向服务器发送请求</li>
+</ul>
+<div class="note">
+<p>协商缓存过程：</p>
+<ul>
+<li>服务器发现资源无需更新，返回 304</li>
+<li>浏览器从本地缓存中获取资源，继续使用</li>
+<li>如果服务器发现该资源更新了，返回该资源，状态码 200</li>
+<li>浏览器更新该资源和缓存标识到本地缓存</li>
+</ul>
+</div>
+<div class="note">
+<p>相关 header：</p>
+<p>Last-Modified / If-Modified-Since</p>
+<ul>
+<li>存在的问题：时间单位只精确到秒，如果文件 1 秒内改变多次，无法确保缓存精度；有可能文件内容没变，但是修改时间因为某些原因变了，人为修改之类的</li>
+<li>Last-Modified（响应头）：资源在服务器最后被修改的时间</li>
+<li>If-Modified-Since（请求头）
+<ul>
+<li>携带上次请求返回的 Last-Modified</li>
+<li>告诉服务器该资源上次请求时的最后被修改时间</li>
+<li>服务器做对比后决定协商缓存是否生效，返回 304 或 200</li>
+</ul>
+</li>
+</ul>
+<p>Etag / If-None-Match</p>
+<ul>
+<li>优先级高于 Last-Modified，解决 Last-Modified 的问题，但性能比 Last-Modified 差，Etag 需要计算</li>
+<li>Etag（响应头）：当前资源文件唯一标识，由服务器生成，由文件内容决定</li>
+<li>If-None-Match（请求头）
+<ul>
+<li>携带上次请求该资源时返回的 Etag，告诉服务器</li>
+<li>服务器做对比，一致则代表生效，返回 304 或 200</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8">实际应用</a></h2>
+<ul>
+<li>需要实时更新频繁变动的资源，设置 cache-control 为 no-cache</li>
+<li>不常变化的资源，例如 jquery，设置 cache-control 为 max-age=一个很长的时间</li>
+<li>单页应用部署时，入口 html 文件使用协商缓存（确保 html 入口是最新的，能够及时更新）</li>
+</ul>
+<h2 id="%E6%8C%89%E4%B8%8B-f5-%E6%88%96-ctrl%2Bf5-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#%E6%8C%89%E4%B8%8B-f5-%E6%88%96-ctrl%2Bf5-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">按下 F5 或 ctrl+F5 时发生了什么</a></h2>
+<ul>
+<li>ctrl+f5：跳过强缓存和协商缓存，直接从服务器加载资源</li>
+<li>f5：跳过强缓存，会检查协商缓存</li>
+<li>浏览器地址栏中输入 URL 回车：走正常流程</li>
+</ul>
 <h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li><a href="https://www.jianshu.com/p/54cc04190252" target="_blank">https://www.jianshu.com/p/54cc04190252</a></li>
 </ul>
 
       
@@ -576,7 +626,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="浏览器缓存"><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98" data-anchor="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98">浏览器缓存</a><ul><li title="缓存位置"><a href="#%E7%BC%93%E5%AD%98%E4%BD%8D%E7%BD%AE" data-anchor="#%E7%BC%93%E5%AD%98%E4%BD%8D%E7%BD%AE">缓存位置</a><ul><li title="Memory Cache"><a href="#memory-cache" data-anchor="#memory-cache">Memory Cache</a></li><li title="Disk Cache"><a href="#disk-cache" data-anchor="#disk-cache">Disk Cache</a></li><li title="Service Worker"><a href="#service-worker" data-anchor="#service-worker">Service Worker</a></li></ul></li><li title="缓存过程"><a href="#%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B" data-anchor="#%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B">缓存过程</a><ul><li title="强缓存"><a href="#%E5%BC%BA%E7%BC%93%E5%AD%98" data-anchor="#%E5%BC%BA%E7%BC%93%E5%AD%98">强缓存</a></li><li title="协商缓存"><a href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98" data-anchor="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98">协商缓存</a></li></ul></li><li title="实际应用"><a href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8" data-anchor="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8">实际应用</a></li><li title="按下 F5 或 ctrl+F5 时发生了什么"><a href="#%E6%8C%89%E4%B8%8B-f5-%E6%88%96-ctrl%2Bf5-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" data-anchor="#%E6%8C%89%E4%B8%8B-f5-%E6%88%96-ctrl%2Bf5-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">按下 F5 或 ctrl+F5 时发生了什么</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

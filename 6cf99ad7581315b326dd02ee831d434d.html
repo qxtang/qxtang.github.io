@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 性能优化</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,123 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" tabindex="-1"><a class="header-anchor" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">性能优化</a></h1>
+<h2 id="gzip" tabindex="-1"><a class="header-anchor" href="#gzip">gzip</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>只对文本文件有效，比如 js、css，流文件无效，比如图片</li>
+<li>需要浏览器和服务端的同时支持</li>
+<li>浏览器支持：请求头中添加 accept-encoding，标识对压缩的支持，说明自己接受哪些压缩方法</li>
+<li>服务端支持：能够返回经过 gzip 压缩的文件，响应头添加 content-encoding: gzip，这个字段用于说明数据的压缩方法</li>
+<li>服务器实时压缩：可通过配置 nginx 开启，express 框架中有一个 compression 中间件，也可以开启 gzip</li>
+<li>构建时压缩：可在前端构建时使用 compression-webpack-plugin 插件，减少耗费服务器 CPU 和时间开销</li>
+<li><a href="https://segmentfault.com/a/1190000012800222" target="_blank">https://segmentfault.com/a/1190000012800222</a></li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="javascript" tabindex="-1"><a class="header-anchor" href="#javascript">Javascript</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>缓存 dom 查找结果</li>
+<li>用 innerHTML 代替 DOM 操作，减少 DOM 操作次数</li>
+<li>不频繁修改 DOM</li>
+<li>如果要修改 DOM 的多个样式可以用 cssText 一次性将要改的样式写入，或将样式写到 class 里，再修改 DOM 的 class 名称</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<pre><code class="language-jsx"><span class="hljs-comment">// bad</span>
+<span class="hljs-keyword">const</span> el = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.myDiv&#x27;</span>);
+el.<span class="hljs-property">style</span>.<span class="hljs-property">borderLeft</span> = <span class="hljs-string">&#x27;1px&#x27;</span>;
+el.<span class="hljs-property">style</span>.<span class="hljs-property">borderRight</span> = <span class="hljs-string">&#x27;2px&#x27;</span>;
+el.<span class="hljs-property">style</span>.<span class="hljs-property">padding</span> = <span class="hljs-string">&#x27;5px&#x27;</span>;
+
+<span class="hljs-comment">// good</span>
+<span class="hljs-keyword">const</span> el = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.myDiv&#x27;</span>);
+el.<span class="hljs-property">style</span>.<span class="hljs-property">cssText</span> += <span class="hljs-string">&#x27;border-left: 1px; border-right: 2px; padding: 5px;&#x27;</span>;
+<span class="hljs-comment">// cssText 会覆盖已存在的样式，所以使用 +=</span>
+</code></pre>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>列表绑定事件，使用事件委托</li>
+<li>如无必要，不要重写原生方法，因为原生方法底层是用 C/C++实现的，速度更快</li>
+<li>CSS 能做的事情，尽量不用 JS 来做</li>
+<li>使用 requestAnimationFrame</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<h2 id="css" tabindex="-1"><a class="header-anchor" href="#css">CSS</a></h2>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>避免 css 表达式比如 calc</li>
+<li>减少选择层级，最高不超过 3 层</li>
+<li>尽量使用 class 选择器，避免使用标签选择器</li>
+<li>少使用后代选择器，后代选择器开销高</li>
+<li>避免对可继承的属性重复定义</li>
+<li>避免使用通配规则器 <code>*</code>，只对需要的元素进行处理</li>
+<li>属性值为 0 时，不加单位</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+<h2 id="webpack" tabindex="-1"><a class="header-anchor" href="#webpack">webpack</a></h2>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>压缩 js、css 代码</li>
+<li>webpack 按需加载，React.lazy + import()，Webpack 4 之后，只需要用异步语句 <code>require.ensure(&quot;./xx.js&quot;)</code> 或 <code>import(&quot;./xx.js&quot;)</code> 方式引入模块，就可以实现模块动态加载，遇到异步引入语句时会为该模块单独生成一个 chunk</li>
+<li>配置 external，将通用库抽离，不打包进 bundle，比如 jquery、lodash，使用 CDN，并开启强缓存</li>
+<li>配置 babel 动态 polyfill，只针对不支持的浏览器引入 polyfill</li>
+<li>配置 file-loader 的 limit 选项，小图转 base64</li>
+<li>开启 tree-shaking 删除多余代码</li>
+<li>antd 按需加载，babel-plugin-import</li>
+<li>webpack 拆包优化</li>
+<li>第三方库按需加载</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<h2 id="%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88">动态 polyfill 方案</a></h2>
+<h3 id="%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">​polyfill.io​​（Polyfill Service）（推荐）</a></h3>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>是一个 script 资源：<a href="https://cdn.polyfill.io/v2/polyfill.js" target="_blank">https://cdn.polyfill.io/v2/polyfill.js</a></li>
+<li>识别请求中的 User Agent，判断浏览器是否支持某些特性，然后下发不同的 Polyfill</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+<h3 id="babel-polyfill" tabindex="-1"><a class="header-anchor" href="#babel-polyfill">babel-polyfill</a></h3>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
+<li>React 16 官方推荐</li>
+<li>包体积 200k+，难以单独抽离 Map、Set；项目里 react 是单独引用的 cdn，如果要用它需要单独构建一份放 react 前加载</li>
 </ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
+<h3 id="babel-plugin-transform-runtime" tabindex="-1"><a class="header-anchor" href="#babel-plugin-transform-runtime">babel-plugin-transform-runtime</a></h3>
 <ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
+<li>能只 polyfill 用到的类或方法，相对体积较小</li>
+<li>不能 polyfill 原型上的方法，不适用于业务项目的复杂开发环境</li>
 </ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
+<h2 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h2>
 <ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
+<li>不常修改的资源（jquery），开启强缓存，配置响应头 Cache-Control 与 Expires</li>
+<li>减少 http 请求次数：雪碧图、小图片使用字体图标代替</li>
+<li>css 放顶部、js 放底部，非关键性的脚本（比如百度统计），script 标签加上 defer 或者 async</li>
+<li>单页应用首屏加载放个 loading，优化用户感知，利用一些过渡效果、骨架屏</li>
+<li>使用 link 标签的 rel 属性，设置 prefetch、preload（preload 将会把资源得下载顺序权重提高，使得关键数据提前下载好，优化页面打开速度）</li>
+<li>注意项目中是否使用了字体，字体加载也会让首屏加载变得很慢</li>
+<li>减少 cookie 的体积</li>
+<li>使用公共 CDN，好处：如果其他网站刚好也用过同一个资源，浏览器会有缓存</li>
+<li>服务端开启 gzip（gzip 只对文本文件有效，比如 js、css，流文件无效，比如图片）</li>
+<li>路由懒加载</li>
+<li>图片懒加载</li>
+<li>使用字体图标 iconfont 代替图片图标，不会失真，生成的文件体积小</li>
 </ul>
 <div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<p>将静态资源放在其他域名的原因（CDN）：</p>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>浏览器对于相同域名有并发请求数限制</li>
+<li>请求时不会发送 cookie，节省流量</li>
+<li>cookie 会发送给二级域名，所以这些静态资源不放在二级域名，放在单独一级域名</li>
+</ul>
+</div>
+<h2 id="script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async" tabindex="-1"><a class="header-anchor" href="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async">script 标签的 defer 和 async</a></h2>
+<ul>
+<li>没有 defer 或 async 属性，浏览器会立即加载并执行相应的脚本</li>
+<li>async：立即下载，下载完立即执行，不确定顺序执行。对于完全独立的脚本来才去使用 async，比如谷歌统计百度统计。一定会在页面的 load 事件前执行，但不确定在 DOMContentLoaded 事件触发前后执行。</li>
+<li>defer：立即下载，将延迟到整个页面都解析完毕后再运行</li>
+</ul>
+<h2 id="js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F" tabindex="-1"><a class="header-anchor" href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F">js 为什么放最下面？</a></h2>
+<ul>
+<li>当文档加载过程中遇到 js 文件，html 文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中 js 文件加载完毕，还要等待解析执行完毕，才可以恢复 html 文档的渲染线程，因为 js 有可能会修改 DOM，比如 document.write，这意味着，在 js 执行完成前，后续所有资源的下载可能是没有必要的，这是 js 阻塞后续资源下载的原因。所以平时的代码中，js 是放在 html 文档末尾的</li>
+</ul>
+<h2 id="css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F" tabindex="-1"><a class="header-anchor" href="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F">css 为什么放最上面？</a></h2>
+<ul>
+<li>css 不会阻塞 DOM 的解析，但会阻塞 DOM 渲染</li>
+<li>css 是由单独的下载线程异步下载的</li>
+<li>但会阻塞 render 树渲染（渲染时需等 css 加载完毕，因为 render 树需要 css 信息）</li>
+</ul>
+<h2 id="%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0" tabindex="-1"><a class="header-anchor" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0">如何判断一个页面卡顿的原因</a></h2>
+<ul>
+<li>内存泄漏，由于疏忽或者程序的某些错误造成未能释放已经不再使用的内存的情况（比如不再使用的变量额外创建）</li>
+<li>Chrome devTools Performance 查看内存情况</li>
+<li>打开 Chrome 的无痕模式，这样做的目的是为了屏蔽掉 Chrome 插件对我们之后测试内存占用情况的影响</li>
 </ul>
 
       
@@ -576,7 +607,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="性能优化"><a href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" data-anchor="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">性能优化</a><ul><li title="gzip"><a href="#gzip" data-anchor="#gzip">gzip</a></li><li title="Javascript"><a href="#javascript" data-anchor="#javascript">Javascript</a></li><li title="CSS"><a href="#css" data-anchor="#css">CSS</a></li><li title="webpack"><a href="#webpack" data-anchor="#webpack">webpack</a></li><li title="动态 polyfill 方案"><a href="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88" data-anchor="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88">动态 polyfill 方案</a><ul><li title="​polyfill.io​​（Polyfill Service）（推荐）"><a href="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" data-anchor="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">​polyfill.io​​（Polyfill Service）（推荐）</a></li><li title="babel-polyfill"><a href="#babel-polyfill" data-anchor="#babel-polyfill">babel-polyfill</a></li><li title="babel-plugin-transform-runtime"><a href="#babel-plugin-transform-runtime" data-anchor="#babel-plugin-transform-runtime">babel-plugin-transform-runtime</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="script 标签的 defer 和 async"><a href="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async" data-anchor="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async">script 标签的 defer 和 async</a></li><li title="js 为什么放最下面？"><a href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F" data-anchor="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F">js 为什么放最下面？</a></li><li title="css 为什么放最上面？"><a href="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F" data-anchor="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F">css 为什么放最上面？</a></li><li title="如何判断一个页面卡顿的原因"><a href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0" data-anchor="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0">如何判断一个页面卡顿的原因</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

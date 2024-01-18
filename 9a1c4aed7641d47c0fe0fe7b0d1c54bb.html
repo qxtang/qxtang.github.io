@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - web 应用登录方案</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,92 +483,68 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="web-%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E6%96%B9%E6%A1%88" tabindex="-1"><a class="header-anchor" href="#web-%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E6%96%B9%E6%A1%88">web 应用登录方案</a></h1>
+<h2 id="cookie-%2B-session" tabindex="-1"><a class="header-anchor" href="#cookie-%2B-session">cookie + session</a></h2>
+<h2 id="%E4%BB%85-jwt" tabindex="-1"><a class="header-anchor" href="#%E4%BB%85-jwt">仅 jwt</a></h2>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>后端直接签发 jwt，后端不存储</li>
+<li>缺点：一旦下发，后端无法拒绝携带该 jwt 的请求，无法踢除用户</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="jwt-%2B-redis" tabindex="-1"><a class="header-anchor" href="#jwt-%2B-redis">jwt + redis</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>后端备份一份 token 存入 redis，请求进来时，使用前端传来的 jwt 从 redis 查询出对应 token，做对比</li>
+<li>若 redis 中的 token 过期或不存在则视为无权限</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="%E9%95%BF%E7%9F%AD-token" tabindex="-1"><a class="header-anchor" href="#%E9%95%BF%E7%9F%AD-token">长短 token</a></h2>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>
+<p>首次登录设置两个 token，都保存进 redis</p>
+<ul>
+<li>access_token：标准 JWT 格式，即请求时的授权令牌，过期时间较短，一般 2 个小时，redis key：uuid-access，value：jwt</li>
+<li>refresh_token：用于刷新 access_token，过期时间较长，一般 1 个月，redis key：uuid-refresh，value：jwt</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+</li>
+<li>
+<p>添加凭 refresh_token 刷新 access_token 的接口</p>
+</li>
+<li>
+<p>前端请求封装</p>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>先发起请求，如果接口返回 access_token 过期，先刷新 access_token，再进行一次重试</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
-<ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+</li>
+<li>
+<p>为了让活跃用户保持登录，其他方案频繁续签会有性能问题，该方案解决此问题</p>
+</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<h2 id="%E5%AE%9E%E8%B7%B5%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E8%B7%B5%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">实践中遇到的问题</a></h2>
+<h3 id="%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%88%B7%E6%96%B0-token-%E6%9C%89%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E6%AC%A1%E5%88%B7%E6%96%B0-token" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%88%B7%E6%96%B0-token-%E6%9C%89%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E6%AC%A1%E5%88%B7%E6%96%B0-token">前端请求刷新 token 有延迟，如何防止多次请求同时发起多次刷新 token</a></h3>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>请求封装中设置刷新 token 防抖锁，如果一次刷新任务进行中，则其他刷新请求取消</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+<h3 id="%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E4%B8%AA%E8%AF%B7%E6%B1%82%E6%97%B6%EF%BC%8Caccess_token-%E6%AD%A3%E5%A5%BD%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%90%8C%E6%97%B6%E5%A4%9A%E6%AC%A1%E6%8F%90%E7%A4%BA%E6%97%A0%E6%9D%83%E9%99%90" tabindex="-1"><a class="header-anchor" href="#%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E4%B8%AA%E8%AF%B7%E6%B1%82%E6%97%B6%EF%BC%8Caccess_token-%E6%AD%A3%E5%A5%BD%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%90%8C%E6%97%B6%E5%A4%9A%E6%AC%A1%E6%8F%90%E7%A4%BA%E6%97%A0%E6%9D%83%E9%99%90">同时发起多个请求时，access_token 正好过期，同时多次提示无权限</a></h3>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
+<li>请求封装中，如果刷新 token 锁处于关闭状态，则把请求任务保存进一个数组，等待锁打开再执行</li>
 </ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
+<h2 id="%E5%AF%86%E7%A0%81%E4%BF%9D%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E5%AF%86%E7%A0%81%E4%BF%9D%E5%AD%98">密码保存</a></h2>
+<h3 id="%E5%93%88%E5%B8%8C%E5%8A%A0%E7%9B%90" tabindex="-1"><a class="header-anchor" href="#%E5%93%88%E5%B8%8C%E5%8A%A0%E7%9B%90">哈希加盐</a></h3>
+<p>哈希函数：单向不可逆加密算法</p>
+<h3 id="%E7%9B%B4%E6%8E%A5%E5%93%88%E5%B8%8C%E7%9A%84%E7%BC%BA%E9%99%B7" tabindex="-1"><a class="header-anchor" href="#%E7%9B%B4%E6%8E%A5%E5%93%88%E5%B8%8C%E7%9A%84%E7%BC%BA%E9%99%B7">直接哈希的缺陷</a></h3>
 <ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
+<li>有可能被查表法、逆向查表法、彩虹表等方式破解</li>
+<li>首先将一些比较常用的密码的哈希值算好，然后建立一张表，当然密码越多，这张表就越大。当你知道某个密码的哈希值时，你只需要在你建立好的表中查找该哈希值，如果找到了，你就知道对应的密码了</li>
 </ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
+<h3 id="%E5%8A%A0%E7%9B%90" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A0%E7%9B%90">加盐</a></h3>
 <ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
+<li>盐就是一个随机生成的字符串</li>
+<li>将盐与原始密码连接在一起（前或后都可以），然后将连接后的字符串加密</li>
+<li>盐和加密后的密码一起保存进数据库</li>
+<li>登录时将盐和密码都查出来，前端传来的密码同样算法加密后进行比对</li>
 </ul>
-<div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<h3 id="%E7%9B%B4%E6%8E%A5-md5-%E5%8A%A0%E5%AF%86%E4%BF%9D%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E7%9B%B4%E6%8E%A5-md5-%E5%8A%A0%E5%AF%86%E4%BF%9D%E5%AD%98">直接 md5 加密保存</a></h3>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>不可逆加密算法，输入任意长度的信息，经过处理，输出都是 128 位的信息值</li>
+<li>小于 8 位的密码用 md5 加密不安全</li>
 </ul>
 
       
@@ -576,7 +552,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="web 应用登录方案"><a href="#web-%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E6%96%B9%E6%A1%88" data-anchor="#web-%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E6%96%B9%E6%A1%88">web 应用登录方案</a><ul><li title="cookie + session"><a href="#cookie-%2B-session" data-anchor="#cookie-%2B-session">cookie + session</a></li><li title="仅 jwt"><a href="#%E4%BB%85-jwt" data-anchor="#%E4%BB%85-jwt">仅 jwt</a></li><li title="jwt + redis"><a href="#jwt-%2B-redis" data-anchor="#jwt-%2B-redis">jwt + redis</a></li><li title="长短 token"><a href="#%E9%95%BF%E7%9F%AD-token" data-anchor="#%E9%95%BF%E7%9F%AD-token">长短 token</a></li><li title="实践中遇到的问题"><a href="#%E5%AE%9E%E8%B7%B5%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98" data-anchor="#%E5%AE%9E%E8%B7%B5%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">实践中遇到的问题</a><ul><li title="前端请求刷新 token 有延迟，如何防止多次请求同时发起多次刷新 token"><a href="#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%88%B7%E6%96%B0-token-%E6%9C%89%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E6%AC%A1%E5%88%B7%E6%96%B0-token" data-anchor="#%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E5%88%B7%E6%96%B0-token-%E6%9C%89%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%A4%9A%E6%AC%A1%E8%AF%B7%E6%B1%82%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E6%AC%A1%E5%88%B7%E6%96%B0-token">前端请求刷新 token 有延迟，如何防止多次请求同时发起多次刷新 token</a></li><li title="同时发起多个请求时，access_token 正好过期，同时多次提示无权限"><a href="#%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E4%B8%AA%E8%AF%B7%E6%B1%82%E6%97%B6%EF%BC%8Caccess_token-%E6%AD%A3%E5%A5%BD%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%90%8C%E6%97%B6%E5%A4%9A%E6%AC%A1%E6%8F%90%E7%A4%BA%E6%97%A0%E6%9D%83%E9%99%90" data-anchor="#%E5%90%8C%E6%97%B6%E5%8F%91%E8%B5%B7%E5%A4%9A%E4%B8%AA%E8%AF%B7%E6%B1%82%E6%97%B6%EF%BC%8Caccess_token-%E6%AD%A3%E5%A5%BD%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%90%8C%E6%97%B6%E5%A4%9A%E6%AC%A1%E6%8F%90%E7%A4%BA%E6%97%A0%E6%9D%83%E9%99%90">同时发起多个请求时，access_token 正好过期，同时多次提示无权限</a></li></ul></li><li title="密码保存"><a href="#%E5%AF%86%E7%A0%81%E4%BF%9D%E5%AD%98" data-anchor="#%E5%AF%86%E7%A0%81%E4%BF%9D%E5%AD%98">密码保存</a><ul><li title="哈希加盐"><a href="#%E5%93%88%E5%B8%8C%E5%8A%A0%E7%9B%90" data-anchor="#%E5%93%88%E5%B8%8C%E5%8A%A0%E7%9B%90">哈希加盐</a></li><li title="直接哈希的缺陷"><a href="#%E7%9B%B4%E6%8E%A5%E5%93%88%E5%B8%8C%E7%9A%84%E7%BC%BA%E9%99%B7" data-anchor="#%E7%9B%B4%E6%8E%A5%E5%93%88%E5%B8%8C%E7%9A%84%E7%BC%BA%E9%99%B7">直接哈希的缺陷</a></li><li title="加盐"><a href="#%E5%8A%A0%E7%9B%90" data-anchor="#%E5%8A%A0%E7%9B%90">加盐</a></li><li title="直接 md5 加密保存"><a href="#%E7%9B%B4%E6%8E%A5-md5-%E5%8A%A0%E5%AF%86%E4%BF%9D%E5%AD%98" data-anchor="#%E7%9B%B4%E6%8E%A5-md5-%E5%8A%A0%E5%AF%86%E4%BF%9D%E5%AD%98">直接 md5 加密保存</a></li></ul></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qxtang.github.io - 原型链和继承</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- version：1.3.5 -->
+  <!-- build time：1/18/2024, 9:38:14 AM -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="c60ace825dfbfff92f5899606e2459ab" data-href="/c33bc774af71130869c75080ef35f8cd.html" class="dir" title="前端">
+                <span>前端</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="4a0b5ccf4d13dfe7fd4a141360f94ce0" data-href="/eae392087397b37c08ef46f26c990033.html" class="dir" title="CSS">
+                <span>CSS</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="addc9af4595edb210c98610f6f3bd530" class="children" title="Flex 布局">
+            <a href="/addc9af4595edb210c98610f6f3bd530.html">Flex 布局</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="ea46b6ad2dbb5eb6e187c6e60fb9af92" data-href="/2f8752d329f016d074d1bcd83e7c6f1e.html" class="dir" title="Javascript">
+                <span>Javascript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="d930c75e6c41afbbfa8335f27b5b4e04" class="children" title="Promise">
+            <a href="/d930c75e6c41afbbfa8335f27b5b4e04.html">Promise</a>
+          </li>
+        
+          <li id="be88105a7585cfc75cc22465286da5bf" class="children" title="Proxy 和 Reflect">
+            <a href="/be88105a7585cfc75cc22465286da5bf.html">Proxy 和 Reflect</a>
+          </li>
+        
+          <li id="ec0bab315a90916ea4a01590407e1da7" class="children" title="原型链和继承">
+            <a href="/ec0bab315a90916ea4a01590407e1da7.html">原型链和继承</a>
+          </li>
+        
+          <li id="af07a9408354f15afe7ab7f38c079349" class="children" title="垃圾回收">
+            <a href="/af07a9408354f15afe7ab7f38c079349.html">垃圾回收</a>
+          </li>
+        
+          <li id="06bce512407c5f4bd04b3f949113a5a7" class="children" title="尾调用和尾递归">
+            <a href="/06bce512407c5f4bd04b3f949113a5a7.html">尾调用和尾递归</a>
+          </li>
+        
+          <li id="ded0767aa1b832ff6b0c1fffa4f8bd93" class="children" title="数据类型">
+            <a href="/ded0767aa1b832ff6b0c1fffa4f8bd93.html">数据类型</a>
+          </li>
+        
+          <li id="f2fc1eb33e1e781281ddf26e44f4c8f6" class="children" title="模块">
+            <a href="/f2fc1eb33e1e781281ddf26e44f4c8f6.html">模块</a>
+          </li>
+        
+          <li id="8edba4a27acf83aaa2f5bef514b3530b" class="children" title="闭包">
+            <a href="/8edba4a27acf83aaa2f5bef514b3530b.html">闭包</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="7f158862ca7d85cf3d2524cb2658cc79" data-href="/8fdbdd3f464fed8281bc6fc45d8dbb80.html" class="dir" title="NodeJS">
+                <span>NodeJS</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="f68779691e0f658547d161fe3f05a6a7" class="children" title="node 模块">
+            <a href="/f68779691e0f658547d161fe3f05a6a7.html">node 模块</a>
+          </li>
+        
+          <li id="8f09317cfe38fa2e2d656e25a98f039e" class="children" title="nodejs 事件循环">
+            <a href="/8f09317cfe38fa2e2d656e25a98f039e.html">nodejs 事件循环</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e26377f01f43ebcc8b63fd1168710356" data-href="/88e6a4b5e6ea3b429fe0c6375020d9b3.html" class="dir" title="Typescript">
+                <span>Typescript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="2206d2b37f42da1adaa694678f5ab1a7" class="children" title="最佳实践">
+            <a href="/2206d2b37f42da1adaa694678f5ab1a7.html">最佳实践</a>
+          </li>
+        
+          <li id="d1a53b4db0dc8c329637406aea552fc0" class="children" title="模板字面量类型">
+            <a href="/d1a53b4db0dc8c329637406aea552fc0.html">模板字面量类型</a>
+          </li>
+        
+          <li id="dbb1c8bc7bec09221e4d874f78412724" class="children" title="泛型">
+            <a href="/dbb1c8bc7bec09221e4d874f78412724.html">泛型</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="33ad97dd1c1de1c20e8d0ee982f532b8" data-href="/6cf99ad7581315b326dd02ee831d434d.html" class="dir" title="性能优化">
+                <span>性能优化</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="c11d2c8e36934046c73bfc440376402d" class="children" title="首屏加载优化">
+            <a href="/c11d2c8e36934046c73bfc440376402d.html">首屏加载优化</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="202854a467fa8bd1203b04de57f5f58e" data-href="" class="dir" title="构建工具">
+                <span>构建工具</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="6f85932b26cde835858cbc88ecf94e68" data-href="/221e77f2f876cc679c9968521e7146d2.html" class="dir" title="Webpack">
+                <span>Webpack</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="77ac9fce726c5973108601166c072dda" class="children" title="Loader">
+            <a href="/77ac9fce726c5973108601166c072dda.html">Loader</a>
+          </li>
+        
+          <li id="0d16c3d58f2b85b4a6169303822d1b2d" class="children" title="Plugin">
+            <a href="/0d16c3d58f2b85b4a6169303822d1b2d.html">Plugin</a>
+          </li>
+        
+          <li id="6a8be065958c2dbe5dd2fd911d7e09e1" class="children" title="分包">
+            <a href="/6a8be065958c2dbe5dd2fd911d7e09e1.html">分包</a>
+          </li>
+        
+          <li id="5a742e6fb38ae9c0d979d1f69259ad4e" class="children" title="最佳实践">
+            <a href="/5a742e6fb38ae9c0d979d1f69259ad4e.html">最佳实践</a>
+          </li>
+        
+          <li id="d937c989871b6907ced1fcc5663c0d5b" class="children" title="构建优化">
+            <a href="/d937c989871b6907ced1fcc5663c0d5b.html">构建优化</a>
+          </li>
+        
+            </ul>
+          
+          <li id="2191e11d28af1c9b3c1d457b06e71465" class="children" title="Vite">
+            <a href="/2191e11d28af1c9b3c1d457b06e71465.html">Vite</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="9ae474f8d5c1cf60ec72eb3315213643" data-href="/c67c2ffa11cd0dab91827ba4c8ff4006.html" class="dir" title="框架">
+                <span>框架</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="a06aba56d0eebc458469010d53c0c769" data-href="/485cea1b6ac19a7c73c2a1af2256306a.html" class="dir" title="React">
+                <span>React</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="71ac96ef6cb2e14de08b6dcd91b56f80" class="children" title="Fiber">
+            <a href="/71ac96ef6cb2e14de08b6dcd91b56f80.html">Fiber</a>
+          </li>
+        
+          <li id="7cb50eb9ed462e2df578538d307f112f" class="children" title="Hooks">
+            <a href="/7cb50eb9ed462e2df578538d307f112f.html">Hooks</a>
+          </li>
+        
+          <li id="db3202f3a00c9c196b8dac24ed8817cc" class="children" title="react-router">
+            <a href="/db3202f3a00c9c196b8dac24ed8817cc.html">react-router</a>
+          </li>
+        
+          <li id="8c08d295f7d0117ca839b801e201ed9f" class="children" title="setState">
+            <a href="/8c08d295f7d0117ca839b801e201ed9f.html">setState</a>
+          </li>
+        
+          <li id="cac3b3ec2a3a2b1dce70bc6254cb598d" class="children" title="渲染原理">
+            <a href="/cac3b3ec2a3a2b1dce70bc6254cb598d.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="8aeb97fee6d70890883e5d21f0a70284" data-href="/95d6870156f47122d0948684e216b600.html" class="dir" title="Vue">
+                <span>Vue</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="4abb31899a22a33e22199a247688c032" class="children" title="vue 中的 diff 算法">
+            <a href="/4abb31899a22a33e22199a247688c032.html">vue 中的 diff 算法</a>
+          </li>
+        
+          <li id="7eb52050103fb5b795d44d524cea73f0" class="children" title="双向绑定原理">
+            <a href="/7eb52050103fb5b795d44d524cea73f0.html">双向绑定原理</a>
+          </li>
+        
+          <li id="8068010ae6cd28d82c2f8e7d5fb05994" class="children" title="渲染原理">
+            <a href="/8068010ae6cd28d82c2f8e7d5fb05994.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e91730aadcf9c6b7a887ab67ec20254a" class="children" title="HOC、Hooks、Mixin">
+            <a href="/e91730aadcf9c6b7a887ab67ec20254a.html">HOC、Hooks、Mixin</a>
+          </li>
+        
+          <li id="06525a63badbb76964788818cc2aa132" class="children" title="Redux">
+            <a href="/06525a63badbb76964788818cc2aa132.html">Redux</a>
+          </li>
+        
+          <li id="e7b856272f499e7d615800f583a18f05" class="children" title="spa 路由原理">
+            <a href="/e7b856272f499e7d615800f583a18f05.html">spa 路由原理</a>
+          </li>
+        
+          <li id="89a269dba934197974e07de67fbdffe7" class="children" title="虚拟 Dom 与 diff">
+            <a href="/89a269dba934197974e07de67fbdffe7.html">虚拟 Dom 与 diff</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e485e4b093f3e648bb7997c595f332e9" data-href="/0891d33a8428aa46e0aaf378da73e0fd.html" class="dir" title="浏览器">
+                <span>浏览器</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="39b728ede14b93d31bd47ce1196d14ad" class="children" title="展示页面过程">
+            <a href="/39b728ede14b93d31bd47ce1196d14ad.html">展示页面过程</a>
+          </li>
+        
+          <li id="b1f9a5c2edf24f12e239400e147cadd7" class="children" title="浏览器架构">
+            <a href="/b1f9a5c2edf24f12e239400e147cadd7.html">浏览器架构</a>
+          </li>
+        
+          <li id="3afb6ad15b155cb037676083d9603300" class="children" title="浏览器缓存">
+            <a href="/3afb6ad15b155cb037676083d9603300.html">浏览器缓存</a>
+          </li>
+        
+          <li id="02b91b90ead1d3896d0a8c1febfa517a" class="children" title="渲染原理">
+            <a href="/02b91b90ead1d3896d0a8c1febfa517a.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+          <li id="389b55b894875c4b629758e783cd8053" class="children" title="AST 抽象语法树">
+            <a href="/389b55b894875c4b629758e783cd8053.html">AST 抽象语法树</a>
+          </li>
+        
+          <li id="dfa88fedd022eb7068bcd634ae9c0b41" class="children" title="Babel">
+            <a href="/dfa88fedd022eb7068bcd634ae9c0b41.html">Babel</a>
+          </li>
+        
+          <li id="bc44b152a26aed4e957221c11c5fe52b" class="children" title="npm">
+            <a href="/bc44b152a26aed4e957221c11c5fe52b.html">npm</a>
+          </li>
+        
+          <li id="3ff5cf28589df4ccb00f03ce76edf16c" class="children" title="事件循环">
+            <a href="/3ff5cf28589df4ccb00f03ce76edf16c.html">事件循环</a>
+          </li>
+        
+          <li id="41b3d5a5ac6bcb3574744656d48dd9fd" class="children" title="图标方案">
+            <a href="/41b3d5a5ac6bcb3574744656d48dd9fd.html">图标方案</a>
+          </li>
+        
+          <li id="8ba6f50880e02e2228ef3d5d8946c449" class="children" title="微前端">
+            <a href="/8ba6f50880e02e2228ef3d5d8946c449.html">微前端</a>
+          </li>
+        
+          <li id="44b01ff35878b7a548bb3550acb75dd2" class="children" title="文件上传&下载">
+            <a href="/44b01ff35878b7a548bb3550acb75dd2.html">文件上传&下载</a>
+          </li>
+        
+          <li id="e72218e1e3f0fdc8683b4540827fdad0" class="children" title="柯里化">
+            <a href="/e72218e1e3f0fdc8683b4540827fdad0.html">柯里化</a>
+          </li>
+        
+          <li id="02653b44d2914e17a51d045920b2eb60" class="children" title="设计稿多端适配方案">
+            <a href="/02653b44d2914e17a51d045920b2eb60.html">设计稿多端适配方案</a>
+          </li>
+        
+          <li id="f4f2163e7aab97895f81615a4f461428" class="children" title="防抖&节流">
+            <a href="/f4f2163e7aab97895f81615a4f461428.html">防抖&节流</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="079c4846f4492de09e5c456d89c26df5" data-href="" class="dir" title="工作沉淀">
+                <span>工作沉淀</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="e9a2550e8c53d313e8e31853512a444e" class="children" title="Nginx 笔记">
+            <a href="/e9a2550e8c53d313e8e31853512a444e.html">Nginx 笔记</a>
+          </li>
+        
+          <li id="54b845f50c1324aaf0f2dd2ef2f8b63a" class="children" title="adb 通过 wifi 调试微信 h5">
+            <a href="/54b845f50c1324aaf0f2dd2ef2f8b63a.html">adb 通过 wifi 调试微信 h5</a>
+          </li>
+        
+          <li id="9a1c4aed7641d47c0fe0fe7b0d1c54bb" class="children" title="web 应用登录方案">
+            <a href="/9a1c4aed7641d47c0fe0fe7b0d1c54bb.html">web 应用登录方案</a>
+          </li>
+        
+          <li id="a7aff4b7b9eea3d879a7aad0c984a6fb" class="children" title="为什么前端团队要统一技术栈">
+            <a href="/a7aff4b7b9eea3d879a7aad0c984a6fb.html">为什么前端团队要统一技术栈</a>
+          </li>
+        
+          <li id="a4f7292ddc0b242295c286032c06ed31" class="children" title="前后端鉴权策略">
+            <a href="/a4f7292ddc0b242295c286032c06ed31.html">前后端鉴权策略</a>
+          </li>
+        
+          <li id="15c0a89ff7639100c849b3d0090fd083" class="children" title="动态校验企微应用可信域名">
+            <a href="/15c0a89ff7639100c849b3d0090fd083.html">动态校验企微应用可信域名</a>
+          </li>
+        
+          <li id="b4baff14e4c3095efd4ef6a7d801ab1e" class="children" title="迭代流程规范">
+            <a href="/b4baff14e4c3095efd4ef6a7d801ab1e.html">迭代流程规范</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="5438208f2f467210ad3b895125ef281b" data-href="/5f55e555510d01a84852a1b5c63710cc.html" class="dir" title="微信">
+                <span>微信</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="6e923e3e6948d0f634098959a5f953da" class="children" title="真机调试微信 h5 页面">
+            <a href="/6e923e3e6948d0f634098959a5f953da.html">真机调试微信 h5 页面</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="cfc6762313c8fadde407c043154409f7" data-href="/6b4ced9d2ef205d68999ba7579eb19ac.html" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="5d9cd149bffeb85ff35aed2ff52e3c4c" class="children" title="CSS最佳实践">
+            <a href="/5d9cd149bffeb85ff35aed2ff52e3c4c.html">CSS最佳实践</a>
+          </li>
+        
+          <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
+            <a href="/90c722fcc7f93ea31011ef4abc7f384d.html">Javascript</a>
+          </li>
+        
+          <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
+            <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
+            <a href="/d02c013ecd23b0f2469dc30db74d4108.html">git 实践</a>
+          </li>
+        
+          <li id="a8b2265cbd54ac650bb8381258e83bd7" class="children" title="前端组件设计原则">
+            <a href="/a8b2265cbd54ac650bb8381258e83bd7.html">前端组件设计原则</a>
+          </li>
+        
+          <li id="3e08f87fd663eba276f17e91f87d0536" class="children" title="调试排错技巧">
+            <a href="/3e08f87fd663eba276f17e91f87d0536.html">调试排错技巧</a>
+          </li>
+        
+          <li id="e7542d604b34ce539d8b7baa7df7746b" class="children" title="通用工程实践">
+            <a href="/e7542d604b34ce539d8b7baa7df7746b.html">通用工程实践</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e3e8f8ee86c2edd5565cdc07690caf3c" data-href="/edbcde9ad73872dc20f5bf13881f12c4.html" class="dir" title="网络">
+                <span>网络</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="4dd00a18c865ea7bc8d38a93b4960217" class="children" title="HTTP">
+            <a href="/4dd00a18c865ea7bc8d38a93b4960217.html">HTTP</a>
+          </li>
+        
+          <li id="c5ca62af56e287aef9b6b981b4847660" class="children" title="HTTPS">
+            <a href="/c5ca62af56e287aef9b6b981b4847660.html">HTTPS</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e3db49d633625ac1552e7dca23fb879e" class="children" title="AST抽象语法树">
+            <a href="/e3db49d633625ac1552e7dca23fb879e.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="af171a65b1a63809e1e25aeda1e60fe1" class="children" title="CentOS">
+            <a href="/af171a65b1a63809e1e25aeda1e60fe1.html">CentOS</a>
+          </li>
+        
+          <li id="1b720adc958d7aa65c28ee132123bd7d" class="children" title="Linux 命令">
+            <a href="/1b720adc958d7aa65c28ee132123bd7d.html">Linux 命令</a>
+          </li>
+        
+          <li id="8e7beee6d2cd7d2325c189032a4f6012" class="children" title="WebAssembly">
+            <a href="/8e7beee6d2cd7d2325c189032a4f6012.html">WebAssembly</a>
+          </li>
+        
+          <li id="9ca2a634dde58497e71f5ebe2ec4a192" class="children" title="前端工具链">
+            <a href="/9ca2a634dde58497e71f5ebe2ec4a192.html">前端工具链</a>
+          </li>
+        
+          <li id="91cddc44e8c0f27fe5a0290f334ada7e" class="children" title="单元测试">
+            <a href="/91cddc44e8c0f27fe5a0290f334ada7e.html">单元测试</a>
+          </li>
+        
+          <li id="54c29119da89e3edf1afb1ec4f51fb6c" class="children" title="工作问题记录">
+            <a href="/54c29119da89e3edf1afb1ec4f51fb6c.html">工作问题记录</a>
+          </li>
+        
+          <li id="a2374d9b519720a592f4d7bf8120f21a" class="children" title="设计模式">
+            <a href="/a2374d9b519720a592f4d7bf8120f21a.html">设计模式</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%92%8C%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%92%8C%E7%BB%A7%E6%89%BF">原型链和继承</a></h1>
+<h2 id="%E5%8E%9F%E5%9E%8B%E9%93%BE" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a></h2>
+<figure><img src="../../resource/%E5%8E%9F%E5%9E%8B%E9%93%BE.png" alt=""></figure>
+<h3 id="%E6%8F%8F%E8%BF%B0" tabindex="-1"><a class="header-anchor" href="#%E6%8F%8F%E8%BF%B0">描述</a></h3>
+<ul>
+<li>原型：每一个对象（null 除外）在创建的时候会关联另一个对象，这个对象就是原型，每一个对象都会从原型继承属性或方法，就是 prototype 属性</li>
+<li>由相互关联的原型组成的链状结构就是原型链</li>
+<li>原型对象上的属性和方法，能被对应构造函数创建的实例共享，这是 JavaScript 继承机制的基本设计</li>
+<li>JavaScript 对象通过 prototype 指向父类对象，直到指向 Object 对象，Object 原型指向 null 为止，这样就形成了一个原型指向的链条</li>
+<li>访问实例的某个属性或方法，会首先在对象内寻找，找不到，才在对象的原型里去找，一直找到底</li>
+<li>instanceof、isPrototypeOf：判断是否处于原型链</li>
+<li>Object.hasOwnProperty()：检查对象自身中是否含有该属性</li>
+<li>for in 可以搜索原型属性</li>
+<li>函数对象的 prototype --&gt; 实例原型</li>
+<li>实例（普通对象）的 <code>__proto__</code> --&gt; 实例原型</li>
+<li>原型的 constructor --&gt; 关联的构造函数</li>
+<li>实例原型的原型 --&gt; Object</li>
+<li>Object 的原型 --&gt; null，<code>Object.prototype.__proto__ === null</code></li>
+</ul>
+<div class="tip">
+<p>此时原型链停止查找<br>
+null 表示“没有对象”，即该处不应该有值。<br>
+所以 <code>Object.prototype.__proto__</code> 的值为 null 跟 Object.prototype 没有原型，其实表达了一个意思</p>
+</div>
+<h3 id="%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1-%E5%92%8C-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1-%E5%92%8C-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">原型对象 和 构造函数</a></h3>
+<ul>
+<li>定义一个函数数据类型\普通函数\类的时候，自带一个 prototype 属性指向函数的原型对象</li>
+<li>当函数经过 new 调用时，这个函数就成为了构造函数，返回一个新的实例，这个实例有一个 <code>__proto__</code> 属性，指向构造函数的原型对象</li>
+</ul>
+<h3 id="%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-prototype" tabindex="-1"><a class="header-anchor" href="#%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-prototype">声明方法为什么要用 prototype</a></h3>
+<ul>
+<li>为了在类的各个实例间共享</li>
+<li>通过该构造函数生成的实例所拥有的方法都是指向一个函数的索引，可以节省内存</li>
+<li>不使用 prototype 定义的方法相当于类的静态方法，可以直接使用，不需要 new</li>
+<li>使用 prototype 定义的方法相当于类的实例方法，必须 new 后才能使用</li>
+</ul>
+<h3 id="prototype-%E5%92%8C-proto-%E5%92%8C-constructor-%E7%9A%84%E5%85%B3%E7%B3%BB" tabindex="-1"><a class="header-anchor" href="#prototype-%E5%92%8C-proto-%E5%92%8C-constructor-%E7%9A%84%E5%85%B3%E7%B3%BB">prototype 和 proto 和 constructor 的关系</a></h3>
+<ul>
+<li>prototype 用于访问函数的原型对象。它是函数所独有的，它是从一个函数指向一个对象。它的含义是函数的原型对象，任何函数在创建的时候，其实会默认同时创建该函数的 prototype 对象</li>
+<li><code>__proto__</code> 用于访问对象实例的原型对象（或者使用 Object.getPrototypeOf()）</li>
+<li><code>__proto__</code> 是对象独有的</li>
+<li><code>__proto__</code> 作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，那么就会去它的 <code>__proto__</code> 属性所指向的那个对象（可以理解为父对象）里找，如果父对象也不存在这个属性，则继续往父对象的 <code>__proto__</code> 属性所指向的那个对象（可以理解为爷爷对象）里找，如果还没找到，则继续往上找，直到原型链顶端 null 空对象</li>
+<li>constructor 属性也是对象才拥有的，它是从一个对象指向一个函数，含义就是指向该对象的构造函数</li>
+</ul>
+<h3 id="typeof-%E5%92%8C-instanceof-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#typeof-%E5%92%8C-instanceof-%E5%8C%BA%E5%88%AB">typeof 和 instanceof 区别</a></h3>
+<ul>
+<li>typeof：判断一个变量的类型</li>
+<li>instanceof：判断一个变量是否是某个对象的实例</li>
+<li>instanceof 原理：能在实例的 原型对象链 中找到该构造函数的 prototype 属性所指向的 原型对象，就返回 true</li>
+</ul>
+<h3 id="new-%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#new-%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88">new 干了什么</a></h3>
+<p>new 操作符新建了一个空对象，这个对象原型指向构造函数的 prototype，执行构造函数后返回这个对象。</p>
+<ul>
+<li>创建一个空对象</li>
+<li>将构造函数的作用域赋给新对象，根据原型链，设置空对象的 <code>__proto__</code> 为构造函数的 prototype</li>
+<li>构造函数的 this 指向这个对象，执行构造函数的代码（为这个新对象添加属性）</li>
+<li>判断函数的返回值类型，如果是引用类型，就返回这个引用类型的对象</li>
+</ul>
+<p>手写 new：</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myNew</span>(<span class="hljs-params">context, ...args</span>) {
+  <span class="hljs-keyword">const</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();
+  obj.<span class="hljs-property">__proto__</span> = context.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>;
+  <span class="hljs-keyword">const</span> res = context.<span class="hljs-title function_">apply</span>(obj, args);
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> res === <span class="hljs-string">&#x27;object&#x27;</span> ? res : obj;
+}
+</code></pre>
+<h2 id="%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E7%BB%A7%E6%89%BF">继承</a></h2>
+<ul>
+<li>许多面向对象语言都支持两种继承方式: 接口继承 和 实现继承</li>
+<li>JavaScript 没有提供传统面向对象语言中的类式继承，而是通过原型委托的方式来实现对象与对象之间的继承</li>
+<li>JavaScript 也没有在语言层面提供对抽象类和接口的支持</li>
+<li>接口继承只继承方法签名，而实现继承则继承实际的方法</li>
+<li>在 JavaScript 中无法实现接口继承，只支持实现继承，而且其实现继承主要是依靠原型链来实现的</li>
+<li>以对象字面量方式创建原型方法会破坏之前的原型链，因为这相当于重写了原型链</li>
+</ul>
+<h3 id="es6-%E5%92%8C-es5-%E7%BB%A7%E6%89%BF%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#es6-%E5%92%8C-es5-%E7%BB%A7%E6%89%BF%E5%8C%BA%E5%88%AB">ES6 和 ES5 继承区别</a></h3>
+<ul>
+<li><a href="https://gist.github.com/zachrey/b3633b357134201e7d39d1c7d8c438fd" target="_blank">https://gist.github.com/zachrey/b3633b357134201e7d39d1c7d8c438fd</a></li>
+<li>ES5 的继承一般是通过原型链模式或者构造函数模式来实现继承，ES5 的 Sub 构造函数的 prototype 指向的是 Function.prototype</li>
+<li>而 ES6 实现的继承，Sub.prototype 的会指向 Parent</li>
+<li>this 的构造顺序是不一样的，ES5 的继承是先构造子对象然后再产生父对象，然后将父对象里面的属性复制到子对象中。而 ES6 是先使用 super()创建 父对象，然后再创建子对象。所以 this 的构造顺序不同。</li>
+</ul>
+<h3 id="%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%A7%E6%89%BF">原型链继承</a></h3>
+<ul>
+<li>直接通过原型继承属性和方法</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Father</span>();
+</code></pre>
+<p>缺点：</p>
+<ul>
+<li>原型中包含引用值的时候，会在所有实例间共享，修改子类引用类型属性会影响到父类</li>
+<li>子类型在实例化时不能给父类型的构造函数传参</li>
+</ul>
+<h3 id="%E7%9B%97%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#%E7%9B%97%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">盗用构造函数</a></h3>
+<ul>
+<li>为了解决原型包含引用值导致的继承问题（含引用类型值的原型属性会被所有实例共享）</li>
+<li>在子类型构造函数的内部调用父类型构造函数</li>
+<li>优点是可以在子类构造函数中向父类构造函数传参</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Father</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">colors</span> = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-string">&#x27;green&#x27;</span>];
+}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Son</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title class_">Father</span>.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>);
+  <span class="hljs-comment">// 继承了Father，且向父类型传递参数</span>
+}
+</code></pre>
+<p>缺点：</p>
+<ul>
+<li>必须在构造函数中定义方法，因此函数不能重用</li>
+<li>子类也不能访问父类原型上定义的方法</li>
+</ul>
+<h3 id="%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">组合继承</a></h3>
+<ul>
+<li>原型链继承和盗用构造函数继承的结合</li>
+<li>使用原型链实现对原型属性和方法的继承</li>
+<li>通过盗用构造函数来实现对实例属性的继承</li>
+<li>既通过在原型上定义方法实现了函数复用，又能够保证每个实例都有它自己的属性</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Father</span>(<span class="hljs-params">name</span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">colors</span> = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-string">&#x27;green&#x27;</span>];
+}
+<span class="hljs-title class_">Father</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">sayName</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">alert</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);
+};
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Son</span>(<span class="hljs-params">name, age</span>) {
+  <span class="hljs-comment">// 继承属性</span>
+  <span class="hljs-title class_">Father</span>.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>, name);
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span> = age;
+}
+<span class="hljs-comment">// 继承方法</span>
+<span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Father</span>();
+<span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">constructor</span> = <span class="hljs-title class_">Son</span>;
+<span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">sayAge</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">alert</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">age</span>);
+};
+</code></pre>
+<h3 id="%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF">原型式继承</a></h3>
+<ul>
+<li>即相当于 ES6 的 Object.create()方法</li>
+<li>适合不需要单独创建构造函数，但仍然需要在对象间共享信息的场合</li>
+<li>创建一个临时构造函数</li>
+<li>将传入的对象赋值给这个构造函数的原型</li>
+<li>然后返回这个临时类型的一个实例</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">object</span>(<span class="hljs-params">o</span>) {
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">F</span>(<span class="hljs-params"></span>) {}
+  F.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span> = o;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">F</span>();
+}
+</code></pre>
+<h3 id="%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF">寄生式继承</a></h3>
+<ul>
+<li>类似工厂模式</li>
+<li>创建一个实现继承的函数，以某种方式增强对象，然后返回这个对象</li>
+<li>适合主要关注对象，而不在乎类型和构造函数的场景</li>
+<li>通过寄生式继承给对象添加函数会导致函数难以重用，与构造函数模式类似</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">var</span> book = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;js book&#x27;</span>, <span class="hljs-attr">likeBook</span>: [<span class="hljs-string">&#x27;html book&#x27;</span>, <span class="hljs-string">&#x27;css book&#x27;</span>] };
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createBook</span>(<span class="hljs-params">obj</span>) {
+  <span class="hljs-comment">// 通过原型方式创建新的对象</span>
+  <span class="hljs-keyword">var</span> o = <span class="hljs-keyword">new</span> <span class="hljs-title function_">inheritObject</span>(obj);
+  <span class="hljs-comment">// 拓展新对象</span>
+  o.<span class="hljs-property">getName</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name);
+  };
+  <span class="hljs-comment">// 返回拓展后的新对象</span>
+  <span class="hljs-keyword">return</span> o;
+}
+</code></pre>
+<h3 id="%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">寄生组合继承</a></h3>
+<ul>
+<li>组合继承的问题：会调用两次父类型构造函数，创建子类原型时、在子类构造函数内部</li>
+<li>通过借用构造函数来继承属性</li>
+<li>通过原型链的混成形式来继承方法</li>
+<li>不必为了指定子类型的原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Father</span>(<span class="hljs-params">foo</span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo</span> = foo;
+}
+<span class="hljs-title class_">Father</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">printFoo</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foo</span>);
+};
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Son</span>(<span class="hljs-params">bar</span>) {
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">bar</span> = bar;
+  <span class="hljs-title class_">Father</span>.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>);
+}
+<span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span> = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">create</span>(<span class="hljs-title class_">Super</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>);
+<span class="hljs-title class_">Son</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">constructor</span> = <span class="hljs-title class_">Son</span>;
+</code></pre>
+<h3 id="es6-%E7%9A%84-extends" tabindex="-1"><a class="header-anchor" href="#es6-%E7%9A%84-extends">ES6 的 extends</a></h3>
+<pre><code class="language-jsx"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Father</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">foo</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">foo</span> = foo;
+  }
+  <span class="hljs-title function_">printFoo</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foo</span>);
+  }
+}
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Father</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">foo, bar</span>) {
+    <span class="hljs-variable language_">super</span>(foo);
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">bar</span> = bar;
+  }
+}
+</code></pre>
+<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<ul>
+<li><a href="https://github.com/mqyqingfeng/blog/issues/2" target="_blank">https://github.com/mqyqingfeng/blog/issues/2</a></li>
+</ul>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="原型链和继承"><a href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%92%8C%E7%BB%A7%E6%89%BF" data-anchor="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%92%8C%E7%BB%A7%E6%89%BF">原型链和继承</a><ul><li title="原型链"><a href="#%E5%8E%9F%E5%9E%8B%E9%93%BE" data-anchor="#%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a><ul><li title="描述"><a href="#%E6%8F%8F%E8%BF%B0" data-anchor="#%E6%8F%8F%E8%BF%B0">描述</a></li><li title="原型对象 和 构造函数"><a href="#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1-%E5%92%8C-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0" data-anchor="#%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1-%E5%92%8C-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">原型对象 和 构造函数</a></li><li title="声明方法为什么要用 prototype"><a href="#%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-prototype" data-anchor="#%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-prototype">声明方法为什么要用 prototype</a></li><li title="prototype 和 proto 和 constructor 的关系"><a href="#prototype-%E5%92%8C-proto-%E5%92%8C-constructor-%E7%9A%84%E5%85%B3%E7%B3%BB" data-anchor="#prototype-%E5%92%8C-proto-%E5%92%8C-constructor-%E7%9A%84%E5%85%B3%E7%B3%BB">prototype 和 proto 和 constructor 的关系</a></li><li title="typeof 和 instanceof 区别"><a href="#typeof-%E5%92%8C-instanceof-%E5%8C%BA%E5%88%AB" data-anchor="#typeof-%E5%92%8C-instanceof-%E5%8C%BA%E5%88%AB">typeof 和 instanceof 区别</a></li><li title="new 干了什么"><a href="#new-%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88" data-anchor="#new-%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88">new 干了什么</a></li></ul></li><li title="继承"><a href="#%E7%BB%A7%E6%89%BF" data-anchor="#%E7%BB%A7%E6%89%BF">继承</a><ul><li title="ES6 和 ES5 继承区别"><a href="#es6-%E5%92%8C-es5-%E7%BB%A7%E6%89%BF%E5%8C%BA%E5%88%AB" data-anchor="#es6-%E5%92%8C-es5-%E7%BB%A7%E6%89%BF%E5%8C%BA%E5%88%AB">ES6 和 ES5 继承区别</a></li><li title="原型链继承"><a href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%A7%E6%89%BF" data-anchor="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%A7%E6%89%BF">原型链继承</a></li><li title="盗用构造函数"><a href="#%E7%9B%97%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0" data-anchor="#%E7%9B%97%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">盗用构造函数</a></li><li title="组合继承"><a href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF" data-anchor="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">组合继承</a></li><li title="原型式继承"><a href="#%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF" data-anchor="#%E5%8E%9F%E5%9E%8B%E5%BC%8F%E7%BB%A7%E6%89%BF">原型式继承</a></li><li title="寄生式继承"><a href="#%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF" data-anchor="#%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF">寄生式继承</a></li><li title="寄生组合继承"><a href="#%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF" data-anchor="#%E5%AF%84%E7%94%9F%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">寄生组合继承</a></li><li title="ES6 的 extends"><a href="#es6-%E7%9A%84-extends" data-anchor="#es6-%E7%9A%84-extends">ES6 的 extends</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - git 实践</title>
+  <title>qxtang.github.io - 数据类型</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -483,100 +483,147 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="git-%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#git-%E5%AE%9E%E8%B7%B5">git 实践</a></h1>
-<h2 id="git-rebase" tabindex="-1"><a class="header-anchor" href="#git-rebase">git rebase</a></h2>
+      <h1 id="%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></h1>
 <ul>
-<li>可以直接理解为改变基底。feature 分支是基于 master 分支的 B 拉出来的分支，feature 的基底是 B。而 master 在 B 之后有新的提交，就相当于此时要用 master 上新的提交来作为 feature 分支的新基底。</li>
-<li>实际操作为把 B 之后 feature 的提交存下来，然后删掉原来这些提交，再找到 master 的最新提交位置，把存下来的提交再接上去（新节点新 commit id）</li>
-<li>如此 feature 分支的基底就相当于变成了 M 而不是原来的 B 了。</li>
-<li>注意，如果 master 上在 B 以后没有新提交，那么就还是用原来的 B 作为基，rebase 操作相当于无效，此时和 git merge 就基本没区别了，差异只在于 git merge 会多一条记录 Merge 操作的提交记录</li>
-<li>大部分公司其实会禁用 rebase，不管是拉代码还是 push 代码统一都使用 merge，虽然会多出无意义的一条提交记录“Merge … to …”，但至少能清楚地知道主线上谁合了的代码以及他们合代码的时间先后顺序</li>
+<li>基本类型：number、string、boolean、undefined、null、Symbol、BigInt</li>
+<li>引用类型：Object、Array、Function、内置对象（Date、Math 等）</li>
 </ul>
-<h2 id="gitflow" tabindex="-1"><a class="header-anchor" href="#gitflow">GitFlow</a></h2>
-<blockquote>
-<p>简单记录工作中使用 gitflow 模型管理代码版本、保证代码安全的方法。</p>
-</blockquote>
-<p>参考：</p>
+<h2 id="bigint" tabindex="-1"><a class="header-anchor" href="#bigint">BigInt</a></h2>
 <ul>
-<li><a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank">A successful Git branching model</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank">Git 工作流程</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank">Git 分支管理策略</a></li>
-<li><a href="https://www.cnblogs.com/lcngu/p/5770288.html" target="_blank">git flow 的使用</a></li>
-<li><a href="https://www.cnblogs.com/diffx/p/10690632.html" target="_blank">GitFlow 原理浅析</a></li>
+<li>
+<p>内置对象，提供了对任意长度整数的支持，表示任意大的整数</p>
+</li>
+<li>
+<p>Number.MAX_SAFE_INTEGER（2^53 - 1）是 Javascript 中可以用 Number 表示的最大数字，在这个数范围内不会出现精度丢失（⼩数除外），超过这个范围，js 会出现计算不准确的情况</p>
+</li>
+<li>
+<p>它提供了一种方法来表示大于 Number.MAX_SAFE_INTEGER 的整数</p>
+</li>
+<li>
+<p>BigInt 不支持一元加法</p>
+</li>
+<li>
+<p>BigInt 出现之前需要依靠第三方库</p>
+</li>
+<li>
+<p>创建 bigint：在一个整数字面量后面加 n 或者调用 BigInt 函数</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> bigint = <span class="hljs-number">1234567890123456789012345678901234567890n</span>;
+<span class="hljs-keyword">const</span> sameBigint = <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&#x27;1234567890123456789012345678901234567890&#x27;</span>);
+<span class="hljs-keyword">const</span> bigintFromNumber = <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">10</span>); <span class="hljs-comment">// 与 10n 相同</span>
+</code></pre>
+</li>
 </ul>
-<p>gitflow 现在被认为过于复杂，可能不适用于现代软件开发：</p>
+<h2 id="%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">内存管理</a></h2>
 <ul>
-<li><a href="https://www.zhihu.com/question/379545619" target="_blank">如何看待 Git flow 发明人称其不适用于持续交付？</a></li>
-<li><a href="http://scottchacon.com/2011/08/31/github-flow.html" target="_blank">Issues with git-flow</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA?" target="_blank">在阿里，我们如何管理代码分支？</a></li>
+<li>基本数据类型保存在栈内存中，因为基本数据类型占用空间小、大小固定，通过按值来访问，属于被频繁使用的数据</li>
+<li>引用数据类型存储在堆内存中，因为引用数据类型占据空间大、占用内存不固定。如果存储在栈中，将会影响程序运行的性能</li>
+<li>引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体</li>
 </ul>
-<h3 id="%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a></h3>
-<h4 id="master" tabindex="-1"><a class="header-anchor" href="#master">master</a></h4>
+<h3 id="%E6%A0%88%E5%86%85%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E6%A0%88%E5%86%85%E5%AD%98">栈内存</a></h3>
 <ul>
-<li>只有一条</li>
-<li>主分支</li>
-<li>只读，只能从分支 release 或 hotfix 合并进来</li>
-<li>所有发生在 master 分支的修改应该打 tag 做记录，方便追溯</li>
+<li>是一种特殊的线性表，它具有后进先出的特性</li>
+<li>存放基本类型，占据空间小、大小固定</li>
 </ul>
-<h4 id="develop" tabindex="-1"><a class="header-anchor" href="#develop">develop</a></h4>
+<h3 id="%E5%A0%86%E5%86%85%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E5%A0%86%E5%86%85%E5%AD%98">堆内存</a></h3>
 <ul>
-<li>只有一条</li>
-<li>主开发分支，基于 master 分支克隆</li>
-<li>包含所有要发布到下一个 release 的代码</li>
-<li>只读，只能从 feature 或 release 合并进来</li>
-<li>feature 功能分支完成开发后，合并到 develop，合并到 develop 前，提交合并申请，与 develop 分支进行比较做代码审查，审查通过则允许合并</li>
-<li>从 develop 拉取 release 分支，提测</li>
-<li>release 或 hotfix 分支上线完毕，合并回 develop。</li>
+<li>存放引用类型（在栈内存中存一个基本类型值保存对象在堆内存中的地址，用于引用这个对象）</li>
+<li>占据空间大、大小不固定</li>
 </ul>
-<h4 id="feature" tabindex="-1"><a class="header-anchor" href="#feature">feature</a></h4>
+<h2 id="%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD" tabindex="-1"><a class="header-anchor" href="#%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD">类型判断</a></h2>
 <ul>
-<li>功能开发分支，基于 develop 分支克隆，主要用于新需求新功能的开发</li>
-<li>有多条，按功能划分，如：<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>可以几个人一起开发一条 feature，也可以一人负责一条 feature</li>
-<li>功能开发完毕后，提测前，合并到 develop 分支</li>
-<li>feature 类型的分支可同时存在多个，用于团队中多个功能同时开发，属于临时分支，功能完成后可选择删除</li>
+<li>typeof：判断基本类型、函数。不能判断 Null、Object、Array，因为都返回 object</li>
+<li>instanceof：判断对象类型，不能判断基本数据类型，机制是判断在对象原型链中能否找到该类型的原型</li>
+<li>Object.prototype.toString.call：所有类型都能判断，还有 Error 对象，Date 对象等</li>
 </ul>
-<h4 id="release" tabindex="-1"><a class="header-anchor" href="#release">release</a></h4>
+<h3 id="%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84" tabindex="-1"><a class="header-anchor" href="#%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84">判断数组</a></h3>
 <ul>
-<li>版本分支，用于测试与上线，基于 feature 分支合并到 develop 之后，从 develop 分支克隆</li>
-<li>有多条，按版本划分，如：<code>/release/20200712-第一版v0.1</code>、<code>/release/20200713-第二版v0.2</code></li>
-<li>release 类型的分支主要用于测试和修改 bug，完成上线后合并回 develop 与 master 分支</li>
+<li>Array.isArray</li>
+<li><code>arr.__proto__ === Array.prototype</code></li>
+<li>arr instanceof Array</li>
+<li>Object.prototype.toString.call</li>
 </ul>
-<h4 id="hotfix" tabindex="-1"><a class="header-anchor" href="#hotfix">hotfix</a></h4>
+<h3 id="null-%E5%92%8C-undefined-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#null-%E5%92%8C-undefined-%E5%8C%BA%E5%88%AB">null 和 undefined 区别</a></h3>
 <ul>
-<li>补丁分支，基于 master 分支克隆，主要用于对线上的版本进行 BUG 修复</li>
-<li>有多条，按版本划分，如：<code>/hotfix/20200712-修复xss漏洞</code>、<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>修复完毕后合并回 develop 与 master 分支</li>
+<li>null 表示没有对象，即该处不应该有值</li>
+<li>undefined 表示缺少值，即此处应该有值，但没有定义</li>
+<li>typeof null 为 object</li>
+<li>typeof undefined 为 undefined</li>
+<li>null 和 undefined 转换成 number 数据类型时，null 转成 0 undefined 转成 NaN</li>
 </ul>
-<h3 id="%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></h3>
+<h2 id="object.is-%E4%B8%8E-%3D%3D%3D%5C%3D%3D-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#object.is-%E4%B8%8E-%3D%3D%3D%5C%3D%3D-%E5%8C%BA%E5%88%AB"><a href="http://Object.is" target="_blank">Object.is</a> 与 <code>===\==</code> 区别</a></h2>
 <ul>
-<li>初始化项目，创建 master 分支，然后从 master 拉取 develop 分支</li>
-<li>根据需求划分功能，从 develop 拉取 feature 分支进行编码开发，如<code>/feature/20200712-新增用户</code>、<code>/feature/20200801-登陆注册</code></li>
-<li>feature 分支完成后，合并到 develop 前，提交合并申请，与 develop 比较，进行代码审查，合并完成可以选择删除当前 feature</li>
-<li>需要发布时，从 develop 拉取 release 分支进行测试，例如<code>/release/20200712-第一版</code>，测试过程中在该条 release 分支上修改 BUG，测试通过后将该条 release 分支发布</li>
-<li>回归：任一 release 分支通过测试上线后，合并该 release 分支到 develop 与 master，master 分支打 tag，当前 release 不可修改，线上有问题须从 master 拉取 hotfix 分支进行修改</li>
-<li>通知所有进行中的 feature、release 把 master 合进来一次</li>
-<li>上线之后若发现 bug，从 master 拉取 hotfix 进行 bug 修改，如<code>/hotfix/20200713-修复新增用户失败bug</code></li>
-<li>hotfix 通过测试上线后，合并 hotfix 分支到 develop 与 master，master 分支打 tag</li>
-<li>版本回退：如果需进行版本回退，则选择上一版本号的 release 分支进行发布</li>
+<li><code>==</code> 会强转，<a href="http://Object.is" target="_blank">Object.is</a> 不会强转</li>
+<li><code>===\==</code> 将数字 -0 和 +0 视为相等，而将 Number.NaN 与 NaN 视为不相等，<a href="http://Object.is" target="_blank">Object.is</a> 反之</li>
+</ul>
+<h2 id="number.isnan-%E4%B8%8E-isnan-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#number.isnan-%E4%B8%8E-isnan-%E5%8C%BA%E5%88%AB">Number.isNaN 与 isNaN 区别</a></h2>
+<ul>
+<li>NaN 是一个值，当算术运算返回一个未定义的或无法表示的值时产生，typeof NaN 为 number</li>
+<li>isNaN：确定一个值是否为 NaN/只要不是 number 就会返回 true</li>
+<li>isNaN 会对传入的值使用 toNumber 转换一次，例如 isNaN('') 为 true，'' 隐式转换为 0</li>
+<li>Number.isNaN：只有传入的值为 NaN 时才返回 true</li>
+</ul>
+<h2 id="nan-%3D%3D-nan-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-false" tabindex="-1"><a class="header-anchor" href="#nan-%3D%3D-nan-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-false">NaN == NaN 为什么是 false</a></h2>
+<ul>
+<li>NaN 的意思是 Not a Number，那么不是数字的字符肯定不是一个，而是一个范围，一个集合。就好像 A 不是数字，B 也不是数字，但是 A 肯定不是 B 一样。所以综上 NaN 其实是不等于它自身的</li>
+</ul>
+<h2 id="%3D%3D-%E5%BC%BA%E8%BD%AC%E8%A7%84%E5%88%99" tabindex="-1"><a class="header-anchor" href="#%3D%3D-%E5%BC%BA%E8%BD%AC%E8%A7%84%E5%88%99"><code>==</code> 强转规则</a></h2>
+<ul>
+<li>类型相同直接比较</li>
+<li>是否在对比 null 和 undefined，是的话就会返回 true</li>
+<li>是否为 string 和 number，是的话就将 string 转 number</li>
+<li>其中一方是否为 boolean，是的话就 boolean 转 number</li>
+<li>其中一方是否为 object 且另一方为 string、number 或者 symbol，是的话就把 object 转为原始类型再进行判断</li>
 </ul>
 <div class="tip">
-<p>分支命名使用 <code>YYYYMMDD-功能名称</code> 格式，gui 工具或命令行打印时自动排序，找分支找比较方便</p>
-</div>
-<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<p>object 转原始类型（ToPrimitive 方法）：</p>
 <ul>
-<li><a href="https://ourai.ws/posts/working-with-git-in-team/" target="_blank">https://ourai.ws/posts/working-with-git-in-team/</a></li>
-<li><a href="https://www.cnblogs.com/irving/p/5146738.html" target="_blank">https://www.cnblogs.com/irving/p/5146738.html</a></li>
-<li><a href="https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA" target="_blank">https://mp.weixin.qq.com/s/0N3isbSZL4fM5HjZo1aafA</a></li>
-<li><a href="https://ihower.tw/blog/archives/3843" target="_blank">https://ihower.tw/blog/archives/3843</a></li>
+<li>先检查该值是否有 valueOf() 方法</li>
+<li>如果有并且返回基本类型值，就使用该值进行强制类型转换。如果没有就使用 toString() 的返回值来进行强制类型转换</li>
+<li>如果 valueOf() 和 toString() 均不返回基本类型值，会产生 TypeError 错误</li>
 </ul>
+</div>
+<h2 id="%E5%85%B6%E4%BB%96%E5%80%BC%E5%88%B0%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96%E5%80%BC%E5%88%B0%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99">其他值到布尔类型的值的转换规则</a></h2>
+<p>以下这些是 false，除此以外都是 true：</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>+0、-0 和 NaN</li>
+<li>&quot;&quot;</li>
+</ul>
+<h2 id="%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1" tabindex="-1"><a class="header-anchor" href="#%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1">精度丢失</a></h2>
+<ul>
+<li>与浮点数在计算机内部（用二进制存储）的表示方法有关</li>
+<li>JS 采用 IEEE 754 标准的 64 位双精度浮点数表示法，这个标准是 20 世纪 80 年代以来最广泛使用的浮点数运算标准，为许多 CPU 与浮点运算器所采用，也被很多语言如 java、python 采用。</li>
+</ul>
+<p>这个标准，会让大部分的十进制小数都不能用二进制浮点数来精确表示（比如转成二进制就会变成无限小数）。所以一般情况下，你输入的十进制小数仅由实际存储在计算机中的近似的二进制浮点数表示。</p>
+<p>然而，许多语言在处理的时候，在一定误差范围内（通常极小）会将结果修正为正确的目标数字，而不是像 JS 一样将存在误差的真实结果转换成最接近的小数输出</p>
+<div class="note">
+<p>解决：</p>
+<p>使用 Number.EPSILON（误差范围）</p>
+<p>Number.EPSILON 表示 1 与 Number 可表示的大于 1 的最小的浮点数之间的差值</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isEqual</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(a - b) &lt; <span class="hljs-title class_">Number</span>.<span class="hljs-property">EPSILON</span>;
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">isEqual</span>(<span class="hljs-number">0.1</span> + <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+</div>
+<h3 id="0.1-%2B-0.2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0.3" tabindex="-1"><a class="header-anchor" href="#0.1-%2B-0.2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0.3">0.1 + 0.2 为什么不等于 0.3</a></h3>
+<ul>
+<li>本质是：二进制模拟十进制进行计算时的精度问题</li>
+<li>进制转换：js 在做数字计算的时候，0.1 和 0.2 被转成二进制后无限循环，但是 js 采用的 IEEE 754 二进制浮点运算，最大可以存储 53 位有效数字，于是大于 53 位后面的会全部截掉，将导致精度丢失</li>
+<li>对阶运算：由于指数位数不相同，运算时需要对阶运算，阶小的尾数要根据阶差来右移（0 舍 1 入），尾数位移时可能会发生数丢失的情况，影响精度</li>
+</ul>
+<div class="tip">
+<p>0.2 + 0.3 为什么没有这个问题？：</p>
+</div>
 
       
         <div class="btt withToc" id="btt"></div>
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="git 实践"><a href="#git-%E5%AE%9E%E8%B7%B5" data-anchor="#git-%E5%AE%9E%E8%B7%B5">git 实践</a><ul><li title="git rebase"><a href="#git-rebase" data-anchor="#git-rebase">git rebase</a></li><li title="GitFlow"><a href="#gitflow" data-anchor="#gitflow">GitFlow</a><ul><li title="分支类型"><a href="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B" data-anchor="#%E5%88%86%E6%94%AF%E7%B1%BB%E5%9E%8B">分支类型</a><ul><li title="master"><a href="#master" data-anchor="#master">master</a></li><li title="develop"><a href="#develop" data-anchor="#develop">develop</a></li><li title="feature"><a href="#feature" data-anchor="#feature">feature</a></li><li title="release"><a href="#release" data-anchor="#release">release</a></li><li title="hotfix"><a href="#hotfix" data-anchor="#hotfix">hotfix</a></li></ul></li><li title="主要工作流程示例"><a href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B" data-anchor="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B">主要工作流程示例</a></li></ul></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="数据类型"><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" data-anchor="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a><ul><li title="BigInt"><a href="#bigint" data-anchor="#bigint">BigInt</a></li><li title="内存管理"><a href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86" data-anchor="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">内存管理</a><ul><li title="栈内存"><a href="#%E6%A0%88%E5%86%85%E5%AD%98" data-anchor="#%E6%A0%88%E5%86%85%E5%AD%98">栈内存</a></li><li title="堆内存"><a href="#%E5%A0%86%E5%86%85%E5%AD%98" data-anchor="#%E5%A0%86%E5%86%85%E5%AD%98">堆内存</a></li></ul></li><li title="类型判断"><a href="#%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD" data-anchor="#%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD">类型判断</a><ul><li title="判断数组"><a href="#%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84" data-anchor="#%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84">判断数组</a></li><li title="null 和 undefined 区别"><a href="#null-%E5%92%8C-undefined-%E5%8C%BA%E5%88%AB" data-anchor="#null-%E5%92%8C-undefined-%E5%8C%BA%E5%88%AB">null 和 undefined 区别</a></li></ul></li><li title="Object.is 与 `===\==` 区别"><a href="#object.is-%E4%B8%8E-%60%3D%3D%3D%5C%3D%3D%60-%E5%8C%BA%E5%88%AB" data-anchor="#object.is-%E4%B8%8E-%60%3D%3D%3D%5C%3D%3D%60-%E5%8C%BA%E5%88%AB">Object.is 与 `===\==` 区别</a></li><li title="Number.isNaN 与 isNaN 区别"><a href="#number.isnan-%E4%B8%8E-isnan-%E5%8C%BA%E5%88%AB" data-anchor="#number.isnan-%E4%B8%8E-isnan-%E5%8C%BA%E5%88%AB">Number.isNaN 与 isNaN 区别</a></li><li title="NaN == NaN 为什么是 false"><a href="#nan-%3D%3D-nan-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-false" data-anchor="#nan-%3D%3D-nan-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-false">NaN == NaN 为什么是 false</a></li><li title="`==` 强转规则"><a href="#%60%3D%3D%60-%E5%BC%BA%E8%BD%AC%E8%A7%84%E5%88%99" data-anchor="#%60%3D%3D%60-%E5%BC%BA%E8%BD%AC%E8%A7%84%E5%88%99">`==` 强转规则</a></li><li title="其他值到布尔类型的值的转换规则"><a href="#%E5%85%B6%E4%BB%96%E5%80%BC%E5%88%B0%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99" data-anchor="#%E5%85%B6%E4%BB%96%E5%80%BC%E5%88%B0%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99">其他值到布尔类型的值的转换规则</a></li><li title="精度丢失"><a href="#%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1" data-anchor="#%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1">精度丢失</a><ul><li title="0.1 + 0.2 为什么不等于 0.3"><a href="#0.1-%2B-0.2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0.3" data-anchor="#0.1-%2B-0.2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0.3">0.1 + 0.2 为什么不等于 0.3</a></li></ul></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->
