@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - 通用工程实践</title>
+  <title>qxtang.github.io - 事件循环</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -299,123 +299,120 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a></h1>
-<h2 id="%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" tabindex="-1"><a class="header-anchor" href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></h2>
+      <h1 id="%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" tabindex="-1"><a class="header-anchor" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF">事件循环</a></h1>
+<h2 id="%E6%98%AF%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a></h2>
 <ul>
-<li>事件名称难以追溯，增加了代码复杂度、可维护性降低</li>
-<li>调试难度大</li>
+<li>js 是设计成单线程的，为了更好的处理异步任务，所以设计了事件循环机制</li>
 </ul>
-<h2 id="%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></h2>
-<pre><code class="language-text">├─assets 静态资源
-├─service 业务逻辑封装
-├─components 组件
-  ├─business 业务组件
-  ├─common 通用组件
-├─constants 常量
-├─store 全局状态
-├─pages 页面
-├─types 通用类型
-├─utils 工具
-</code></pre>
-<h2 id="%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" tabindex="-1"><a class="header-anchor" href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></h2>
-<p>集成 mockjs 等工具，使前端能够脱离后端独立的进行测试，模拟后端各种请求报错以及所有其他情况</p>
-<h2 id="npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" tabindex="-1"><a class="header-anchor" href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></h2>
-<p>同一系列行为的脚本，命令行参数、环境变量有差异，用冒号区分，比如</p>
-<pre><code class="language-json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;build:test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode test&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;build:prod&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode production&quot;</span><span class="hljs-punctuation">,</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-<h2 id="%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></h2>
-<p>如登录、获取用户信息、权限检查等任务，放在根组件（App.tsx、App.vue）中执行，执行结束再渲染路由组件，保证业务接口能正确获取参数</p>
-<div class="tip">
-<p>小程序：</p>
-<p>小程序入口组件不会渲染任何内容，<br>
-例如 Taro 框架，根组件必须同步返回 props.children，<br>
-所以对前置操作的处理，可以将首页设置为一个 loading 页，在 loading 页中显示加载中且进行前置操作后，<br>
-再跳转到业务页面（为 loading 页设置如 redirectUrl 参数设置跳转页面）。</p>
-</div>
-<h2 id="%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a></h2>
-<p>应使用 devops 系统</p>
-<h3 id="%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></h3>
+<h2 id="js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B">js 为什么是单线程</a></h2>
 <ul>
-<li>获取代码：从代码仓库获取项目代码，并切换到待部署的分支或版本</li>
-<li>安装依赖：安装项目构建所需要的依赖包</li>
-<li>源码构建：使用构建工具对项目源代码进行构建，生成产物代码</li>
-<li>产物打包：将部署所需的代码（通常指的是构建后的产物代码，如果是部署 Node 服务则还需要其他目录与文件）打成压缩包</li>
-<li>推送代码：将待部署的文件或压缩包推送至目标服务器的特定目录下，如果是推送压缩包的情况，还需执行解压</li>
-<li>重启服务：在部署 Node 服务的情况下，在代码推送后需要进行服务重启</li>
+<li>与 js 的用途有关</li>
+<li>如果 js 被设计了多线程，如果有一个线程要修改一个 dom 元素，另一个线程要删除这个 dom 元素，渲染器就不知道以哪个线程为准，DOM 渲染的结果不可预期</li>
+<li>多线程具有复杂性，编码的复杂性会增高</li>
+<li>为了利用多核 CPU 的计算能力，HTML5 提出 Web Worker 标准，允许 JavaScript 脚本创建多个线程，但是子线程完全受主线程控制，且不得操作 DOM。所以，这个新标准并没有改变 JavaScript 单线程的本质</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></h3>
+<h2 id="%E5%90%8C%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1" tabindex="-1"><a class="header-anchor" href="#%E5%90%8C%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1">同步任务和异步任务</a></h2>
 <ul>
-<li>快速：不需要获取代码、安装依赖这几个步骤</li>
-<li>构建失败能更方便查找问题</li>
+<li>JavaScript 单线程任务分为同步任务和异步任务</li>
+<li>JavaScript 有一个主线程（js 引擎线程）和调用栈（执行栈），所有的任务都会被放到调用栈等待主线程执行，同步任务会在调用栈中按顺序依次执行，异步任务会在异步任务有了结果后，将注册的回调函数放入任务队列中，等待主线程空闲的时候（调用栈被清空），被读取到栈内等待主线程的执行</li>
+<li>在遇到异步任务时（setTimeout、DOM 事件、ajax 等），会转交给浏览器的其他工作线程（事件触发线程、定时器线程）执行，执行完之后将回调函数放入到任务队列</li>
+<li>事件触发线程管理一个任务队列，调用栈中的代码调用某些异步 API 时会在任务队列中添加事件，异步任务触发条件达成，将回调事件放到任务队列中</li>
+<li>当主线程的任务执行完了（执行栈空了），js 会去询问事件队列有没有回调函数需要执行（所以 setTimeout 0 会等到最后才执行）</li>
+<li>如此循环往复，形成事件循环机制</li>
+<li>事件循环不一定每轮都伴随着重渲染，但是如果有微任务，一定会伴随着微任务执行</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></h3>
+<h2 id="%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1" tabindex="-1"><a class="header-anchor" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1">宏任务和微任务</a></h2>
 <ul>
 <li>
-<p>溯源难</p>
+<p>异步任务队列又分微任务队列和宏任务队列</p>
 </li>
 <li>
-<p>环境一致性：不同开发人员的本地依赖包版本可能存在差异，导致打包结果并不严格一致；本地环境和部署代码的目标服务器环境之间也可能存在差异；导致项目代码的稳定性无法得到保障</p>
+<p>宏任务是由宿主发起的，而微任务由 JavaScript 自身发起</p>
+</li>
+<li>
+<p>宏任务（多为运行环境 api）：script 标签中的代码、UI 渲染、UI 交互、setTimeout/setInterval/setImmediate、DOM 事件、postMessage、ajax 请求、requestAnimationFrame</p>
 <blockquote>
-<p>例如对于一个 Node 项目而言，在一个 NodeJS 低版本环境下构建的产物，在 Node 高版本环境下就有可能启动异常</p>
+<p>宏任务代表一个个离散的、独立工作单元，运行完任务后，浏览器可以继续其他调度，如重新渲染页面的 UI 或执行垃圾回收</p>
 </blockquote>
 </li>
-</ul>
-<h2 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h2>
+<li>
+<p>微任务（多为语法）：Promise.then\catch\finally、MutationObserver、async/await、process.nextTick（NodeJS）</p>
+<blockquote>
+<p>微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的 UI。微任务的案例包括 promise 回调函数、DOM 发生变化等。微任务需要尽可能快地、通过异步方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染 UI 之前执行指定的行为，避免不必要的 UI 重绘，UI 重绘会使应用程序的状态不连续</p>
+</blockquote>
+</li>
+<li>
+<p>两者区别：</p>
 <ul>
-<li>
-<p>第三方库按需加载</p>
+<li>宏任务：DOM 渲染后触发</li>
+<li>微任务：DOM 渲染前触发</li>
+</ul>
 </li>
 <li>
-<p>移除生产环境的控制台打印</p>
-</li>
-<li>
-<p>动态 polyfill</p>
-</li>
-<li>
-<p>通过判断环境变量的方式，区分执行环境差异代码，借助 DefinePlugin 将环境变量静态嵌入客户端代码</p>
-</li>
-<li>
-<p>尽量不要污染全局 window 对象</p>
-</li>
-<li>
-<p>通过封装解决浏览器差异兼容性问题</p>
-</li>
-<li>
-<p>为项目配置代码引用路径别名 alias</p>
-</li>
-<li>
-<p>项目不要添加任何与开发环境强耦合的设置（比如某个地方必须借助 vscode 的某个插件才能运行）</p>
-</li>
-<li>
-<p>禁止安装私人依赖包</p>
-</li>
-<li>
-<p>使用 Webpack Bundle Analyzer 分析包大小组成</p>
-</li>
-<li>
-<p>函数遵循单一职责原则</p>
-</li>
-<li>
-<p>只导入类型，使用 import type</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">DependencyList</span>, useEffect, useLayoutEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-</code></pre>
-</li>
-<li>
-<p>想要在 chrome 移动设备模拟器上添加某个自定义设备型号，需要知道该设备的分辨率</p>
-<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientWidth</span>, <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientHeight</span>);
-</code></pre>
-</li>
-<li>
-<p>开发环境 node 和 npm 版本需要一致，因为不同版本 node、npm 行为不一样</p>
+<p>当满足执行条件时，宏任务(macroTask) 和 微任务(microTask) 会各自被放入对应的队列：宏队列(Macrotask Queue) 和 微队列(Microtask Queue) 中等待执行</p>
 </li>
 </ul>
-<h2 id="%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" tabindex="-1"><a class="header-anchor" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></h2>
+<h2 id="%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B">事件循环流程</a></h2>
 <ul>
-<li><a href="https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000" target="_blank">https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000</a></li>
-<li><a href="https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013" target="_blank">https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013</a></li>
+<li>先会执行主进程栈中的内容，栈中的内容执行后执行微任务，微任务清空后再执行宏任务，先取出一个宏任务，再去执行微任务，然后在取宏任务清微任务这样不停的循环</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+  queue = <span class="hljs-title function_">getNextQueue</span>(); <span class="hljs-comment">// 如果是多队列情况则取一个队列</span>
+  task = queue.<span class="hljs-title function_">pop</span>(); <span class="hljs-comment">// 取第一个任务</span>
+  <span class="hljs-title function_">execute</span>(task); <span class="hljs-comment">// 执行任务</span>
+
+  <span class="hljs-comment">// 如果有微任务那么执行所有的微任务</span>
+  <span class="hljs-keyword">while</span> (microTasks.<span class="hljs-title function_">hasTasks</span>()) {
+    <span class="hljs-title function_">doMicroTask</span>();
+  }
+
+  <span class="hljs-comment">// 浏览器渲染阶段</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isRepaintTime</span>()) {
+    <span class="hljs-comment">// 动画队列有任务 那么执行所有动画 task(requestAnimationFrame)</span>
+    animationTasks = animationQueue.<span class="hljs-title function_">copyTasks</span>();
+    <span class="hljs-keyword">for</span> (task <span class="hljs-keyword">in</span> animationTasks) {
+      <span class="hljs-title function_">doAnimationTask</span>(task);
+    }
+    <span class="hljs-comment">// 绘制</span>
+    <span class="hljs-title function_">repaint</span>();
+  }
+}
+</code></pre>
+<ul>
+<li>当主线程结束，从宏任务队列中，按照入队顺序，找到第一个执行的宏任务，放入调用栈，开始执行</li>
+<li>执行完该宏任务下所有同步任务后，即调用栈清空后，该宏任务被推出宏任务队列，然后微任务队列开始按照入队顺序，依次执行其中的微任务，直至微任务队列清空</li>
+<li>当微任务队列清空后，一个事件循环结束</li>
+<li>接着从宏任务队列中，找到下一个执行的宏任务，开始第二个事件循环，直至宏任务队列清空为止</li>
+<li>当微任务队列处理完成并清空时，事件循环会检查是否需要更新 UI 渲染，如果是，则会重新渲染 UI 视图</li>
+</ul>
+<blockquote>
+<p>单次循环迭代中，最多处理一个宏任务（其余的在队列中等待），而队列中的所有微任务都会被处理</p>
+</blockquote>
+<h3 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%AE%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%97%A9" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%AE%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%97%A9">为什么微任务执行更早</a></h3>
+<ul>
+<li>微任务是语法规定的</li>
+<li>宏任务执行时间一般比较长</li>
+<li>宏任务是由浏览器规定的（web api）</li>
+<li>每一次宏任务开始之前一定是伴随着一次 event loop 结束的，而微任务是在一次 event loop 结束前执行的</li>
+</ul>
+<h2 id="%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93" tabindex="-1"><a class="header-anchor" href="#%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93">页面渲染</a></h2>
+<ul>
+<li>每次当一次事件循环结束后，即一个宏任务执行完成后以及微任务队列被清空后，浏览器就会进行一次页面更新渲染。通常我们浏览器页面刷新频率是 60fps，也就是意味着 16.67ms 要刷新一次，因此我们也要尽量保证一次事件循环控制在 16.67ms 之内，这也是我们需要做代码性能优化的一个原因。</li>
+<li>requestAnimationFrame 在重新渲染屏幕之前执行，非常适合用来做动画</li>
+<li>resize 和 scroll 事件其实自带节流，它只在 Event Loop 的渲染阶段去派发事件到 EventTarget 上</li>
+</ul>
+<h2 id="%E6%89%A7%E8%A1%8C-settimeout%2Fsetinterval-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#%E6%89%A7%E8%A1%8C-settimeout%2Fsetinterval-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">执行 setTimeout/setInterval 时发生了什么</a></h2>
+<ul>
+<li>JS 引擎线程通知定时触发器线程，间隔一个时间后，会触发一个回调事件， 而定时触发器线程在接收到这个消息后，会在等待的时间后，将回调事件放入到由事件触发线程所管理的事件队列中</li>
+</ul>
+<h2 id="%E6%89%A7%E8%A1%8C-xhr%2Ffetch-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#%E6%89%A7%E8%A1%8C-xhr%2Ffetch-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">执行 XHR/fetch 时发生了什么</a></h2>
+<ul>
+<li>JS 引擎线程通知异步 http 请求线程，发送一个网络请求，并制定请求完成后的回调事件， 而异步 http 请求线程在接收到这个消息后，会在请求成功后，将回调事件放入到由事件触发线程所管理的事件队列中</li>
+</ul>
+<h2 id="%E5%8F%82%E8%80%83" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E8%80%83">参考</a></h2>
+<ul>
+<li><a href="https://juejin.cn/post/6844904165462769678" target="_blank">https://juejin.cn/post/6844904165462769678</a></li>
+<li><a href="https://juejin.cn/post/6844903919789801486" target="_blank">https://juejin.cn/post/6844903919789801486</a></li>
 </ul>
 
       
@@ -423,7 +420,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="其他工程实践"><a href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" data-anchor="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a><ul><li title="滥用事件总线的危害"><a href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" data-anchor="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></li><li title="业务代码分层习惯"><a href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" data-anchor="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></li><li title="使前端能够脱离后端进行独立测试"><a href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" data-anchor="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></li><li title="npm 脚本命名"><a href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" data-anchor="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></li><li title="前置操作的处理"><a href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" data-anchor="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></li><li title="不建议在本地构建部署代码"><a href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" data-anchor="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a><ul><li title="前端项目的一般部署流程"><a href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" data-anchor="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></li><li title="本地部署的优势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></li><li title="本地部署的劣势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="小程序环境判断"><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" data-anchor="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="事件循环"><a href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF" data-anchor="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF">事件循环</a><ul><li title="是什么"><a href="#%E6%98%AF%E4%BB%80%E4%B9%88" data-anchor="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a></li><li title="js 为什么是单线程"><a href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B" data-anchor="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B">js 为什么是单线程</a></li><li title="同步任务和异步任务"><a href="#%E5%90%8C%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1" data-anchor="#%E5%90%8C%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1">同步任务和异步任务</a></li><li title="宏任务和微任务"><a href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1" data-anchor="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1">宏任务和微任务</a></li><li title="事件循环流程"><a href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B" data-anchor="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B">事件循环流程</a><ul><li title="为什么微任务执行更早"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%AE%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%97%A9" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%AE%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%97%A9">为什么微任务执行更早</a></li></ul></li><li title="页面渲染"><a href="#%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93" data-anchor="#%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93">页面渲染</a></li><li title="执行 setTimeout/setInterval 时发生了什么"><a href="#%E6%89%A7%E8%A1%8C-settimeout%2Fsetinterval-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" data-anchor="#%E6%89%A7%E8%A1%8C-settimeout%2Fsetinterval-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">执行 setTimeout/setInterval 时发生了什么</a></li><li title="执行 XHR/fetch 时发生了什么"><a href="#%E6%89%A7%E8%A1%8C-xhr%2Ffetch-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88" data-anchor="#%E6%89%A7%E8%A1%8C-xhr%2Ffetch-%E6%97%B6%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88">执行 XHR/fetch 时发生了什么</a></li><li title="参考"><a href="#%E5%8F%82%E8%80%83" data-anchor="#%E5%8F%82%E8%80%83">参考</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

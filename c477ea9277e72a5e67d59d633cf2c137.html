@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - 通用工程实践</title>
+  <title>qxtang.github.io - 性能优化</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -299,123 +299,123 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a></h1>
-<h2 id="%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" tabindex="-1"><a class="header-anchor" href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></h2>
+      <h1 id="%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" tabindex="-1"><a class="header-anchor" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">性能优化</a></h1>
+<h2 id="gzip" tabindex="-1"><a class="header-anchor" href="#gzip">gzip</a></h2>
 <ul>
-<li>事件名称难以追溯，增加了代码复杂度、可维护性降低</li>
-<li>调试难度大</li>
+<li>只对文本文件有效，比如 js、css，流文件无效，比如图片</li>
+<li>需要浏览器和服务端的同时支持</li>
+<li>浏览器支持：请求头中添加 accept-encoding，标识对压缩的支持，说明自己接受哪些压缩方法</li>
+<li>服务端支持：能够返回经过 gzip 压缩的文件，响应头添加 content-encoding: gzip，这个字段用于说明数据的压缩方法</li>
+<li>服务器实时压缩：可通过配置 nginx 开启，express 框架中有一个 compression 中间件，也可以开启 gzip</li>
+<li>构建时压缩：可在前端构建时使用 compression-webpack-plugin 插件，减少耗费服务器 CPU 和时间开销</li>
+<li><a href="https://segmentfault.com/a/1190000012800222" target="_blank">https://segmentfault.com/a/1190000012800222</a></li>
 </ul>
-<h2 id="%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></h2>
-<pre><code class="language-text">├─assets 静态资源
-├─service 业务逻辑封装
-├─components 组件
-  ├─business 业务组件
-  ├─common 通用组件
-├─constants 常量
-├─store 全局状态
-├─pages 页面
-├─types 通用类型
-├─utils 工具
+<h2 id="javascript" tabindex="-1"><a class="header-anchor" href="#javascript">Javascript</a></h2>
+<ul>
+<li>缓存 dom 查找结果</li>
+<li>用 innerHTML 代替 DOM 操作，减少 DOM 操作次数</li>
+<li>不频繁修改 DOM</li>
+<li>如果要修改 DOM 的多个样式可以用 cssText 一次性将要改的样式写入，或将样式写到 class 里，再修改 DOM 的 class 名称</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-comment">// bad</span>
+<span class="hljs-keyword">const</span> el = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.myDiv&#x27;</span>);
+el.<span class="hljs-property">style</span>.<span class="hljs-property">borderLeft</span> = <span class="hljs-string">&#x27;1px&#x27;</span>;
+el.<span class="hljs-property">style</span>.<span class="hljs-property">borderRight</span> = <span class="hljs-string">&#x27;2px&#x27;</span>;
+el.<span class="hljs-property">style</span>.<span class="hljs-property">padding</span> = <span class="hljs-string">&#x27;5px&#x27;</span>;
+
+<span class="hljs-comment">// good</span>
+<span class="hljs-keyword">const</span> el = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.myDiv&#x27;</span>);
+el.<span class="hljs-property">style</span>.<span class="hljs-property">cssText</span> += <span class="hljs-string">&#x27;border-left: 1px; border-right: 2px; padding: 5px;&#x27;</span>;
+<span class="hljs-comment">// cssText 会覆盖已存在的样式，所以使用 +=</span>
 </code></pre>
-<h2 id="%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" tabindex="-1"><a class="header-anchor" href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></h2>
-<p>集成 mockjs 等工具，使前端能够脱离后端独立的进行测试，模拟后端各种请求报错以及所有其他情况</p>
-<h2 id="npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" tabindex="-1"><a class="header-anchor" href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></h2>
-<p>同一系列行为的脚本，命令行参数、环境变量有差异，用冒号区分，比如</p>
-<pre><code class="language-json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;build:test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode test&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;build:prod&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode production&quot;</span><span class="hljs-punctuation">,</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-<h2 id="%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></h2>
-<p>如登录、获取用户信息、权限检查等任务，放在根组件（App.tsx、App.vue）中执行，执行结束再渲染路由组件，保证业务接口能正确获取参数</p>
-<div class="tip">
-<p>小程序：</p>
-<p>小程序入口组件不会渲染任何内容，<br>
-例如 Taro 框架，根组件必须同步返回 props.children，<br>
-所以对前置操作的处理，可以将首页设置为一个 loading 页，在 loading 页中显示加载中且进行前置操作后，<br>
-再跳转到业务页面（为 loading 页设置如 redirectUrl 参数设置跳转页面）。</p>
-</div>
-<h2 id="%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a></h2>
-<p>应使用 devops 系统</p>
-<h3 id="%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></h3>
 <ul>
-<li>获取代码：从代码仓库获取项目代码，并切换到待部署的分支或版本</li>
-<li>安装依赖：安装项目构建所需要的依赖包</li>
-<li>源码构建：使用构建工具对项目源代码进行构建，生成产物代码</li>
-<li>产物打包：将部署所需的代码（通常指的是构建后的产物代码，如果是部署 Node 服务则还需要其他目录与文件）打成压缩包</li>
-<li>推送代码：将待部署的文件或压缩包推送至目标服务器的特定目录下，如果是推送压缩包的情况，还需执行解压</li>
-<li>重启服务：在部署 Node 服务的情况下，在代码推送后需要进行服务重启</li>
+<li>列表绑定事件，使用事件委托</li>
+<li>如无必要，不要重写原生方法，因为原生方法底层是用 C/C++实现的，速度更快</li>
+<li>CSS 能做的事情，尽量不用 JS 来做</li>
+<li>使用 requestAnimationFrame</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></h3>
+<h2 id="css" tabindex="-1"><a class="header-anchor" href="#css">CSS</a></h2>
 <ul>
-<li>快速：不需要获取代码、安装依赖这几个步骤</li>
-<li>构建失败能更方便查找问题</li>
+<li>避免 css 表达式比如 calc</li>
+<li>减少选择层级，最高不超过 3 层</li>
+<li>尽量使用 class 选择器，避免使用标签选择器</li>
+<li>少使用后代选择器，后代选择器开销高</li>
+<li>避免对可继承的属性重复定义</li>
+<li>避免使用通配规则器 <code>*</code>，只对需要的元素进行处理</li>
+<li>属性值为 0 时，不加单位</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></h3>
+<h2 id="webpack" tabindex="-1"><a class="header-anchor" href="#webpack">webpack</a></h2>
 <ul>
-<li>
-<p>溯源难</p>
-</li>
-<li>
-<p>环境一致性：不同开发人员的本地依赖包版本可能存在差异，导致打包结果并不严格一致；本地环境和部署代码的目标服务器环境之间也可能存在差异；导致项目代码的稳定性无法得到保障</p>
-<blockquote>
-<p>例如对于一个 Node 项目而言，在一个 NodeJS 低版本环境下构建的产物，在 Node 高版本环境下就有可能启动异常</p>
-</blockquote>
-</li>
+<li>压缩 js、css 代码</li>
+<li>webpack 按需加载，React.lazy + import()，Webpack 4 之后，只需要用异步语句 <code>require.ensure(&quot;./xx.js&quot;)</code> 或 <code>import(&quot;./xx.js&quot;)</code> 方式引入模块，就可以实现模块动态加载，遇到异步引入语句时会为该模块单独生成一个 chunk</li>
+<li>配置 external，将通用库抽离，不打包进 bundle，比如 jquery、lodash，使用 CDN，并开启强缓存</li>
+<li>配置 babel 动态 polyfill，只针对不支持的浏览器引入 polyfill</li>
+<li>配置 file-loader 的 limit 选项，小图转 base64</li>
+<li>开启 tree-shaking 删除多余代码</li>
+<li>antd 按需加载，babel-plugin-import</li>
+<li>webpack 拆包优化</li>
+<li>第三方库按需加载</li>
+</ul>
+<h2 id="%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88">动态 polyfill 方案</a></h2>
+<h3 id="%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">​polyfill.io​​（Polyfill Service）（推荐）</a></h3>
+<ul>
+<li>是一个 script 资源：<a href="https://cdn.polyfill.io/v2/polyfill.js" target="_blank">https://cdn.polyfill.io/v2/polyfill.js</a></li>
+<li>识别请求中的 User Agent，判断浏览器是否支持某些特性，然后下发不同的 Polyfill</li>
+</ul>
+<h3 id="babel-polyfill" tabindex="-1"><a class="header-anchor" href="#babel-polyfill">babel-polyfill</a></h3>
+<ul>
+<li>React 16 官方推荐</li>
+<li>包体积 200k+，难以单独抽离 Map、Set；项目里 react 是单独引用的 cdn，如果要用它需要单独构建一份放 react 前加载</li>
+</ul>
+<h3 id="babel-plugin-transform-runtime" tabindex="-1"><a class="header-anchor" href="#babel-plugin-transform-runtime">babel-plugin-transform-runtime</a></h3>
+<ul>
+<li>能只 polyfill 用到的类或方法，相对体积较小</li>
+<li>不能 polyfill 原型上的方法，不适用于业务项目的复杂开发环境</li>
 </ul>
 <h2 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h2>
 <ul>
-<li>
-<p>第三方库按需加载</p>
-</li>
-<li>
-<p>移除生产环境的控制台打印</p>
-</li>
-<li>
-<p>动态 polyfill</p>
-</li>
-<li>
-<p>通过判断环境变量的方式，区分执行环境差异代码，借助 DefinePlugin 将环境变量静态嵌入客户端代码</p>
-</li>
-<li>
-<p>尽量不要污染全局 window 对象</p>
-</li>
-<li>
-<p>通过封装解决浏览器差异兼容性问题</p>
-</li>
-<li>
-<p>为项目配置代码引用路径别名 alias</p>
-</li>
-<li>
-<p>项目不要添加任何与开发环境强耦合的设置（比如某个地方必须借助 vscode 的某个插件才能运行）</p>
-</li>
-<li>
-<p>禁止安装私人依赖包</p>
-</li>
-<li>
-<p>使用 Webpack Bundle Analyzer 分析包大小组成</p>
-</li>
-<li>
-<p>函数遵循单一职责原则</p>
-</li>
-<li>
-<p>只导入类型，使用 import type</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">DependencyList</span>, useEffect, useLayoutEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-</code></pre>
-</li>
-<li>
-<p>想要在 chrome 移动设备模拟器上添加某个自定义设备型号，需要知道该设备的分辨率</p>
-<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientWidth</span>, <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientHeight</span>);
-</code></pre>
-</li>
-<li>
-<p>开发环境 node 和 npm 版本需要一致，因为不同版本 node、npm 行为不一样</p>
-</li>
+<li>不常修改的资源（jquery），开启强缓存，配置响应头 Cache-Control 与 Expires</li>
+<li>减少 http 请求次数：雪碧图、小图片使用字体图标代替</li>
+<li>css 放顶部、js 放底部，非关键性的脚本（比如百度统计），script 标签加上 defer 或者 async</li>
+<li>单页应用首屏加载放个 loading，优化用户感知，利用一些过渡效果、骨架屏</li>
+<li>使用 link 标签的 rel 属性，设置 prefetch、preload（preload 将会把资源得下载顺序权重提高，使得关键数据提前下载好，优化页面打开速度）</li>
+<li>注意项目中是否使用了字体，字体加载也会让首屏加载变得很慢</li>
+<li>减少 cookie 的体积</li>
+<li>使用公共 CDN，好处：如果其他网站刚好也用过同一个资源，浏览器会有缓存</li>
+<li>服务端开启 gzip（gzip 只对文本文件有效，比如 js、css，流文件无效，比如图片）</li>
+<li>路由懒加载</li>
+<li>图片懒加载</li>
+<li>使用字体图标 iconfont 代替图片图标，不会失真，生成的文件体积小</li>
 </ul>
-<h2 id="%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" tabindex="-1"><a class="header-anchor" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></h2>
+<div class="tip">
+<p>将静态资源放在其他域名的原因（CDN）：</p>
 <ul>
-<li><a href="https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000" target="_blank">https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000</a></li>
-<li><a href="https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013" target="_blank">https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013</a></li>
+<li>浏览器对于相同域名有并发请求数限制</li>
+<li>请求时不会发送 cookie，节省流量</li>
+<li>cookie 会发送给二级域名，所以这些静态资源不放在二级域名，放在单独一级域名</li>
+</ul>
+</div>
+<h2 id="script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async" tabindex="-1"><a class="header-anchor" href="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async">script 标签的 defer 和 async</a></h2>
+<ul>
+<li>没有 defer 或 async 属性，浏览器会立即加载并执行相应的脚本</li>
+<li>async：立即下载，下载完立即执行，不确定顺序执行。对于完全独立的脚本来才去使用 async，比如谷歌统计百度统计。一定会在页面的 load 事件前执行，但不确定在 DOMContentLoaded 事件触发前后执行。</li>
+<li>defer：立即下载，将延迟到整个页面都解析完毕后再运行</li>
+</ul>
+<h2 id="js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F" tabindex="-1"><a class="header-anchor" href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F">js 为什么放最下面？</a></h2>
+<ul>
+<li>当文档加载过程中遇到 js 文件，html 文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中 js 文件加载完毕，还要等待解析执行完毕，才可以恢复 html 文档的渲染线程，因为 js 有可能会修改 DOM，比如 document.write，这意味着，在 js 执行完成前，后续所有资源的下载可能是没有必要的，这是 js 阻塞后续资源下载的原因。所以平时的代码中，js 是放在 html 文档末尾的</li>
+</ul>
+<h2 id="css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F" tabindex="-1"><a class="header-anchor" href="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F">css 为什么放最上面？</a></h2>
+<ul>
+<li>css 不会阻塞 DOM 的解析，但会阻塞 DOM 渲染</li>
+<li>css 是由单独的下载线程异步下载的</li>
+<li>但会阻塞 render 树渲染（渲染时需等 css 加载完毕，因为 render 树需要 css 信息）</li>
+</ul>
+<h2 id="%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0" tabindex="-1"><a class="header-anchor" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0">如何判断一个页面卡顿的原因</a></h2>
+<ul>
+<li>内存泄漏，由于疏忽或者程序的某些错误造成未能释放已经不再使用的内存的情况（比如不再使用的变量额外创建）</li>
+<li>Chrome devTools Performance 查看内存情况</li>
+<li>打开 Chrome 的无痕模式，这样做的目的是为了屏蔽掉 Chrome 插件对我们之后测试内存占用情况的影响</li>
 </ul>
 
       
@@ -423,7 +423,7 @@
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="其他工程实践"><a href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" data-anchor="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a><ul><li title="滥用事件总线的危害"><a href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" data-anchor="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></li><li title="业务代码分层习惯"><a href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" data-anchor="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></li><li title="使前端能够脱离后端进行独立测试"><a href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" data-anchor="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></li><li title="npm 脚本命名"><a href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" data-anchor="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></li><li title="前置操作的处理"><a href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" data-anchor="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></li><li title="不建议在本地构建部署代码"><a href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" data-anchor="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a><ul><li title="前端项目的一般部署流程"><a href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" data-anchor="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></li><li title="本地部署的优势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></li><li title="本地部署的劣势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="小程序环境判断"><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" data-anchor="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="性能优化"><a href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" data-anchor="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">性能优化</a><ul><li title="gzip"><a href="#gzip" data-anchor="#gzip">gzip</a></li><li title="Javascript"><a href="#javascript" data-anchor="#javascript">Javascript</a></li><li title="CSS"><a href="#css" data-anchor="#css">CSS</a></li><li title="webpack"><a href="#webpack" data-anchor="#webpack">webpack</a></li><li title="动态 polyfill 方案"><a href="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88" data-anchor="#%E5%8A%A8%E6%80%81-polyfill-%E6%96%B9%E6%A1%88">动态 polyfill 方案</a><ul><li title="​polyfill.io​​（Polyfill Service）（推荐）"><a href="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89" data-anchor="#%E2%80%8Bpolyfill.io%E2%80%8B%E2%80%8B%EF%BC%88polyfill-service%EF%BC%89%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89">​polyfill.io​​（Polyfill Service）（推荐）</a></li><li title="babel-polyfill"><a href="#babel-polyfill" data-anchor="#babel-polyfill">babel-polyfill</a></li><li title="babel-plugin-transform-runtime"><a href="#babel-plugin-transform-runtime" data-anchor="#babel-plugin-transform-runtime">babel-plugin-transform-runtime</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="script 标签的 defer 和 async"><a href="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async" data-anchor="#script-%E6%A0%87%E7%AD%BE%E7%9A%84-defer-%E5%92%8C-async">script 标签的 defer 和 async</a></li><li title="js 为什么放最下面？"><a href="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F" data-anchor="#js-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%9F">js 为什么放最下面？</a></li><li title="css 为什么放最上面？"><a href="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F" data-anchor="#css-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E6%9C%80%E4%B8%8A%E9%9D%A2%EF%BC%9F">css 为什么放最上面？</a></li><li title="如何判断一个页面卡顿的原因"><a href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0" data-anchor="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E5%8D%A1%E9%A1%BF%E7%9A%84%E5%8E%9F%E5%9B%A0">如何判断一个页面卡顿的原因</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

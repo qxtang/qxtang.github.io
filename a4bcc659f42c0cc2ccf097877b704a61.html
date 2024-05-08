@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qxtang.github.io - 通用工程实践</title>
+  <title>qxtang.github.io - 垃圾回收</title>
 
   <!-- styles -->
   <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
@@ -299,131 +299,52 @@
       <img src="/resource/icons/bars.svg" alt="" />
     </div>
     <div class="content markdown-body">
-      <h1 id="%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a></h1>
-<h2 id="%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" tabindex="-1"><a class="header-anchor" href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></h2>
+      <h1 id="%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6" tabindex="-1"><a class="header-anchor" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6">垃圾回收</a></h1>
 <ul>
-<li>事件名称难以追溯，增加了代码复杂度、可维护性降低</li>
-<li>调试难度大</li>
+<li>各大浏览器通常用采用的垃圾回收有两种：标记清除、引用计数</li>
 </ul>
-<h2 id="%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" tabindex="-1"><a class="header-anchor" href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></h2>
-<pre><code class="language-text">├─assets 静态资源
-├─service 业务逻辑封装
-├─components 组件
-  ├─business 业务组件
-  ├─common 通用组件
-├─constants 常量
-├─store 全局状态
-├─pages 页面
-├─types 通用类型
-├─utils 工具
-</code></pre>
-<h2 id="%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" tabindex="-1"><a class="header-anchor" href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></h2>
-<p>集成 mockjs 等工具，使前端能够脱离后端独立的进行测试，模拟后端各种请求报错以及所有其他情况</p>
-<h2 id="npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" tabindex="-1"><a class="header-anchor" href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></h2>
-<p>同一系列行为的脚本，命令行参数、环境变量有差异，用冒号区分，比如</p>
-<pre><code class="language-json"><span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;build:test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode test&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;build:prod&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tsc &amp;&amp; vite build --mode production&quot;</span><span class="hljs-punctuation">,</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-<h2 id="%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></h2>
-<p>如登录、获取用户信息、权限检查等任务，放在根组件（App.tsx、App.vue）中执行，执行结束再渲染路由组件，保证业务接口能正确获取参数</p>
-<div class="tip">
-<p>小程序：</p>
-<p>小程序入口组件不会渲染任何内容，<br>
-例如 Taro 框架，根组件必须同步返回 props.children，<br>
-所以对前置操作的处理，可以将首页设置为一个 loading 页，在 loading 页中显示加载中且进行前置操作后，<br>
-再跳转到业务页面（为 loading 页设置如 redirectUrl 参数设置跳转页面）。</p>
-</div>
-<h2 id="%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a></h2>
-<p>应使用 devops 系统</p>
-<h3 id="%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" tabindex="-1"><a class="header-anchor" href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></h3>
+<h2 id="%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%EF%BC%88%E4%B8%BB%E6%B5%81%EF%BC%89" tabindex="-1"><a class="header-anchor" href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%EF%BC%88%E4%B8%BB%E6%B5%81%EF%BC%89">标记清除（主流）</a></h2>
 <ul>
-<li>获取代码：从代码仓库获取项目代码，并切换到待部署的分支或版本</li>
-<li>安装依赖：安装项目构建所需要的依赖包</li>
-<li>源码构建：使用构建工具对项目源代码进行构建，生成产物代码</li>
-<li>产物打包：将部署所需的代码（通常指的是构建后的产物代码，如果是部署 Node 服务则还需要其他目录与文件）打成压缩包</li>
-<li>推送代码：将待部署的文件或压缩包推送至目标服务器的特定目录下，如果是推送压缩包的情况，还需执行解压</li>
-<li>重启服务：在部署 Node 服务的情况下，在代码推送后需要进行服务重启</li>
+<li>垃圾收集器在运行时给存储在内存中的所有变量加上标记</li>
+<li>因为只要上下文中的代码在运行，就有可能用到它们</li>
+<li>从根部出发将能触及到的对象的标记清除</li>
+<li>还存在标记的变量被视为准备删除的变量</li>
+<li>销毁带标记的变量</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></h3>
+<h2 id="%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0">引用计数</a></h2>
 <ul>
-<li>快速：不需要获取代码、安装依赖这几个步骤</li>
-<li>构建失败能更方便查找问题</li>
+<li>如果一个对象没有被其他对象引用，那它将被垃圾回收机制回收</li>
+<li>跟踪记录每个值被引用的次数</li>
+<li>当声明了一个变量并将一个引用类型赋值给该变量时，则这个值的引用次数就是 1</li>
+<li>相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数就减 1</li>
+<li>当这个引用次数变成 0 时，则说明没有办法再访问这个值了，因而就可以将其所占的内存空间给收回来</li>
+<li>缺点：循环引用会造成对象无法被回收</li>
 </ul>
-<h3 id="%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" tabindex="-1"><a class="header-anchor" href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></h3>
+<h2 id="%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6" tabindex="-1"><a class="header-anchor" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6">如何避免垃圾回收</a></h2>
 <ul>
-<li>
-<p>溯源难</p>
-</li>
-<li>
-<p>环境一致性：不同开发人员的本地依赖包版本可能存在差异，导致打包结果并不严格一致；本地环境和部署代码的目标服务器环境之间也可能存在差异；导致项目代码的稳定性无法得到保障</p>
-<blockquote>
-<p>例如对于一个 Node 项目而言，在一个 NodeJS 低版本环境下构建的产物，在 Node 高版本环境下就有可能启动异常</p>
-</blockquote>
-</li>
+<li>对象尽量复用</li>
+<li>数组优化：将 [] 赋值给一个数组对象，但是这种方式又创建了一个新的空对象，且将原来的数组对象变成了一小片内存垃圾，实际上，将数组长度赋值为 0（arr.length = 0）也能达到清空数组的目的，并且同时能实现数组重用，减少内存垃圾的产生</li>
 </ul>
-<h2 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h2>
+<h2 id="%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C" tabindex="-1"><a class="header-anchor" href="#%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C">引起内存泄漏的操作</a></h2>
 <ul>
-<li>
-<p>第三方库按需加载</p>
-</li>
-<li>
-<p>移除生产环境的控制台打印</p>
-</li>
-<li>
-<p>动态 polyfill</p>
-</li>
-<li>
-<p>通过判断环境变量的方式，区分执行环境差异代码，借助 DefinePlugin 将环境变量静态嵌入客户端代码</p>
-</li>
-<li>
-<p>尽量不要污染全局 window 对象</p>
-</li>
-<li>
-<p>通过封装解决浏览器差异兼容性问题</p>
-</li>
-<li>
-<p>为项目配置代码引用路径别名 alias</p>
-</li>
-<li>
-<p>项目不要添加任何与开发环境强耦合的设置（比如某个地方必须借助 vscode 的某个插件才能运行）</p>
-</li>
-<li>
-<p>禁止安装私人依赖包</p>
-</li>
-<li>
-<p>使用 Webpack Bundle Analyzer 分析包大小组成</p>
-</li>
-<li>
-<p>函数遵循单一职责原则</p>
-</li>
-<li>
-<p>只导入类型，使用 import type</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">DependencyList</span>, useEffect, useLayoutEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-</code></pre>
-</li>
-<li>
-<p>想要在 chrome 移动设备模拟器上添加某个自定义设备型号，需要知道该设备的分辨率</p>
-<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientWidth</span>, <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">clientHeight</span>);
-</code></pre>
-</li>
-<li>
-<p>开发环境 node 和 npm 版本需要一致，因为不同版本 node、npm 行为不一样</p>
-</li>
+<li>全局变量</li>
+<li>闭包</li>
+<li>dom 清除，事件绑定未清除</li>
+<li>未清除的计时器</li>
+<li>setTimeout 的第一个参数使用字符串而非函数</li>
+<li>引用循环：在两个对象彼此引用且彼此保留时，就会产生一个引用循环</li>
+<li>console.log 打印了太大的变量</li>
+<li>React 组件卸载后，存在异步回调中调用 setState</li>
 </ul>
-<h2 id="%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" tabindex="-1"><a class="header-anchor" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></h2>
-<ul>
-<li><a href="https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000" target="_blank">https://developers.weixin.qq.com/community/develop/doc/000e466b2c84d057b178e339d5b000</a></li>
-<li><a href="https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013" target="_blank">https://developers.weixin.qq.com/community/develop/article/doc/000e6606ab4ac0edb4791eb4951013</a></li>
-</ul>
+<h2 id="%E6%89%8B%E5%8A%A8%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98" tabindex="-1"><a class="header-anchor" href="#%E6%89%8B%E5%8A%A8%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98">手动释放内存</a></h2>
+<p>fn = null【null：空指针对象】</p>
 
       
         <div class="btt withToc" id="btt"></div>
       
     </div>
     
-    <div class="table-of-contents"><ul><li title="其他工程实践"><a href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5" data-anchor="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5">其他工程实践</a><ul><li title="滥用事件总线的危害"><a href="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3" data-anchor="#%E6%BB%A5%E7%94%A8%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E7%9A%84%E5%8D%B1%E5%AE%B3">滥用事件总线的危害</a></li><li title="业务代码分层习惯"><a href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF" data-anchor="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E4%B9%A0%E6%83%AF">业务代码分层习惯</a></li><li title="使前端能够脱离后端进行独立测试"><a href="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95" data-anchor="#%E4%BD%BF%E5%89%8D%E7%AB%AF%E8%83%BD%E5%A4%9F%E8%84%B1%E7%A6%BB%E5%90%8E%E7%AB%AF%E8%BF%9B%E8%A1%8C%E7%8B%AC%E7%AB%8B%E6%B5%8B%E8%AF%95">使前端能够脱离后端进行独立测试</a></li><li title="npm 脚本命名"><a href="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D" data-anchor="#npm-%E8%84%9A%E6%9C%AC%E5%91%BD%E5%90%8D">npm 脚本命名</a></li><li title="前置操作的处理"><a href="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86" data-anchor="#%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C%E7%9A%84%E5%A4%84%E7%90%86">前置操作的处理</a></li><li title="不建议在本地构建部署代码"><a href="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81" data-anchor="#%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">不建议在本地构建部署代码</a><ul><li title="前端项目的一般部署流程"><a href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B" data-anchor="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E8%88%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B">前端项目的一般部署流程</a></li><li title="本地部署的优势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E4%BC%98%E5%8A%BF">本地部署的优势</a></li><li title="本地部署的劣势"><a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF" data-anchor="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E7%9A%84%E5%8A%A3%E5%8A%BF">本地部署的劣势</a></li></ul></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li><li title="小程序环境判断"><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD" data-anchor="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83%E5%88%A4%E6%96%AD">小程序环境判断</a></li></ul></li></ul></div>
+    <div class="table-of-contents"><ul><li title="垃圾回收"><a href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6" data-anchor="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6">垃圾回收</a><ul><li title="标记清除（主流）"><a href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%EF%BC%88%E4%B8%BB%E6%B5%81%EF%BC%89" data-anchor="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%EF%BC%88%E4%B8%BB%E6%B5%81%EF%BC%89">标记清除（主流）</a></li><li title="引用计数"><a href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0" data-anchor="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0">引用计数</a></li><li title="如何避免垃圾回收"><a href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6" data-anchor="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6">如何避免垃圾回收</a></li><li title="引起内存泄漏的操作"><a href="#%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C" data-anchor="#%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C">引起内存泄漏的操作</a></li><li title="手动释放内存"><a href="#%E6%89%8B%E5%8A%A8%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98" data-anchor="#%E6%89%8B%E5%8A%A8%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98">手动释放内存</a></li></ul></li></ul></div>
     
 
     <!-- bottom scripts -->

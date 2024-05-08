@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qxtang.github.io - React</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- version：1.3.5 -->
+  <!-- build time：5/8/2024, 8:40:37 PM -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="d04c16bcfbdfba8c24c5ad9cf75efe27" data-href="/cba08ec3eed650e75ecc9b68be1e625b.html" class="dir" title="Javascript">
+                <span>Javascript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="b7acc861eaf47e03b0a92a42651c79c8" class="children" title="Promise">
+            <a href="/b7acc861eaf47e03b0a92a42651c79c8.html">Promise</a>
+          </li>
+        
+          <li id="4c24e2cb0810d551ab2bdfd7f7965355" class="children" title="Proxy 和 Reflect">
+            <a href="/4c24e2cb0810d551ab2bdfd7f7965355.html">Proxy 和 Reflect</a>
+          </li>
+        
+          <li id="a4bcc659f42c0cc2ccf097877b704a61" class="children" title="垃圾回收">
+            <a href="/a4bcc659f42c0cc2ccf097877b704a61.html">垃圾回收</a>
+          </li>
+        
+          <li id="8e72deaaffb1f9d8d7d22ded1dced51d" class="children" title="尾调用和尾递归">
+            <a href="/8e72deaaffb1f9d8d7d22ded1dced51d.html">尾调用和尾递归</a>
+          </li>
+        
+          <li id="9c385c2692f3ff1048c7151d11034f52" class="children" title="数据类型">
+            <a href="/9c385c2692f3ff1048c7151d11034f52.html">数据类型</a>
+          </li>
+        
+          <li id="c6b9fd6a48d36ee64ab6ce9417f7b313" class="children" title="模块">
+            <a href="/c6b9fd6a48d36ee64ab6ce9417f7b313.html">模块</a>
+          </li>
+        
+          <li id="cca3708fb440763c24616b1c2e3c2443" class="children" title="闭包">
+            <a href="/cca3708fb440763c24616b1c2e3c2443.html">闭包</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="785adeeaf391ec96d5bb3f7fae59f68e" data-href="/42e6798920d6ff44395defafa4f42997.html" class="dir" title="Typescript">
+                <span>Typescript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1fdca525eedd483c6becd39c1b3729dc" class="children" title="最佳实践">
+            <a href="/1fdca525eedd483c6becd39c1b3729dc.html">最佳实践</a>
+          </li>
+        
+          <li id="13cd8af91bad9a2aa47557b9d5176822" class="children" title="模板字面量类型">
+            <a href="/13cd8af91bad9a2aa47557b9d5176822.html">模板字面量类型</a>
+          </li>
+        
+          <li id="d1717ba400642b4a80b534e90d45a089" class="children" title="泛型">
+            <a href="/d1717ba400642b4a80b534e90d45a089.html">泛型</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e6087fb36c2e7e45d806a54d447462b2" data-href="/c477ea9277e72a5e67d59d633cf2c137.html" class="dir" title="性能优化">
+                <span>性能优化</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="e6550d621738d7e47a2f89dac59256aa" class="children" title="首屏加载优化">
+            <a href="/e6550d621738d7e47a2f89dac59256aa.html">首屏加载优化</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="cfc6762313c8fadde407c043154409f7" data-href="/6b4ced9d2ef205d68999ba7579eb19ac.html" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="5d9cd149bffeb85ff35aed2ff52e3c4c" class="children" title="CSS最佳实践">
+            <a href="/5d9cd149bffeb85ff35aed2ff52e3c4c.html">CSS最佳实践</a>
+          </li>
+        
+          <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
+            <a href="/90c722fcc7f93ea31011ef4abc7f384d.html">Javascript</a>
+          </li>
+        
+          <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
+            <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
+            <a href="/d02c013ecd23b0f2469dc30db74d4108.html">git 实践</a>
+          </li>
+        
+          <li id="a8b2265cbd54ac650bb8381258e83bd7" class="children" title="前端组件设计原则">
+            <a href="/a8b2265cbd54ac650bb8381258e83bd7.html">前端组件设计原则</a>
+          </li>
+        
+          <li id="e7542d604b34ce539d8b7baa7df7746b" class="children" title="通用工程实践">
+            <a href="/e7542d604b34ce539d8b7baa7df7746b.html">通用工程实践</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="a0c5da9a0cd648aa743ef98594dd0703" data-href="" class="dir" title="构建工具">
+                <span>构建工具</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="f76805d5a2ef74d03db420f95ad2e5ba" data-href="/a229946809829f1260ee10f79a146fdc.html" class="dir" title="Webpack">
+                <span>Webpack</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1c964e57911bcf5ca7cd965d5fad4338" class="children" title="Loader">
+            <a href="/1c964e57911bcf5ca7cd965d5fad4338.html">Loader</a>
+          </li>
+        
+          <li id="fbe579f71e1521e74442b1935abac94d" class="children" title="Plugin">
+            <a href="/fbe579f71e1521e74442b1935abac94d.html">Plugin</a>
+          </li>
+        
+          <li id="ec69a5c5d474a5557d0c9fd83dc0eedc" class="children" title="分包">
+            <a href="/ec69a5c5d474a5557d0c9fd83dc0eedc.html">分包</a>
+          </li>
+        
+          <li id="36b42f5305d0324c294138c790ddc810" class="children" title="最佳实践">
+            <a href="/36b42f5305d0324c294138c790ddc810.html">最佳实践</a>
+          </li>
+        
+          <li id="feaf7c0c42b2aa9ad1bb116958bb1cd2" class="children" title="构建优化">
+            <a href="/feaf7c0c42b2aa9ad1bb116958bb1cd2.html">构建优化</a>
+          </li>
+        
+            </ul>
+          
+          <li id="278fc17858441b35a42c08ff27b1fa6e" class="children" title="Vite">
+            <a href="/278fc17858441b35a42c08ff27b1fa6e.html">Vite</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="3740baa7f411a43d1dd5ca51e1d17cd2" data-href="/3553975a46c992a32da3df54ac64a2b2.html" class="dir" title="框架">
+                <span>框架</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="89dbe899b1f34a5fd136b8210e81f4f9" data-href="/6114bfb11d1305bea2c3cf9b91a6c7e9.html" class="dir" title="React">
+                <span>React</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="607f2cec98ac0a0adb8a132a8963635c" class="children" title="Fiber">
+            <a href="/607f2cec98ac0a0adb8a132a8963635c.html">Fiber</a>
+          </li>
+        
+          <li id="b40b06853ea21f5b268225415b22d328" class="children" title="Hooks">
+            <a href="/b40b06853ea21f5b268225415b22d328.html">Hooks</a>
+          </li>
+        
+          <li id="5c5c812375fd1db2efe2bddded241844" class="children" title="react-router">
+            <a href="/5c5c812375fd1db2efe2bddded241844.html">react-router</a>
+          </li>
+        
+          <li id="b1a8f8bc02c01ca5bc970fd1d44d493d" class="children" title="setState">
+            <a href="/b1a8f8bc02c01ca5bc970fd1d44d493d.html">setState</a>
+          </li>
+        
+          <li id="a999cfa0f63e25631e3ae0382b46eabe" class="children" title="渲染原理">
+            <a href="/a999cfa0f63e25631e3ae0382b46eabe.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e1bb2da53c15eeacf0aa43254e7c6176" class="children" title="HOC、Hooks、Mixin">
+            <a href="/e1bb2da53c15eeacf0aa43254e7c6176.html">HOC、Hooks、Mixin</a>
+          </li>
+        
+          <li id="f8ba3590330d2ed2455fe2c83dfb642f" class="children" title="Redux">
+            <a href="/f8ba3590330d2ed2455fe2c83dfb642f.html">Redux</a>
+          </li>
+        
+          <li id="464e637f0da9231bc777743987827f47" class="children" title="spa 路由原理">
+            <a href="/464e637f0da9231bc777743987827f47.html">spa 路由原理</a>
+          </li>
+        
+          <li id="c8cacf58206b6565ea69383e6fbdf7b4" class="children" title="虚拟 Dom 与 diff">
+            <a href="/c8cacf58206b6565ea69383e6fbdf7b4.html">虚拟 Dom 与 diff</a>
+          </li>
+        
+            </ul>
+          
+          <li id="fb9a19d530d65e394c0a161b3d801ad0" class="children" title="AST 抽象语法树">
+            <a href="/fb9a19d530d65e394c0a161b3d801ad0.html">AST 抽象语法树</a>
+          </li>
+        
+          <li id="e3db49d633625ac1552e7dca23fb879e" class="children" title="AST抽象语法树">
+            <a href="/e3db49d633625ac1552e7dca23fb879e.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="8578439a28ea7be119c5e0f09881c164" class="children" title="demo">
+            <a href="/8578439a28ea7be119c5e0f09881c164.html">demo</a>
+          </li>
+        
+          <li id="906880e21cbf1c394f3f24b9b0a64b83" class="children" title="事件循环">
+            <a href="/906880e21cbf1c394f3f24b9b0a64b83.html">事件循环</a>
+          </li>
+        
+          <li id="91cddc44e8c0f27fe5a0290f334ada7e" class="children" title="单元测试">
+            <a href="/91cddc44e8c0f27fe5a0290f334ada7e.html">单元测试</a>
+          </li>
+        
+          <li id="c806b6f5f1e6d1c68f72fae33a8626eb" class="children" title="图标方案">
+            <a href="/c806b6f5f1e6d1c68f72fae33a8626eb.html">图标方案</a>
+          </li>
+        
+          <li id="c271045a3b943be978d1785dadf28253" class="children" title="微前端">
+            <a href="/c271045a3b943be978d1785dadf28253.html">微前端</a>
+          </li>
+        
+          <li id="d101024edcca4d6dff270c2fb6d8b6bd" class="children" title="文件上传&下载">
+            <a href="/d101024edcca4d6dff270c2fb6d8b6bd.html">文件上传&下载</a>
+          </li>
+        
+          <li id="c7291e11fd38fa3a59efe315b9a3ac69" class="children" title="柯里化">
+            <a href="/c7291e11fd38fa3a59efe315b9a3ac69.html">柯里化</a>
+          </li>
+        
+          <li id="1478f616d95f169a35afbf80de6d5b7c" class="children" title="设计稿多端适配方案">
+            <a href="/1478f616d95f169a35afbf80de6d5b7c.html">设计稿多端适配方案</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="react" tabindex="-1"><a class="header-anchor" href="#react">React</a></h1>
+<h2 id="api" tabindex="-1"><a class="header-anchor" href="#api">API</a></h2>
+<h3 id="refs" tabindex="-1"><a class="header-anchor" href="#refs">Refs</a></h3>
+<ul>
+<li>安全访问 DOM 或某个组件实例</li>
+<li>不得不直接访问时才使用，否则容易造成混乱</li>
+<li>useRef 还可以用来保存多帧共享的数据</li>
+</ul>
+<h3 id="context" tabindex="-1"><a class="header-anchor" href="#context">Context</a></h3>
+<p>当不想在组件树中通过逐层传递 props 或者 state 的方式来传递数据时，可以使用 Context 来实现跨层级的组件数据传递</p>
+<ul>
+<li>React.createContext：创建一个上下文的容器（组件），defaultValue 可以设置共享的默认数据</li>
+<li>Provider（生产者）：用于生产共享数据</li>
+<li>Consumer（消费者）：专门消费 Provider 的数据。Consumer 需要嵌套在生产者下面，才能通过回调的方式拿到共享的数据，当然也可以单独使用，那就只能消费到上文提到的 defaultValue</li>
+</ul>
+<h3 id="%E5%85%B6%E4%BB%96" tabindex="-1"><a class="header-anchor" href="#%E5%85%B6%E4%BB%96">其他</a></h3>
+<ul>
+<li>React.PureComponent：与 React.Component 完全相同，但是在 shouldComponentUpdate 中实现了 props 和 state 的浅比较，可以提高性能</li>
+<li>React.memo：高阶组件，与 React.PureComponent 类似，用于包裹函数组件，通过记忆结果来提高性能</li>
+<li>React.createRef：创建一个 ref，它可以通过 ref 属性附加到 React 元素</li>
+<li>React.forwardRef：创建一个 React 组件，将它接收的 ref 属性转发给组件树中的另一个组件。接受渲染函数作为参数。React 将用 props 和 ref 作为两个参数来调用这个函数。此函数应返回 React 节点</li>
+<li>React.lazy：定义动态加载的组件。有助于减少包大小，用来延迟加载在初始渲染期间未使用的组件，要求被<code>&lt;React.Suspense&gt;</code>组件包裹。这是指定加载指示器的方式</li>
+<li>React.Suspense：指定加载指示器</li>
+<li>createPortal：将子节点渲染到父组件以外的 DOM 节点</li>
+</ul>
+<div class="warning">
+<p>PureComponent 缺点：</p>
+<ul>
+<li>PureComponent 创建了默认的 shouldComponentUpdate 行为，这个默认的 shouldComponentUpdate 行为会一一比较 props 和 state 中所有的属性，只有当其中任意一项发生改变是，才会进行重绘</li>
+<li>PureComponent 使用浅比较判断组件是否需要重绘，即比较指针的异同</li>
+<li>所以如果 props 和 state 是引用对象，比如对象、数组，修改属性或元素，不会导致重绘</li>
+</ul>
+</div>
+<h2 id="%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD" tabindex="-1"><a class="header-anchor" href="#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD">异步加载</a></h2>
+<p>示例：</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">const</span> <span class="hljs-title class_">Box</span> = <span class="hljs-title class_">React</span>.<span class="hljs-title function_">lazy</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./components/Box&#x27;</span>));
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">div</span>&gt;</span>loading...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>}&gt;{show &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">Box</span> /&gt;</span>}<span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span></span>;
+</code></pre>
+<div class="tip">
+<p>import()：</p>
+<ul>
+<li>es2020 的规范</li>
+<li>import() 表达式加载模块并返回一个 promise，该 promise resolve 为一个包含其所有导出的模块。我们可以在代码中的任意位置调用这个表达式</li>
+<li>webpack 碰到之后会将其拆出来成一个 chunk，可以使用魔术注释自定义 chunk 名称，需要加载时会通过异步请求来加载这个 chunk</li>
+<li>对应的 babel 语法插件：babel-plugin-syntax-dynamic-import</li>
+</ul>
+</div>
+<h2 id="%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a></h2>
+<p>设置边界包裹组件，实现 componentDidCatch</p>
+<h2 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E5%9C%A8-render-%E4%B8%AD%E5%A3%B0%E6%98%8E%E7%BB%84%E4%BB%B6" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E5%9C%A8-render-%E4%B8%AD%E5%A3%B0%E6%98%8E%E7%BB%84%E4%BB%B6">为什么不要在 render 中声明组件</a></h2>
+<p>每次渲染都会声明的一个新的组件，组件的一些非受控状态就会丢失，比如聚焦状态，浏览器选中文字状态</p>
+<h2 id="%E5%AE%9E%E7%8E%B0%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E3%80%81hoc%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BB%A7%E6%89%BF" tabindex="-1"><a class="header-anchor" href="#%E5%AE%9E%E7%8E%B0%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E3%80%81hoc%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BB%A7%E6%89%BF">实现组件之间代码重用，为什么推荐组合、HOC，而不是继承</a></h2>
+<ul>
+<li>React 希望组件是按照最小可用思想来进行封装，一个组件只做一件事情，符合单一职责原则</li>
+<li>函数式编程中，函数组合是组合两个或多个函数以产生新函数的过程。将函数组合在一起就像将一系列管道拼接在一起，让我们的数据流过</li>
+</ul>
+<h2 id="%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F" tabindex="-1"><a class="header-anchor" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a></h2>
+<p>1、挂载卸载过程</p>
+<ul>
+<li>constructor()：必须写 super(),否则会导致 this 指向错误</li>
+<li>componentWillMount()：即将过时不要使用</li>
+<li>componentDidMount()：dom 节点已经生成，可以在这里调用 ajax 请求</li>
+<li>componentWillUnmount()：在这里移除事件订阅和定时器</li>
+</ul>
+<p>2、更新过程</p>
+<ul>
+<li>componentWillReceiveProps(nextProps)：即将过时不要使用，接受父组件改变后的 props 需要重新渲染</li>
+<li>shouldComponentUpdate(nextProps,nextState)：性能优化</li>
+<li>componentWillUpdate(nextProps,nextState)：即将过时不要使用</li>
+<li>componentDidUpdate(prevProps,prevState)</li>
+<li>render()：插入 jsx 生成的 dom 结构，diff 算法比较更新前后的新旧 DOM 树，找到最小的有差异的节点，重新渲染</li>
+</ul>
+<p>在 Fiber 中，reconciliation 阶段进行了任务分割，涉及到 暂停 和 重启，因此可能会导致 reconciliation 中的生命周期函数在一次更新渲染循环中被 多次调用 的情况，产生一些意外错误<br>
+新版的建议生命周期如下：</p>
+<pre><code class="language-jsx"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> {
+  <span class="hljs-comment">// 替换 `componentWillReceiveProps`</span>
+  <span class="hljs-comment">// 初始化和 update 时被调用</span>
+  <span class="hljs-comment">// 静态函数，无法使用 this</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">getDerivedStateFromProps</span>(<span class="hljs-params">nextProps, prevState</span>) {}
+  <span class="hljs-comment">// 判断是否需要更新组件</span>
+  <span class="hljs-comment">// 可以用于组件性能优化</span>
+  <span class="hljs-title function_">shouldComponentUpdate</span>(<span class="hljs-params">nextProps, nextState</span>) {}
+  <span class="hljs-comment">// 组件被挂载后触发</span>
+  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) {}
+  <span class="hljs-comment">// 替换</span>
+  componentWillUpdate;
+  <span class="hljs-comment">// 可以在更新之前获取最新 dom 数据</span>
+  <span class="hljs-title function_">getSnapshotBeforeUpdate</span>(<span class="hljs-params"></span>) {}
+  <span class="hljs-comment">// 组件更新后调用</span>
+  <span class="hljs-title function_">componentDidUpdate</span>(<span class="hljs-params"></span>) {}
+  <span class="hljs-comment">// 组件即将销毁</span>
+  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) {}
+  <span class="hljs-comment">// 组件已销毁</span>
+  <span class="hljs-title function_">componentDidUnmount</span>(<span class="hljs-params"></span>) {}
+}
+</code></pre>
+<h3 id="%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%EF%BC%9A" tabindex="-1"><a class="header-anchor" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%EF%BC%9A">生命周期使用建议：</a></h3>
+<ul>
+<li>在 constructor 初始化 state</li>
+<li>在 componentDidMount 中进行事件监听，并在 componentWillUnmount 中解绑事件</li>
+<li>在 componentDidMount 中进行数据的请求，而不是在 componentWillMount</li>
+<li>需要根据 props 更新 state 时，使用 getDerivedStateFromProps(nextProps, prevState)</li>
+<li>可以在 componentDidUpdate 监听 props 或者 state 的变化</li>
+<li>在 componentDidUpdate 使用 setState 时，必须加条件，否则会死循环</li>
+<li>getSnapshotBeforeUpdate(prevProps, prevState) 可以在更新之前获取最新的渲染数据，它的调用是在 render 之后，update 之前</li>
+<li>shouldComponentUpdate: 默认每次调用 setState，一定会最终走到 diff 阶段，但可以通过 shouldComponentUpdate 的生命钩子返回 false 来直接阻止后面的逻辑执行，通常是用于做条件渲染，优化渲染的性能</li>
+</ul>
+<h3 id="react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%98%AF%E5%93%AA%E4%B8%AA%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%98%AF%E5%93%AA%E4%B8%AA%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">react 性能优化是哪个周期函数</a></h3>
+<ul>
+<li>shouldComponentUpdate</li>
+<li>用来判断是否需要调用 render 方法重新描绘 dom</li>
+<li>因为 dom 的描绘比较消耗性能</li>
+<li>如果能在 shouldComponentUpdate 方法中能够写出更优化的逻辑，可以提高性能</li>
+</ul>
+<h2 id="%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86" tabindex="-1"><a class="header-anchor" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86">事件处理</a></h2>
+<ul>
+<li>React 没有直接将事件绑定到元素上，而是在 document 处监听所有支持的事件</li>
+<li>冒泡到 document 上的事件不是原生浏览器事件，而是 React 自己实现的合成事件</li>
+<li>为了解决跨浏览器兼容性问题，React 将 浏览器原生事件 封装为 合成事件</li>
+<li>提供了与原生事件相同的接口，屏蔽了底层浏览器的细节差异，保证了行为一致性</li>
+<li>这样 React 在更新 DOM 的时候不需要考虑如何去处理绑定在 DOM 上的事件监听器，达到优化性能目的</li>
+</ul>
+<h3 id="react-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#react-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB">react 合成事件是什么，和原生事件的区别</a></h3>
+<ul>
+<li>React 合成事件机制，React 并不是将 click 事件直接绑定在 dom 上面，而是采用事件冒泡的形式冒泡到 document 上面，然后 React 将事件封装给正式的函数</li>
+<li>如果 DOM 上绑定了过多的事件处理函数，页面响应以及内存占用可能会受影响</li>
+<li>为了避免这类 DOM 事件滥用，同时屏蔽底层不同浏览器之间的事件系统差异，React 实现了一个中间层</li>
+<li>当用户在为 onClick 添加函数时，React 并没有将 Click 事件绑定在 DOM 元素上，而是在 document 处监听所有支持的事件，当事件发生并冒泡至 document 处时，React 将事件内容封装交给中间层</li>
+</ul>
+<h2 id="constructor-%E4%B8%AD-super-%E4%B8%8E-props-%E5%8F%82%E6%95%B0%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88" tabindex="-1"><a class="header-anchor" href="#constructor-%E4%B8%AD-super-%E4%B8%8E-props-%E5%8F%82%E6%95%B0%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88">constructor 中 super 与 props 参数一起使用的目的是什么</a></h2>
+<ul>
+<li>ES6 规定，在子类的 constructor 中必须先调用 super 初始化父类才能引用 this</li>
+<li>在调用方法之前，子类构造函数无法使用 this 引用 super()</li>
+</ul>
+<h2 id="%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81-import-%E2%80%9Creact%E2%80%9D" tabindex="-1"><a class="header-anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81-import-%E2%80%9Creact%E2%80%9D">为什么一定要 import “react”</a></h2>
+<ul>
+<li>JSX 实际上是 React.createElement 的语法糖，jsx 会被 babel 翻译成 React.createElement</li>
+</ul>
+<h2 id="react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" tabindex="-1"><a class="header-anchor" href="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">react 性能优化</a></h2>
+<ul>
+<li>重写 shouldComponentUpdate 来避免不必要的 dom 操作</li>
+<li>使用 production 版本的 react.js</li>
+<li>使用 key 来帮助 React 识别列表中所有子组件的最小变化</li>
+<li>React.memo</li>
+<li>PureComponent</li>
+<li>useMemo、useCallback</li>
+</ul>
+<h2 id="react-%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B" tabindex="-1"><a class="header-anchor" href="#react-%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B">React 编程模型</a></h2>
+<h3 id="%E5%AE%BF%E4%B8%BB%E6%A0%91" tabindex="-1"><a class="header-anchor" href="#%E5%AE%BF%E4%B8%BB%E6%A0%91">宿主树</a></h3>
+<ul>
+<li>用于展示 UI</li>
+<li>会随时间变化</li>
+<li>稳定性，宿主树相对稳定</li>
+<li>通用性，宿主树可以被拆分为外观和行为一致的 UI 模式</li>
+</ul>
+<h3 id="%E5%AE%BF%E4%B8%BB%E5%AE%9E%E4%BE%8B" tabindex="-1"><a class="header-anchor" href="#%E5%AE%BF%E4%B8%BB%E5%AE%9E%E4%BE%8B">宿主实例</a></h3>
+<ul>
+<li>宿主树的节点</li>
+</ul>
+<h3 id="%E6%B8%B2%E6%9F%93%E5%99%A8" tabindex="-1"><a class="header-anchor" href="#%E6%B8%B2%E6%9F%93%E5%99%A8">渲染器</a></h3>
+<ul>
+<li>渲染器决定如何与特定的宿主环境通信以及如何管理它的宿主实例</li>
+<li>让开发者能以一种更好的方式操控宿主实例，而不用在意低级视图 API 范例</li>
+</ul>
+<h3 id="react-%E5%85%83%E7%B4%A0" tabindex="-1"><a class="header-anchor" href="#react-%E5%85%83%E7%B4%A0">React 元素</a></h3>
+<ul>
+<li>最小的构建单元</li>
+<li>一个普通的 JavaScript 对象，用来描述一个宿主实例</li>
+<li>React 元素也能形成一棵树</li>
+<li>React 元素并不是永远存在的，它们总是在重建和删除之间不断循环</li>
+<li>React 元素具有不可变性。不能改变 React 元素中的子元素或者属性，如果想要在稍后渲染一些不同的东西，需要从头创建新的 React 元素树来描述它</li>
+<li>类似电影中放映的每一帧</li>
+</ul>
+<h3 id="%E5%85%A5%E5%8F%A3" tabindex="-1"><a class="header-anchor" href="#%E5%85%A5%E5%8F%A3">入口</a></h3>
+<ul>
+<li>告诉 React ，将特定的 React 元素树渲染到真正的宿主实例中去，例如，React DOM 的入口就是 ReactDOM.render()</li>
+</ul>
+<h3 id="%E7%BB%84%E4%BB%B6" tabindex="-1"><a class="header-anchor" href="#%E7%BB%84%E4%BB%B6">组件</a></h3>
+<ul>
+<li>即返回 React 元素的函数</li>
+</ul>
+<h3 id="%E4%B8%80%E8%87%B4%E6%80%A7" tabindex="-1"><a class="header-anchor" href="#%E4%B8%80%E8%87%B4%E6%80%A7">一致性</a></h3>
+<ul>
+<li>React 将所有的工作分成了“渲染阶段”和“提交阶段”。渲染阶段是当 React 调用你的组件然后进行协调的时段，在此阶段进行干涉是安全的，提交阶段就是 React 操作宿主树的时候，而这个阶段永远是同步的</li>
+</ul>
+<h3 id="%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0" tabindex="-1"><a class="header-anchor" href="#%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0">批量更新</a></h3>
+<ul>
+<li>React 会在组件内所有事件触发完成后再进行批量更新，避免浪费的重复渲染</li>
+</ul>
+<h3 id="%E4%B8%8A%E4%B8%8B%E6%96%87" tabindex="-1"><a class="header-anchor" href="#%E4%B8%8A%E4%B8%8B%E6%96%87">上下文</a></h3>
+<ul>
+<li>事实上，当 React 渲染时，维护了一个上下文栈</li>
+</ul>
+<h3 id="%E5%89%AF%E4%BD%9C%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E5%89%AF%E4%BD%9C%E7%94%A8">副作用</a></h3>
+<ul>
+<li>React 会推迟执行 effect 直到浏览器重新绘制屏幕</li>
+<li>有一个极少使用的 Hook 能够让你选择退出这种行为并进行一些同步的工作，请尽量避免使用它：useLayoutEffect</li>
+</ul>
+<h3 id="%E8%87%AA%E5%AE%9A%E4%B9%89-hooks" tabindex="-1"><a class="header-anchor" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks">自定义 Hooks</a></h3>
+<ul>
+<li>自定义 Hooks 让不同的组件共享可重用的状态逻辑。注意状态本身是不共享的。每次调用 Hook 都只声明了其自身的独立状态。</li>
+</ul>
+<h3 id="%E6%B8%B2%E6%9F%93%E5%99%A8-1" tabindex="-1"><a class="header-anchor" href="#%E6%B8%B2%E6%9F%93%E5%99%A8-1">渲染器</a></h3>
+<ul>
+<li>react-dom、react-dom/server、 react-native、 react-test-renderer 都是常见的渲染器</li>
+<li>不管你的目标平台是什么，react 包都是可用的，从 react 包中导出的一切，比如 React.Component、React.createElement、 React.Children 和 Hooks，都是独立于目标平台的</li>
+<li>渲染器包则暴露特定平台的 API，例如 ReactDOM.render()</li>
+<li>react 包仅仅是让你使用 React 的特性，但是它不知道这些特性是如何实现的。渲染器包(react-dom、react-native 等)提供了 React 特性的实现以及平台特定的逻辑</li>
+<li>每个渲染器都在已创建的类上设置了一个特殊的字段，这个字段叫做 updater</li>
+</ul>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="React"><a href="#react" data-anchor="#react">React</a><ul><li title="API"><a href="#api" data-anchor="#api">API</a><ul><li title="Refs"><a href="#refs" data-anchor="#refs">Refs</a></li><li title="Context"><a href="#context" data-anchor="#context">Context</a></li><li title="其他"><a href="#%E5%85%B6%E4%BB%96" data-anchor="#%E5%85%B6%E4%BB%96">其他</a></li></ul></li><li title="异步加载"><a href="#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD" data-anchor="#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD">异步加载</a></li><li title="异常处理"><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86" data-anchor="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a></li><li title="为什么不要在 render 中声明组件"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E5%9C%A8-render-%E4%B8%AD%E5%A3%B0%E6%98%8E%E7%BB%84%E4%BB%B6" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%A6%81%E5%9C%A8-render-%E4%B8%AD%E5%A3%B0%E6%98%8E%E7%BB%84%E4%BB%B6">为什么不要在 render 中声明组件</a></li><li title="实现组件之间代码重用，为什么推荐组合、HOC，而不是继承"><a href="#%E5%AE%9E%E7%8E%B0%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E3%80%81hoc%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BB%A7%E6%89%BF" data-anchor="#%E5%AE%9E%E7%8E%B0%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E7%BB%84%E5%90%88%E3%80%81hoc%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BB%A7%E6%89%BF">实现组件之间代码重用，为什么推荐组合、HOC，而不是继承</a></li><li title="生命周期"><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F" data-anchor="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul><li title="生命周期使用建议："><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%EF%BC%9A" data-anchor="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%EF%BC%9A">生命周期使用建议：</a></li><li title="react 性能优化是哪个周期函数"><a href="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%98%AF%E5%93%AA%E4%B8%AA%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0" data-anchor="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%98%AF%E5%93%AA%E4%B8%AA%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">react 性能优化是哪个周期函数</a></li></ul></li><li title="事件处理"><a href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86" data-anchor="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86">事件处理</a><ul><li title="react 合成事件是什么，和原生事件的区别"><a href="#react-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB" data-anchor="#react-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB">react 合成事件是什么，和原生事件的区别</a></li></ul></li><li title="constructor 中 super 与 props 参数一起使用的目的是什么"><a href="#constructor-%E4%B8%AD-super-%E4%B8%8E-props-%E5%8F%82%E6%95%B0%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88" data-anchor="#constructor-%E4%B8%AD-super-%E4%B8%8E-props-%E5%8F%82%E6%95%B0%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88">constructor 中 super 与 props 参数一起使用的目的是什么</a></li><li title="为什么一定要 import “react”"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81-import-%E2%80%9Creact%E2%80%9D" data-anchor="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81-import-%E2%80%9Creact%E2%80%9D">为什么一定要 import “react”</a></li><li title="react 性能优化"><a href="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96" data-anchor="#react-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">react 性能优化</a></li><li title="React 编程模型"><a href="#react-%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B" data-anchor="#react-%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B">React 编程模型</a><ul><li title="宿主树"><a href="#%E5%AE%BF%E4%B8%BB%E6%A0%91" data-anchor="#%E5%AE%BF%E4%B8%BB%E6%A0%91">宿主树</a></li><li title="宿主实例"><a href="#%E5%AE%BF%E4%B8%BB%E5%AE%9E%E4%BE%8B" data-anchor="#%E5%AE%BF%E4%B8%BB%E5%AE%9E%E4%BE%8B">宿主实例</a></li><li title="渲染器"><a href="#%E6%B8%B2%E6%9F%93%E5%99%A8" data-anchor="#%E6%B8%B2%E6%9F%93%E5%99%A8">渲染器</a></li><li title="React 元素"><a href="#react-%E5%85%83%E7%B4%A0" data-anchor="#react-%E5%85%83%E7%B4%A0">React 元素</a></li><li title="入口"><a href="#%E5%85%A5%E5%8F%A3" data-anchor="#%E5%85%A5%E5%8F%A3">入口</a></li><li title="组件"><a href="#%E7%BB%84%E4%BB%B6" data-anchor="#%E7%BB%84%E4%BB%B6">组件</a></li><li title="一致性"><a href="#%E4%B8%80%E8%87%B4%E6%80%A7" data-anchor="#%E4%B8%80%E8%87%B4%E6%80%A7">一致性</a></li><li title="批量更新"><a href="#%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0" data-anchor="#%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0">批量更新</a></li><li title="上下文"><a href="#%E4%B8%8A%E4%B8%8B%E6%96%87" data-anchor="#%E4%B8%8A%E4%B8%8B%E6%96%87">上下文</a></li><li title="副作用"><a href="#%E5%89%AF%E4%BD%9C%E7%94%A8" data-anchor="#%E5%89%AF%E4%BD%9C%E7%94%A8">副作用</a></li><li title="自定义 Hooks"><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks" data-anchor="#%E8%87%AA%E5%AE%9A%E4%B9%89-hooks">自定义 Hooks</a></li><li title="渲染器"><a href="#%E6%B8%B2%E6%9F%93%E5%99%A8-1" data-anchor="#%E6%B8%B2%E6%9F%93%E5%99%A8-1">渲染器</a></li></ul></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>

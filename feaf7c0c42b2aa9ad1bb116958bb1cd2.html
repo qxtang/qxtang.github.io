@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qxtang.github.io - 构建优化</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- version：1.3.5 -->
+  <!-- build time：5/8/2024, 8:40:37 PM -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="d04c16bcfbdfba8c24c5ad9cf75efe27" data-href="/cba08ec3eed650e75ecc9b68be1e625b.html" class="dir" title="Javascript">
+                <span>Javascript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="b7acc861eaf47e03b0a92a42651c79c8" class="children" title="Promise">
+            <a href="/b7acc861eaf47e03b0a92a42651c79c8.html">Promise</a>
+          </li>
+        
+          <li id="4c24e2cb0810d551ab2bdfd7f7965355" class="children" title="Proxy 和 Reflect">
+            <a href="/4c24e2cb0810d551ab2bdfd7f7965355.html">Proxy 和 Reflect</a>
+          </li>
+        
+          <li id="a4bcc659f42c0cc2ccf097877b704a61" class="children" title="垃圾回收">
+            <a href="/a4bcc659f42c0cc2ccf097877b704a61.html">垃圾回收</a>
+          </li>
+        
+          <li id="8e72deaaffb1f9d8d7d22ded1dced51d" class="children" title="尾调用和尾递归">
+            <a href="/8e72deaaffb1f9d8d7d22ded1dced51d.html">尾调用和尾递归</a>
+          </li>
+        
+          <li id="9c385c2692f3ff1048c7151d11034f52" class="children" title="数据类型">
+            <a href="/9c385c2692f3ff1048c7151d11034f52.html">数据类型</a>
+          </li>
+        
+          <li id="c6b9fd6a48d36ee64ab6ce9417f7b313" class="children" title="模块">
+            <a href="/c6b9fd6a48d36ee64ab6ce9417f7b313.html">模块</a>
+          </li>
+        
+          <li id="cca3708fb440763c24616b1c2e3c2443" class="children" title="闭包">
+            <a href="/cca3708fb440763c24616b1c2e3c2443.html">闭包</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="785adeeaf391ec96d5bb3f7fae59f68e" data-href="/42e6798920d6ff44395defafa4f42997.html" class="dir" title="Typescript">
+                <span>Typescript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1fdca525eedd483c6becd39c1b3729dc" class="children" title="最佳实践">
+            <a href="/1fdca525eedd483c6becd39c1b3729dc.html">最佳实践</a>
+          </li>
+        
+          <li id="13cd8af91bad9a2aa47557b9d5176822" class="children" title="模板字面量类型">
+            <a href="/13cd8af91bad9a2aa47557b9d5176822.html">模板字面量类型</a>
+          </li>
+        
+          <li id="d1717ba400642b4a80b534e90d45a089" class="children" title="泛型">
+            <a href="/d1717ba400642b4a80b534e90d45a089.html">泛型</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e6087fb36c2e7e45d806a54d447462b2" data-href="/c477ea9277e72a5e67d59d633cf2c137.html" class="dir" title="性能优化">
+                <span>性能优化</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="e6550d621738d7e47a2f89dac59256aa" class="children" title="首屏加载优化">
+            <a href="/e6550d621738d7e47a2f89dac59256aa.html">首屏加载优化</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="cfc6762313c8fadde407c043154409f7" data-href="/6b4ced9d2ef205d68999ba7579eb19ac.html" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="5d9cd149bffeb85ff35aed2ff52e3c4c" class="children" title="CSS最佳实践">
+            <a href="/5d9cd149bffeb85ff35aed2ff52e3c4c.html">CSS最佳实践</a>
+          </li>
+        
+          <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
+            <a href="/90c722fcc7f93ea31011ef4abc7f384d.html">Javascript</a>
+          </li>
+        
+          <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
+            <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
+            <a href="/d02c013ecd23b0f2469dc30db74d4108.html">git 实践</a>
+          </li>
+        
+          <li id="a8b2265cbd54ac650bb8381258e83bd7" class="children" title="前端组件设计原则">
+            <a href="/a8b2265cbd54ac650bb8381258e83bd7.html">前端组件设计原则</a>
+          </li>
+        
+          <li id="e7542d604b34ce539d8b7baa7df7746b" class="children" title="通用工程实践">
+            <a href="/e7542d604b34ce539d8b7baa7df7746b.html">通用工程实践</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="a0c5da9a0cd648aa743ef98594dd0703" data-href="" class="dir" title="构建工具">
+                <span>构建工具</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="f76805d5a2ef74d03db420f95ad2e5ba" data-href="/a229946809829f1260ee10f79a146fdc.html" class="dir" title="Webpack">
+                <span>Webpack</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1c964e57911bcf5ca7cd965d5fad4338" class="children" title="Loader">
+            <a href="/1c964e57911bcf5ca7cd965d5fad4338.html">Loader</a>
+          </li>
+        
+          <li id="fbe579f71e1521e74442b1935abac94d" class="children" title="Plugin">
+            <a href="/fbe579f71e1521e74442b1935abac94d.html">Plugin</a>
+          </li>
+        
+          <li id="ec69a5c5d474a5557d0c9fd83dc0eedc" class="children" title="分包">
+            <a href="/ec69a5c5d474a5557d0c9fd83dc0eedc.html">分包</a>
+          </li>
+        
+          <li id="36b42f5305d0324c294138c790ddc810" class="children" title="最佳实践">
+            <a href="/36b42f5305d0324c294138c790ddc810.html">最佳实践</a>
+          </li>
+        
+          <li id="feaf7c0c42b2aa9ad1bb116958bb1cd2" class="children" title="构建优化">
+            <a href="/feaf7c0c42b2aa9ad1bb116958bb1cd2.html">构建优化</a>
+          </li>
+        
+            </ul>
+          
+          <li id="278fc17858441b35a42c08ff27b1fa6e" class="children" title="Vite">
+            <a href="/278fc17858441b35a42c08ff27b1fa6e.html">Vite</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="3740baa7f411a43d1dd5ca51e1d17cd2" data-href="/3553975a46c992a32da3df54ac64a2b2.html" class="dir" title="框架">
+                <span>框架</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="89dbe899b1f34a5fd136b8210e81f4f9" data-href="/6114bfb11d1305bea2c3cf9b91a6c7e9.html" class="dir" title="React">
+                <span>React</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="607f2cec98ac0a0adb8a132a8963635c" class="children" title="Fiber">
+            <a href="/607f2cec98ac0a0adb8a132a8963635c.html">Fiber</a>
+          </li>
+        
+          <li id="b40b06853ea21f5b268225415b22d328" class="children" title="Hooks">
+            <a href="/b40b06853ea21f5b268225415b22d328.html">Hooks</a>
+          </li>
+        
+          <li id="5c5c812375fd1db2efe2bddded241844" class="children" title="react-router">
+            <a href="/5c5c812375fd1db2efe2bddded241844.html">react-router</a>
+          </li>
+        
+          <li id="b1a8f8bc02c01ca5bc970fd1d44d493d" class="children" title="setState">
+            <a href="/b1a8f8bc02c01ca5bc970fd1d44d493d.html">setState</a>
+          </li>
+        
+          <li id="a999cfa0f63e25631e3ae0382b46eabe" class="children" title="渲染原理">
+            <a href="/a999cfa0f63e25631e3ae0382b46eabe.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e1bb2da53c15eeacf0aa43254e7c6176" class="children" title="HOC、Hooks、Mixin">
+            <a href="/e1bb2da53c15eeacf0aa43254e7c6176.html">HOC、Hooks、Mixin</a>
+          </li>
+        
+          <li id="f8ba3590330d2ed2455fe2c83dfb642f" class="children" title="Redux">
+            <a href="/f8ba3590330d2ed2455fe2c83dfb642f.html">Redux</a>
+          </li>
+        
+          <li id="464e637f0da9231bc777743987827f47" class="children" title="spa 路由原理">
+            <a href="/464e637f0da9231bc777743987827f47.html">spa 路由原理</a>
+          </li>
+        
+          <li id="c8cacf58206b6565ea69383e6fbdf7b4" class="children" title="虚拟 Dom 与 diff">
+            <a href="/c8cacf58206b6565ea69383e6fbdf7b4.html">虚拟 Dom 与 diff</a>
+          </li>
+        
+            </ul>
+          
+          <li id="fb9a19d530d65e394c0a161b3d801ad0" class="children" title="AST 抽象语法树">
+            <a href="/fb9a19d530d65e394c0a161b3d801ad0.html">AST 抽象语法树</a>
+          </li>
+        
+          <li id="e3db49d633625ac1552e7dca23fb879e" class="children" title="AST抽象语法树">
+            <a href="/e3db49d633625ac1552e7dca23fb879e.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="8578439a28ea7be119c5e0f09881c164" class="children" title="demo">
+            <a href="/8578439a28ea7be119c5e0f09881c164.html">demo</a>
+          </li>
+        
+          <li id="906880e21cbf1c394f3f24b9b0a64b83" class="children" title="事件循环">
+            <a href="/906880e21cbf1c394f3f24b9b0a64b83.html">事件循环</a>
+          </li>
+        
+          <li id="91cddc44e8c0f27fe5a0290f334ada7e" class="children" title="单元测试">
+            <a href="/91cddc44e8c0f27fe5a0290f334ada7e.html">单元测试</a>
+          </li>
+        
+          <li id="c806b6f5f1e6d1c68f72fae33a8626eb" class="children" title="图标方案">
+            <a href="/c806b6f5f1e6d1c68f72fae33a8626eb.html">图标方案</a>
+          </li>
+        
+          <li id="c271045a3b943be978d1785dadf28253" class="children" title="微前端">
+            <a href="/c271045a3b943be978d1785dadf28253.html">微前端</a>
+          </li>
+        
+          <li id="d101024edcca4d6dff270c2fb6d8b6bd" class="children" title="文件上传&下载">
+            <a href="/d101024edcca4d6dff270c2fb6d8b6bd.html">文件上传&下载</a>
+          </li>
+        
+          <li id="c7291e11fd38fa3a59efe315b9a3ac69" class="children" title="柯里化">
+            <a href="/c7291e11fd38fa3a59efe315b9a3ac69.html">柯里化</a>
+          </li>
+        
+          <li id="1478f616d95f169a35afbf80de6d5b7c" class="children" title="设计稿多端适配方案">
+            <a href="/1478f616d95f169a35afbf80de6d5b7c.html">设计稿多端适配方案</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96" tabindex="-1"><a class="header-anchor" href="#%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96">构建优化</a></h1>
+<h2 id="%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7" tabindex="-1"><a class="header-anchor" href="#%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7">分析工具</a></h2>
+<ul>
+<li>webpack-bundle-analyzer：可视化方式看打包的 bundle 中包含哪些模块内容、大小</li>
+<li>webpackbar：实时显示打包进度</li>
+<li>实时显示打包进度：可以看到每个 loader 和 plugin 耗时情况</li>
+<li>speed-measure-webpack-plugin：分析打包速度</li>
+</ul>
+<h2 id="%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96" tabindex="-1"><a class="header-anchor" href="#%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96">构建速度优化</a></h2>
+<p>思路：从 模块搜索时间、解析时间、压缩时间、二次打包时间 入手</p>
+<h3 id="%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%84%E5%BB%BA" tabindex="-1"><a class="header-anchor" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%84%E5%BB%BA">多进程构建</a></h3>
+<ul>
+<li>运行在 Node.js 之上的 webpack 是单线程模式的，webpack 打包只能逐个文件处理</li>
+<li>使用 <s>happypack（废弃）</s>、thread-loader（推荐）</li>
+<li>仅在耗时的 loader 上使用，如果是小项目，不要开启多进程构建，开启进程需要花费时间，构建反而变慢</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// 把它放置在其它 loader 之前</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+        <span class="hljs-attr">use</span>: [<span class="hljs-string">&#x27;thread-loader&#x27;</span>, <span class="hljs-string">&#x27;babel-loader&#x27;</span>],
+      },
+    ],
+  },
+};
+</code></pre>
+<div class="tip">
+<p>thread-loader 需要放在 style-loader 之后：因为 thread-loader 后的 loader 没法存取文件也没法获取 webpack 的选项设置</p>
+</div>
+<h3 id="%E5%88%A9%E7%94%A8%E7%BC%93%E5%AD%98%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BA%8C%E6%AC%A1%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6" tabindex="-1"><a class="header-anchor" href="#%E5%88%A9%E7%94%A8%E7%BC%93%E5%AD%98%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BA%8C%E6%AC%A1%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6">利用缓存，提升二次构建速度</a></h3>
+<ul>
+<li>
+<p>使用缓存后，node_modules 中会有一个.cache 目录，用于存放缓存内容</p>
+</li>
+<li>
+<p>cache-loader：只对性能开销较大的 loader 使用，保存和读取缓存文件有开销</p>
+<pre><code class="language-js"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+        <span class="hljs-attr">use</span>: [<span class="hljs-string">&#x27;cache-loader&#x27;</span>, <span class="hljs-string">&#x27;babel-loader&#x27;</span>],
+      },
+    ],
+  },
+};
+</code></pre>
+</li>
+<li>
+<p>babel-loader 开启缓存，在 babel-loader 后面加上?cacheDirectory=true</p>
+</li>
+<li>
+<p>hard-source-webpack-plugin：用于开启模块的缓存</p>
+</li>
+<li>
+<p>terser-webpack-plugin 开启缓存</p>
+</li>
+</ul>
+<h3 id="%E7%BC%A9%E5%B0%8F%E6%89%93%E5%8C%85%E4%BD%9C%E7%94%A8%E5%9F%9F" tabindex="-1"><a class="header-anchor" href="#%E7%BC%A9%E5%B0%8F%E6%89%93%E5%8C%85%E4%BD%9C%E7%94%A8%E5%9F%9F">缩小打包作用域</a></h3>
+<ul>
+<li>exclude/include：确定 loader 规则范围，node_modules 里的 js 文件基本上都是转译好了的，不需要再次处理，用 include/exclude 来避免不必要的转译</li>
+<li>优化 resolve.alias：可减少耗时的递归解析操作</li>
+<li>优化 resolve.extensions：列表要尽可能的小，尽可能减少后缀尝试次数；频率出现高的后缀优先放前面，尽快退出寻找过程；写导入语句时，尽可能带上后缀，避免寻找过程</li>
+<li>resolve.modules：指明第三方模块的绝对路径，减少不必要的查找</li>
+<li>优化 resolve.mainFields：一些第三方模块会针对不同环境提供几分代码，位置写在 package.json 文件里，webpack 会根据 mainFields 配置决定优先采用哪份代码</li>
+<li>优化 module.noParse：对不需要解析的库进行忽略（jquery、echarts），不解析但仍打包到 bundle 中，被忽略掉的文件里不应该包含 import、require、define 等模块化语句</li>
+</ul>
+<h3 id="%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93">动态链接库</a></h3>
+<ul>
+<li>
+<p>将第三方库代码和业务代码都打包进一个 bundle，那么处理这个 bundle 文件的插件（比如压缩之类的插件），就没办法不处理里面第三方库内容</p>
+</li>
+<li>
+<p>第三方库代码基本都是成熟的，不用作处理，可以将第三方库代码分离出来</p>
+</li>
+<li>
+<p>配置 externals，每一个库都在 html 文档中引入一个 script 标签，js 文件下载影响性能，而且我们只使用库中的部分功能，script 标签全量引入不合理</p>
+</li>
+<li>
+<p>SplitChunks 在每一次构建会重新构建第三方库，不能有效提升构建速度</p>
+</li>
+<li>
+<p>使用 DllPlugin 和 DLLReferencePlugin（配合使用，webpack 内置插件），会将不频繁更新的第三方库单独打包，当这些第三方库版本没有变化时，不需要重新构建</p>
+<pre><code class="language-js"><span class="hljs-comment">// webpack.dll.js 用于打包第三方库</span>
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>);
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;production&#x27;</span>,
+  <span class="hljs-attr">entry</span>: {
+    <span class="hljs-attr">three</span>: [<span class="hljs-string">&#x27;jquery&#x27;</span>, <span class="hljs-string">&#x27;lodash&#x27;</span>], <span class="hljs-comment">// 第三方库配置</span>
+  },
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].dll.js&#x27;</span>, <span class="hljs-comment">// [name] 就是在 entry</span>
+    <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist/lib&#x27;</span>),
+    <span class="hljs-attr">library</span>: <span class="hljs-string">&#x27;[name]&#x27;</span>,
+  },
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-keyword">new</span> webpack.<span class="hljs-title class_">DllPlugin</span>({
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;[name]&#x27;</span>,
+      <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;dist/lib/[name].json&#x27;</span>), <span class="hljs-comment">// manifest.json 的存放位置</span>
+    }),
+  ],
+};
+</code></pre>
+<pre><code class="language-js"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-comment">// 修改 CleanWebpackPlugin 配置</span>
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWebpackPlugin</span>({
+      <span class="hljs-attr">cleanOnceBeforeBuildPatterns</span>: [
+        <span class="hljs-string">&#x27;!lib/**&#x27;</span>, <span class="hljs-comment">// 在每次清除 dist 目录时，不清理 lib 文件夹</span>
+      ],
+    }),
+    <span class="hljs-comment">// dll 相关配置</span>
+    <span class="hljs-keyword">new</span> webpack.<span class="hljs-title class_">DllReferencePlugin</span>({
+      <span class="hljs-comment">// 将 manifest 字段配置成第1步中打包出来的 json 文件</span>
+      <span class="hljs-attr">manifest</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./dist/lib/three.json&#x27;</span>),
+    }),
+  ],
+};
+</code></pre>
+</li>
+</ul>
+<h2 id="%E4%BC%98%E5%8C%96%E6%9E%84%E5%BB%BA%E4%BD%93%E7%A7%AF" tabindex="-1"><a class="header-anchor" href="#%E4%BC%98%E5%8C%96%E6%9E%84%E5%BB%BA%E4%BD%93%E7%A7%AF">优化构建体积</a></h2>
+<h3 id="%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2" tabindex="-1"><a class="header-anchor" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2">代码分割</a></h3>
+<p>分离第三方库和业务代码中的基础库，通过 SplitChunks 或动态链接库</p>
+<h3 id="%E5%8A%A8%E6%80%81-import" tabindex="-1"><a class="header-anchor" href="#%E5%8A%A8%E6%80%81-import">动态 import</a></h3>
+<ul>
+<li>减少首屏资源的体积，非首屏的资源在用到的时候再去请求</li>
+<li>路由配置使用 import() 来引入页面组件，凡是通过 import() 引用的模块都会打包成独立 bundle</li>
+</ul>
+<h3 id="tree-shaking" tabindex="-1"><a class="header-anchor" href="#tree-shaking">tree shaking</a></h3>
+<ul>
+<li>使用 esm 模块规范</li>
+<li>不要使用 export default</li>
+<li>那么在 mode：production 生产环境，就会自动开启 tree-shaking，移除没有使用到的代码</li>
+</ul>
+<h3 id="%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9" tabindex="-1"><a class="header-anchor" href="#%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9">代码压缩</a></h3>
+<ul>
+<li>
+<p>mode：production 自动开启</p>
+</li>
+<li>
+<p><s>uglifyjs-webpack-plugin（废弃）</s> 和 terser-webpack-plugin（推荐）</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-title class_">TerserPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;terser-webpack-plugin&#x27;</span>);
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">optimization</span>: {
+    <span class="hljs-attr">minimizer</span>: [
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">TerserPlugin</span>({
+        <span class="hljs-attr">parallel</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 开启并行压缩，加快构建速度</span>
+        <span class="hljs-attr">sourceMap</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 使用 source-maps</span>
+      }),
+    ],
+  },
+};
+</code></pre>
+<div class="tip">
+<p>terser 是什么：用于 ES6+ 的 JavaScript 解析器、mangler/compressor（压缩器）工具包。</p>
+</div>
+</li>
+<li>
+<p>gzip</p>
+<p>compression-webpack-plugin</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-title class_">CompressionWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;compression-webpack-plugin&#x27;</span>);
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">CompressionWebpackPlugin</span>({
+      <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|css)$/</span>, <span class="hljs-comment">// 匹配要压缩的文件</span>
+      <span class="hljs-attr">algorithm</span>: <span class="hljs-string">&#x27;gzip&#x27;</span>,
+    }),
+  ],
+};
+</code></pre>
+</li>
+</ul>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="构建优化"><a href="#%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96" data-anchor="#%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96">构建优化</a><ul><li title="分析工具"><a href="#%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7" data-anchor="#%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7">分析工具</a></li><li title="构建速度优化"><a href="#%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96" data-anchor="#%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96">构建速度优化</a><ul><li title="多进程构建"><a href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%84%E5%BB%BA" data-anchor="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%84%E5%BB%BA">多进程构建</a></li><li title="利用缓存，提升二次构建速度"><a href="#%E5%88%A9%E7%94%A8%E7%BC%93%E5%AD%98%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BA%8C%E6%AC%A1%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6" data-anchor="#%E5%88%A9%E7%94%A8%E7%BC%93%E5%AD%98%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BA%8C%E6%AC%A1%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6">利用缓存，提升二次构建速度</a></li><li title="缩小打包作用域"><a href="#%E7%BC%A9%E5%B0%8F%E6%89%93%E5%8C%85%E4%BD%9C%E7%94%A8%E5%9F%9F" data-anchor="#%E7%BC%A9%E5%B0%8F%E6%89%93%E5%8C%85%E4%BD%9C%E7%94%A8%E5%9F%9F">缩小打包作用域</a></li><li title="动态链接库"><a href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93" data-anchor="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93">动态链接库</a></li></ul></li><li title="优化构建体积"><a href="#%E4%BC%98%E5%8C%96%E6%9E%84%E5%BB%BA%E4%BD%93%E7%A7%AF" data-anchor="#%E4%BC%98%E5%8C%96%E6%9E%84%E5%BB%BA%E4%BD%93%E7%A7%AF">优化构建体积</a><ul><li title="代码分割"><a href="#%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2" data-anchor="#%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2">代码分割</a></li><li title="动态 import"><a href="#%E5%8A%A8%E6%80%81-import" data-anchor="#%E5%8A%A8%E6%80%81-import">动态 import</a></li><li title="tree shaking"><a href="#tree-shaking" data-anchor="#tree-shaking">tree shaking</a></li><li title="代码压缩"><a href="#%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9" data-anchor="#%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9">代码压缩</a></li></ul></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>

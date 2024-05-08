@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qxtang.github.io - Javascript</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="/resource/lib/github-markdown.min.css" />
+  <link rel="stylesheet" href="/resource/style.css" />
+  <link rel="stylesheet" href="/resource/lib/highlight.default.min.css" />
+  <link rel="stylesheet" href="/resource/lib/viewerjs-1.10.5/viewer.min.css" />
+
+  <!-- scripts -->
+  <script src="/resource/lib/jquery.min.js"></script>
+
+  <!-- PWA support -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="bookmark" type="image/x-icon" href="/resource/favicon.ico" />
+  <link rel="apple-touch-icon" href="/resource/favicon.ico" />
+
+  <!-- version：1.3.5 -->
+  <!-- build time：5/8/2024, 8:40:37 PM -->
+
+  <script>
+    window.root = '';
+
+    // 提前把搜索数据库载入内存
+    fetch(`${window.root}/dir_tree.json`)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (res) {
+              window.__doc_builder_dir_tree__ = res;
+            });
+  </script>
+</head>
+
+  <body>
+    <ul class="menu expand" id="menu">
+      <div class="loading">
+        <span>加载中...</span>
+      </div>
+      <div class="search_bar" id="search_bar">
+        <input type="text" placeholder="search..." />
+        <img
+          class="clear"
+          id="clear"
+          src="/resource/icons/circle-xmark.svg"
+          alt=""
+        />
+        <div class="search_result" id="search_result"></div>
+      </div>
+      
+            <ul class="parent expand">
+              <li id="d04c16bcfbdfba8c24c5ad9cf75efe27" data-href="/cba08ec3eed650e75ecc9b68be1e625b.html" class="dir" title="Javascript">
+                <span>Javascript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="b7acc861eaf47e03b0a92a42651c79c8" class="children" title="Promise">
+            <a href="/b7acc861eaf47e03b0a92a42651c79c8.html">Promise</a>
+          </li>
+        
+          <li id="4c24e2cb0810d551ab2bdfd7f7965355" class="children" title="Proxy 和 Reflect">
+            <a href="/4c24e2cb0810d551ab2bdfd7f7965355.html">Proxy 和 Reflect</a>
+          </li>
+        
+          <li id="a4bcc659f42c0cc2ccf097877b704a61" class="children" title="垃圾回收">
+            <a href="/a4bcc659f42c0cc2ccf097877b704a61.html">垃圾回收</a>
+          </li>
+        
+          <li id="8e72deaaffb1f9d8d7d22ded1dced51d" class="children" title="尾调用和尾递归">
+            <a href="/8e72deaaffb1f9d8d7d22ded1dced51d.html">尾调用和尾递归</a>
+          </li>
+        
+          <li id="9c385c2692f3ff1048c7151d11034f52" class="children" title="数据类型">
+            <a href="/9c385c2692f3ff1048c7151d11034f52.html">数据类型</a>
+          </li>
+        
+          <li id="c6b9fd6a48d36ee64ab6ce9417f7b313" class="children" title="模块">
+            <a href="/c6b9fd6a48d36ee64ab6ce9417f7b313.html">模块</a>
+          </li>
+        
+          <li id="cca3708fb440763c24616b1c2e3c2443" class="children" title="闭包">
+            <a href="/cca3708fb440763c24616b1c2e3c2443.html">闭包</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="785adeeaf391ec96d5bb3f7fae59f68e" data-href="/42e6798920d6ff44395defafa4f42997.html" class="dir" title="Typescript">
+                <span>Typescript</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1fdca525eedd483c6becd39c1b3729dc" class="children" title="最佳实践">
+            <a href="/1fdca525eedd483c6becd39c1b3729dc.html">最佳实践</a>
+          </li>
+        
+          <li id="13cd8af91bad9a2aa47557b9d5176822" class="children" title="模板字面量类型">
+            <a href="/13cd8af91bad9a2aa47557b9d5176822.html">模板字面量类型</a>
+          </li>
+        
+          <li id="d1717ba400642b4a80b534e90d45a089" class="children" title="泛型">
+            <a href="/d1717ba400642b4a80b534e90d45a089.html">泛型</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="e6087fb36c2e7e45d806a54d447462b2" data-href="/c477ea9277e72a5e67d59d633cf2c137.html" class="dir" title="性能优化">
+                <span>性能优化</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="e6550d621738d7e47a2f89dac59256aa" class="children" title="首屏加载优化">
+            <a href="/e6550d621738d7e47a2f89dac59256aa.html">首屏加载优化</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="cfc6762313c8fadde407c043154409f7" data-href="/6b4ced9d2ef205d68999ba7579eb19ac.html" class="dir" title="最佳实践">
+                <span>最佳实践</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="5d9cd149bffeb85ff35aed2ff52e3c4c" class="children" title="CSS最佳实践">
+            <a href="/5d9cd149bffeb85ff35aed2ff52e3c4c.html">CSS最佳实践</a>
+          </li>
+        
+          <li id="90c722fcc7f93ea31011ef4abc7f384d" class="children" title="Javascript">
+            <a href="/90c722fcc7f93ea31011ef4abc7f384d.html">Javascript</a>
+          </li>
+        
+          <li id="38f7be06c8c5c4d4d37ea6cadecfc7fe" class="children" title="React">
+            <a href="/38f7be06c8c5c4d4d37ea6cadecfc7fe.html">React</a>
+          </li>
+        
+          <li id="d02c013ecd23b0f2469dc30db74d4108" class="children" title="git 实践">
+            <a href="/d02c013ecd23b0f2469dc30db74d4108.html">git 实践</a>
+          </li>
+        
+          <li id="a8b2265cbd54ac650bb8381258e83bd7" class="children" title="前端组件设计原则">
+            <a href="/a8b2265cbd54ac650bb8381258e83bd7.html">前端组件设计原则</a>
+          </li>
+        
+          <li id="e7542d604b34ce539d8b7baa7df7746b" class="children" title="通用工程实践">
+            <a href="/e7542d604b34ce539d8b7baa7df7746b.html">通用工程实践</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="a0c5da9a0cd648aa743ef98594dd0703" data-href="" class="dir" title="构建工具">
+                <span>构建工具</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="f76805d5a2ef74d03db420f95ad2e5ba" data-href="/a229946809829f1260ee10f79a146fdc.html" class="dir" title="Webpack">
+                <span>Webpack</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="1c964e57911bcf5ca7cd965d5fad4338" class="children" title="Loader">
+            <a href="/1c964e57911bcf5ca7cd965d5fad4338.html">Loader</a>
+          </li>
+        
+          <li id="fbe579f71e1521e74442b1935abac94d" class="children" title="Plugin">
+            <a href="/fbe579f71e1521e74442b1935abac94d.html">Plugin</a>
+          </li>
+        
+          <li id="ec69a5c5d474a5557d0c9fd83dc0eedc" class="children" title="分包">
+            <a href="/ec69a5c5d474a5557d0c9fd83dc0eedc.html">分包</a>
+          </li>
+        
+          <li id="36b42f5305d0324c294138c790ddc810" class="children" title="最佳实践">
+            <a href="/36b42f5305d0324c294138c790ddc810.html">最佳实践</a>
+          </li>
+        
+          <li id="feaf7c0c42b2aa9ad1bb116958bb1cd2" class="children" title="构建优化">
+            <a href="/feaf7c0c42b2aa9ad1bb116958bb1cd2.html">构建优化</a>
+          </li>
+        
+            </ul>
+          
+          <li id="278fc17858441b35a42c08ff27b1fa6e" class="children" title="Vite">
+            <a href="/278fc17858441b35a42c08ff27b1fa6e.html">Vite</a>
+          </li>
+        
+            </ul>
+          
+            <ul class="parent expand">
+              <li id="3740baa7f411a43d1dd5ca51e1d17cd2" data-href="/3553975a46c992a32da3df54ac64a2b2.html" class="dir" title="框架">
+                <span>框架</span>
+                <div class="triangle"></div>
+              </li>
+              
+            <ul class="parent expand">
+              <li id="89dbe899b1f34a5fd136b8210e81f4f9" data-href="/6114bfb11d1305bea2c3cf9b91a6c7e9.html" class="dir" title="React">
+                <span>React</span>
+                <div class="triangle"></div>
+              </li>
+              
+          <li id="607f2cec98ac0a0adb8a132a8963635c" class="children" title="Fiber">
+            <a href="/607f2cec98ac0a0adb8a132a8963635c.html">Fiber</a>
+          </li>
+        
+          <li id="b40b06853ea21f5b268225415b22d328" class="children" title="Hooks">
+            <a href="/b40b06853ea21f5b268225415b22d328.html">Hooks</a>
+          </li>
+        
+          <li id="5c5c812375fd1db2efe2bddded241844" class="children" title="react-router">
+            <a href="/5c5c812375fd1db2efe2bddded241844.html">react-router</a>
+          </li>
+        
+          <li id="b1a8f8bc02c01ca5bc970fd1d44d493d" class="children" title="setState">
+            <a href="/b1a8f8bc02c01ca5bc970fd1d44d493d.html">setState</a>
+          </li>
+        
+          <li id="a999cfa0f63e25631e3ae0382b46eabe" class="children" title="渲染原理">
+            <a href="/a999cfa0f63e25631e3ae0382b46eabe.html">渲染原理</a>
+          </li>
+        
+            </ul>
+          
+          <li id="e1bb2da53c15eeacf0aa43254e7c6176" class="children" title="HOC、Hooks、Mixin">
+            <a href="/e1bb2da53c15eeacf0aa43254e7c6176.html">HOC、Hooks、Mixin</a>
+          </li>
+        
+          <li id="f8ba3590330d2ed2455fe2c83dfb642f" class="children" title="Redux">
+            <a href="/f8ba3590330d2ed2455fe2c83dfb642f.html">Redux</a>
+          </li>
+        
+          <li id="464e637f0da9231bc777743987827f47" class="children" title="spa 路由原理">
+            <a href="/464e637f0da9231bc777743987827f47.html">spa 路由原理</a>
+          </li>
+        
+          <li id="c8cacf58206b6565ea69383e6fbdf7b4" class="children" title="虚拟 Dom 与 diff">
+            <a href="/c8cacf58206b6565ea69383e6fbdf7b4.html">虚拟 Dom 与 diff</a>
+          </li>
+        
+            </ul>
+          
+          <li id="fb9a19d530d65e394c0a161b3d801ad0" class="children" title="AST 抽象语法树">
+            <a href="/fb9a19d530d65e394c0a161b3d801ad0.html">AST 抽象语法树</a>
+          </li>
+        
+          <li id="e3db49d633625ac1552e7dca23fb879e" class="children" title="AST抽象语法树">
+            <a href="/e3db49d633625ac1552e7dca23fb879e.html">AST抽象语法树</a>
+          </li>
+        
+          <li id="8578439a28ea7be119c5e0f09881c164" class="children" title="demo">
+            <a href="/8578439a28ea7be119c5e0f09881c164.html">demo</a>
+          </li>
+        
+          <li id="906880e21cbf1c394f3f24b9b0a64b83" class="children" title="事件循环">
+            <a href="/906880e21cbf1c394f3f24b9b0a64b83.html">事件循环</a>
+          </li>
+        
+          <li id="91cddc44e8c0f27fe5a0290f334ada7e" class="children" title="单元测试">
+            <a href="/91cddc44e8c0f27fe5a0290f334ada7e.html">单元测试</a>
+          </li>
+        
+          <li id="c806b6f5f1e6d1c68f72fae33a8626eb" class="children" title="图标方案">
+            <a href="/c806b6f5f1e6d1c68f72fae33a8626eb.html">图标方案</a>
+          </li>
+        
+          <li id="c271045a3b943be978d1785dadf28253" class="children" title="微前端">
+            <a href="/c271045a3b943be978d1785dadf28253.html">微前端</a>
+          </li>
+        
+          <li id="d101024edcca4d6dff270c2fb6d8b6bd" class="children" title="文件上传&下载">
+            <a href="/d101024edcca4d6dff270c2fb6d8b6bd.html">文件上传&下载</a>
+          </li>
+        
+          <li id="c7291e11fd38fa3a59efe315b9a3ac69" class="children" title="柯里化">
+            <a href="/c7291e11fd38fa3a59efe315b9a3ac69.html">柯里化</a>
+          </li>
+        
+          <li id="1478f616d95f169a35afbf80de6d5b7c" class="children" title="设计稿多端适配方案">
+            <a href="/1478f616d95f169a35afbf80de6d5b7c.html">设计稿多端适配方案</a>
+          </li>
+        
+      <li id="index.md" class="children about">
+        <a href="/">关于</a>
+      </li>
+    </ul>
+    <div class="drager" id="drager">
+      <div class="switcher btn" id="switcher" title="展开或收起"></div>
+      <div class="expand-all btn" id="expand-all" title="展开所有"></div>
+      <div class="collapse-all btn" id="collapse-all" title="收起所有"></div>
+    </div>
+    <div class="mobile_menu" id="mobile_menu">
+      <img src="/resource/icons/bars.svg" alt="" />
+    </div>
+    <div class="content markdown-body">
+      <h1 id="javascript" tabindex="-1"><a class="header-anchor" href="#javascript">Javascript</a></h1>
+<h2 id="string-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95" tabindex="-1"><a class="header-anchor" href="#string-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95">String 原生方法</a></h2>
+<ul>
+<li><code>substr(start[, length])</code>：deprecated，同 slice/substring</li>
+<li><code>split([separator[, limit]])</code>：按照给定规则分割字符串，返回一个由分割出来的子字符串组成的数组 <code>'1,2,3' =&gt; [1, 2, 3]</code></li>
+<li><code>substring(indexStart[, indexEnd])</code>：返回字符串在开始索引到结束索引之间的一个子集，或从开始索引直到字符串末尾的一个子集</li>
+<li><code>slice(beginIndex[, endIndex])</code>：提取字符串一部分，返回一个新的字符串，不会改动原字符串</li>
+</ul>
+<h2 id="array-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95" tabindex="-1"><a class="header-anchor" href="#array-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95">Array 原生方法</a></h2>
+<ul>
+<li><code>push(element1, ..., elementN)</code>：在数组末端添加一个/多个元素，返回添加结果数组 length，改变原数组</li>
+<li><code>pop()</code>：删除数组最后一个元素，返回该元素，改变原数组</li>
+<li><code>shift()</code>：删除数组第一个元素，返回该元素，改变原数组</li>
+<li><code>unshift(element1, ..., elementN)</code>：在数组的第一个位置添加元素，返回添加新元素后的数组 length，改变原数组</li>
+<li><code>join([separator])</code>：以指定参数作为分隔符，将所有数组成员连接为一个字符串返回，如果不提供参数，默认用逗号分隔，<code>[1, 2, 3] =&gt; '1,2,3'</code></li>
+<li><code>slice([begin[, end]])</code>：提取数组的一部分，返回一个新数组，不改变原数组</li>
+<li><code>splice(start[, deleteCount[, item1[, item2[, ...]]]])</code>：删除原数组的一部分成员，并可以在删除的位置添加新的成员，返回被删除的元素，改变原数组</li>
+</ul>
+<p>遍历迭代方法：</p>
+<ul>
+<li><code>for in</code> 顺序遍历一个对象自有的、继承的、可枚举的、非 Symbol 的属性。对于每个不同的属性，语句都会被执行</li>
+</ul>
+<blockquote>
+<p>如果只考虑对象本身的属性，而不是它的原型，那么使用 getOwnPropertyNames() 或 hasOwnProperty() 来确定属性是否是对象本身的。</p>
+</blockquote>
+<ul>
+<li><code>for of</code> ES6 新增，替代 for in 和 forEach，可以遍历 Array，String，Map，Set 等可迭代数据结构</li>
+<li><code>forEach</code> 遍历数组每一项，没有返回值，对原数组没有影响，注意：在 forEach 中用 return 不会返回，break 不会跳出，函数会继续执行</li>
+<li><code>map</code> 返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值</li>
+<li><code>flat</code> 将嵌套的数组“拉平”，变成一维的数组，返回一个新数组，不改变原数组，默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将 flat() 方法的参数写成一个整数</li>
+<li><code>flatMap</code> 对原数组的每个成员执行一个函数（相当于 map），然后对返回值组成的数组执行 flat() 方法。返回一个新数组，不改变原数组，只能展开一层数组</li>
+<li><code>filter</code> 返回通过过滤的元素，不改变原数组</li>
+<li><code>some</code> 检测数组中某个元素是否满足指定条件，返回 boolean 值，不改变原数组</li>
+<li><code>every</code> 检测数组中所有元素是否符合指定条件，返回 boolean 值，不改变原数组</li>
+<li><code>reduce</code> 接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值</li>
+<li><code>reduceRight</code> 同 reduce，方向相反</li>
+<li><code>find</code> 返回通过测试（函数内判断）的数组的第一个元素的值</li>
+</ul>
+<div class="note">
+<p><strong>forEach、for in、for of 区别</strong></p>
+<ul>
+<li>forEach 更多的用来遍历数组</li>
+<li>for in 一般常用来遍历对象或 json</li>
+<li>for of 数组对象都可以遍历，遍历对象需要通过和 Object.keys()</li>
+<li>for in 循环出的是 key，for of 循环出的是 value</li>
+</ul>
+</div>
+<h2 id="%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1" tabindex="-1"><a class="header-anchor" href="#%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1">类数组对象</a></h2>
+<p>拥有 length 属性，length-0 可隐式转换为 number 类型</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> a = { <span class="hljs-number">1</span>: <span class="hljs-string">&#x27;gg&#x27;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&#x27;love&#x27;</span>, <span class="hljs-number">4</span>: <span class="hljs-string">&#x27;meimei&#x27;</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">5</span> };
+</code></pre>
+<p>类数组对象转数组：</p>
+<pre><code class="language-javascript"><span class="hljs-title class_">Array</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">slice</span>.<span class="hljs-title function_">call</span>(arrLike);
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(arrLike);
+</code></pre>
+<h2 id="%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1" tabindex="-1"><a class="header-anchor" href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1">内置对象</a></h2>
+<ul>
+<li>BigInt</li>
+<li>URL 对象</li>
+<li>Error</li>
+<li>Math</li>
+<li>Date</li>
+<li>RegExp</li>
+<li>Proxy\Reflect</li>
+<li>URL 对象：提供用于创建和解析 URL</li>
+<li>DOM 变动观察器（Mutation observer）：观察 DOM 元素，并在检测到更改时触发回调</li>
+</ul>
+<h2 id="es6-%E6%96%B0%E7%89%B9%E6%80%A7" tabindex="-1"><a class="header-anchor" href="#es6-%E6%96%B0%E7%89%B9%E6%80%A7">ES6 新特性</a></h2>
+<ul>
+<li>箭头函数</li>
+<li>Promise</li>
+<li>扩展运算符和解构赋值</li>
+<li>对象和数组解构</li>
+<li>let const</li>
+<li>模板字符串</li>
+<li>函数的参数默认值</li>
+<li>class</li>
+<li><code>for of</code> 和 <code>for in</code></li>
+<li>模块</li>
+<li>尾调用优化 TCO</li>
+</ul>
+<h2 id="var-let-const" tabindex="-1"><a class="header-anchor" href="#var-let-const">var let const</a></h2>
+<ul>
+<li>let 和 const 具有块级作用域，var 不存在块级作用域</li>
+<li>const 声明常量，不能修改，声明的对象，属性可以被修改</li>
+<li>用 var 重复声明不会报错，但 let 和 const 会</li>
+<li>var 会使变量提升，变量可以在 var 声明之前使用。let 和 const 不会使变量提升，提前使用会报错</li>
+</ul>
+<h2 id="%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D" tabindex="-1"><a class="header-anchor" href="#%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D">深浅拷贝</a></h2>
+<ul>
+<li>
+<p>浅拷贝: 以赋值形式拷贝引用对象，仍指向同一个地址，修改时原对象也会受到影响，实现：Object.assign 或 展开运算符</p>
+</li>
+<li>
+<p>深拷贝：</p>
+<ul>
+<li>JavaScript 包含基本类型 和 引用类型</li>
+<li>基本类型按值访问、引用类型按引用访问</li>
+<li>直接复制引用类型的值，实际上是同一个内存地址的指针，修改新的变量，原变量也会被修改</li>
+</ul>
+</li>
+<li>
+<p>手写深拷贝：</p>
+</li>
+</ul>
+<pre><code class="language-jsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">deepCopy</span>(<span class="hljs-params">obj</span>) {
+  <span class="hljs-comment">// 判断是否是简单数据类型，</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> obj == <span class="hljs-string">&#x27;object&#x27;</span>) {
+    <span class="hljs-comment">// 复杂数据类型</span>
+    <span class="hljs-keyword">var</span> result = obj.<span class="hljs-property">constructor</span> == <span class="hljs-title class_">Array</span> ? [] : {};
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i <span class="hljs-keyword">in</span> obj) {
+      result[i] = <span class="hljs-keyword">typeof</span> obj[i] == <span class="hljs-string">&#x27;object&#x27;</span> ? <span class="hljs-title function_">deepCopy</span>(obj[i]) : obj[i];
+    }
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// 简单数据类型 直接赋值</span>
+    <span class="hljs-keyword">var</span> result = obj;
+  }
+  <span class="hljs-keyword">return</span> result;
+}
+</code></pre>
+<h2 id="generator-%E5%87%BD%E6%95%B0" tabindex="-1"><a class="header-anchor" href="#generator-%E5%87%BD%E6%95%B0">Generator 函数</a></h2>
+<ul>
+<li>function 关键字与函数名之间有一个星号</li>
+<li>函数体内部使用 yield 表达式</li>
+<li>返回一个指向内部状态的指针对象，是一个遍历器对象</li>
+<li>调用遍历器对象的 next 方法，使指针移向下一个状态</li>
+<li>内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个 yield 表达式（或 return 语句）为止</li>
+<li>next 方法返回一个对象，它的 value 属性是当前 yield 表达式的值，done 属性的值表示遍历是否结束</li>
+</ul>
+<h2 id="async%2Fawait" tabindex="-1"><a class="header-anchor" href="#async%2Fawait">async/await</a></h2>
+<ul>
+<li>async 用来声明函数，告诉解释器这是一个异步函数，只有 async 声明的函数里面才能用 await</li>
+<li>await 等待一个 promise 执行结束，可以返回 promise 对象 resolve 出来的结果</li>
+<li>如果 await 等待的这个 Promise 对象出错或者结果为 reject，可以通过 try catch 捕获到错误</li>
+</ul>
+<p>实现原理：</p>
+<ul>
+<li>Generator 函数的语法糖</li>
+<li>将 Generator 函数和自动执行器，包装在一个函数里</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">args</span>) {
+  <span class="hljs-comment">// ...</span>
+}
+
+<span class="hljs-comment">// 等同于</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">args</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">spawn</span>(<span class="hljs-keyword">function</span>* () {
+    <span class="hljs-comment">// ...</span>
+  });
+}
+</code></pre>
+<p>spawn 函数就是自动执行器，spawn 函数的实现：</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">spawn</span>(<span class="hljs-params">genF</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) {
+    <span class="hljs-keyword">const</span> gen = <span class="hljs-title function_">genF</span>();
+
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">step</span>(<span class="hljs-params">nextF</span>) {
+      <span class="hljs-keyword">let</span> next;
+      <span class="hljs-keyword">try</span> {
+        next = <span class="hljs-title function_">nextF</span>();
+      } <span class="hljs-keyword">catch</span> (e) {
+        <span class="hljs-keyword">return</span> <span class="hljs-title function_">reject</span>(e);
+      }
+      <span class="hljs-keyword">if</span> (next.<span class="hljs-property">done</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-title function_">resolve</span>(next.<span class="hljs-property">value</span>);
+      }
+      <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(next.<span class="hljs-property">value</span>).<span class="hljs-title function_">then</span>(
+        <span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) {
+          <span class="hljs-title function_">step</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+            <span class="hljs-keyword">return</span> gen.<span class="hljs-title function_">next</span>(v);
+          });
+        },
+        <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+          <span class="hljs-title function_">step</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+            <span class="hljs-keyword">return</span> gen.<span class="hljs-keyword">throw</span>(e);
+          });
+        }
+      );
+    }
+
+    <span class="hljs-title function_">step</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">return</span> gen.<span class="hljs-title function_">next</span>(<span class="hljs-literal">undefined</span>);
+    });
+  });
+}
+</code></pre>
+<h2 id="apply%E3%80%81call%E3%80%81bind" tabindex="-1"><a class="header-anchor" href="#apply%E3%80%81call%E3%80%81bind">apply、call、bind</a></h2>
+<ul>
+<li>都是用来改变函数 this 的指向</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li>apply 和 call 的区别是 call 方法接受的是若干个参数列表，而 apply 接收的是一个包含多个参数的数组</li>
+<li>bind 方法创建新的函数，在 bind 被调用时，这个新函数的 this 被指定为 bind 的第一个参数，而其余参数将作为新函数的参数，供调用时使用，bind 与 apply/call 一样都能改变函数 this 指向，但 bind 并不会立即执行函数，而是返回一个绑定了 this 的新函数，你需要再次调用此函数才能达到最终执行</li>
+</ul>
+<p>手写：</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// call</span>
+<span class="hljs-title class_">Function</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">myCall</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">context, ...args</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">this</span> !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Type error&#x27;</span>);
+  }
+
+  <span class="hljs-comment">// 判断 context 是否传入，如果没有传就设置为 window</span>
+  context = context || <span class="hljs-variable language_">window</span>;
+
+  <span class="hljs-comment">// 使用 Symbol 来保证属性唯一</span>
+  <span class="hljs-comment">// 保证不会重写用户自己原来定义在 context 中的同名属性</span>
+  <span class="hljs-keyword">const</span> fnSymbol = <span class="hljs-title class_">Symbol</span>();
+
+  <span class="hljs-comment">// 将被调用的方法设置为 context 的属性</span>
+  <span class="hljs-comment">// this 即为我们要调用的方法</span>
+  context[fnSymbol] = <span class="hljs-variable language_">this</span>;
+
+  <span class="hljs-comment">// 将执行结果返回</span>
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">return</span> context[fnSymbol](...args);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-comment">// 最后删除手动增加的属性方法</span>
+    <span class="hljs-keyword">delete</span> context[fnSymbol];
+  }
+};
+
+<span class="hljs-keyword">var</span> foo = {
+  <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>,
+};
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bar</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span>);
+}
+
+bar.<span class="hljs-title function_">call</span>(foo); <span class="hljs-comment">// 1</span>
+bar.<span class="hljs-title function_">myCall</span>(foo); <span class="hljs-comment">// 1</span>
+
+<span class="hljs-comment">// apply</span>
+<span class="hljs-comment">// 与 call 相比仅获取参数方式不同</span>
+
+<span class="hljs-comment">// bind</span>
+<span class="hljs-title class_">Function</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">myBind</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">context, ...args</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">this</span> !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Type error&#x27;</span>);
+  }
+
+  <span class="hljs-keyword">const</span> fn = <span class="hljs-variable language_">this</span>;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">Fn</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> fn.<span class="hljs-title function_">apply</span>(
+      <span class="hljs-variable language_">this</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Fn</span> ? <span class="hljs-variable language_">this</span> : context,
+      <span class="hljs-comment">// 当前的这个 arguments 是指 Fn 的参数</span>
+      args.<span class="hljs-title function_">concat</span>(...<span class="hljs-variable language_">arguments</span>)
+    );
+  };
+};
+</code></pre>
+<h2 id="%E4%BD%9C%E7%94%A8%E5%9F%9F" tabindex="-1"><a class="header-anchor" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a></h2>
+<p>用来管理引擎如何在当前作用域以及嵌套子作用域中根据标识符名称（变量名或者函数名）进行变量查找<br>
+作用域类型：全局作用域和函数作用域</p>
+<h3 id="%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F" tabindex="-1"><a class="header-anchor" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F">块级作用域</a></h3>
+<p>解决 ES5 的问题：</p>
+<ul>
+<li>内层变量可能覆盖外层变量</li>
+<li>用来计数的循环变量泄露为全局变量</li>
+</ul>
+<h3 id="%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE" tabindex="-1"><a class="header-anchor" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE">作用域链</a></h3>
+<p>当访问一个变量时，编译器在执行这段代码时，会首先从当前的作用域中查找是否有这个标识符，如果没找到，就去父作用域查找，如果父作用域还没找到继续向上查找，直到全局作用域为止，作用域链，就是由当前作用域与上层作用域的一系列变量对象组成，保证了当前执行的作用域对符合访问权限的变量和函数的有序访问</p>
+<h3 id="%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F" tabindex="-1"><a class="header-anchor" href="#%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F">词法作用域和动态作用域</a></h3>
+<ul>
+<li>JavaScript 采用词法作用域，也就是静态作用域</li>
+<li>函数的作用域在函数定义的时候就决定了</li>
+<li>而与词法作用域相对的是动态作用域，函数的作用域是在函数调用的时候才决定</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> value = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value);
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">bar</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">var</span> value = <span class="hljs-number">2</span>;
+  <span class="hljs-title function_">foo</span>();
+}
+
+<span class="hljs-title function_">bar</span>();
+
+<span class="hljs-comment">// 1</span>
+</code></pre>
+<h3 id="%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87" tabindex="-1"><a class="header-anchor" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87">执行上下文</a></h3>
+<ul>
+<li>当函数执行时，会创建一个称为执行上下文的内部对象</li>
+<li>一个执行上下文定义了一个函数执行时的环境，函数每次执行时对应的执行上下文都是独一无二的，所以多次调用一个函数会导致创建多个执行上下文，</li>
+<li>当函数执行完毕，执行上下文被销毁</li>
+</ul>
+<h2 id="%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92" tabindex="-1"><a class="header-anchor" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">参数传递</a></h2>
+<ul>
+<li>参数如果是基本类型是按值传递，如果是引用类型按共享传递</li>
+<li>但是当值是一个复杂的数据结构的时候，拷贝就会产生性能上的问题</li>
+</ul>
+<h3 id="%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92" tabindex="-1"><a class="header-anchor" href="#%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92">按值传递</a></h3>
+<ul>
+<li>把函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样</li>
+</ul>
+<h3 id="%E5%85%B1%E4%BA%AB%E4%BC%A0%E9%80%92" tabindex="-1"><a class="header-anchor" href="#%E5%85%B1%E4%BA%AB%E4%BC%A0%E9%80%92">共享传递</a></h3>
+<ul>
+<li>在传递对象的时候，传递对象的引用的副本</li>
+<li>假设 arg 是一个对象参数，修改 arg.value，可以通过引用找到原值，但是直接修改 arg，并不会修改原值</li>
+</ul>
+<h3 id="arguments" tabindex="-1"><a class="header-anchor" href="#arguments">arguments</a></h3>
+<ul>
+<li>一个类数组对象，存储传入函数的全部参数</li>
+<li>callee 属性：当前函数的引用</li>
+<li>妙用：递归、参数累加</li>
+</ul>
+<div class="tip">
+<p>为什么 arguments 是类数组：</p>
+<p>BE 本人也承认 arguments 的设计是因为当时只花了十天所以整得太糙了</p>
+</div>
+<div class="tip">
+<p>为什么 ES6 不推荐 arguments.callee()：</p>
+<ul>
+<li>访问 arguments 是个很昂贵的操作，因为它是个很大的对象，每次递归调用时都需要重新创建。影响浏览器的性能，还会影响闭包</li>
+<li>当一个函数必须调用自身的时候，假如它是函数表达式则给它命名，或者使用函数声明，避免使用 callee</li>
+</ul>
+</div>
+<h2 id="delete-%E6%9C%BA%E5%88%B6" tabindex="-1"><a class="header-anchor" href="#delete-%E6%9C%BA%E5%88%B6">delete 机制</a></h2>
+<ul>
+<li>使用 delete 操作符不会直接释放内存，与 V8 引擎有关</li>
+<li>最有效的方式，应该是将不需要的属性设置为 undefined</li>
+<li>在实际业务中可以考虑使用 Map 来代替 object，map 包装对象有 delete 方法，比以上方式都快</li>
+</ul>
+<h2 id="%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7%E4%B8%8D%E8%83%BD%E4%BF%AE%E6%94%B9" tabindex="-1"><a class="header-anchor" href="#%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7%E4%B8%8D%E8%83%BD%E4%BF%AE%E6%94%B9">设置一个对象所有属性不能修改</a></h2>
+<ul>
+<li><code>Object.preventExtensions()</code></li>
+<li><code>Object.seal()</code> 封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置，当前属性的值只要原来是可写的就可以改变</li>
+<li><code>Object.freeze()</code> 使用 Object.freeze() 冻结的对象中的现有属性值是不可变的。用 Object.seal() 密封的对象可以改变其现有属性值</li>
+</ul>
+<h2 id="%E4%BB%A3%E7%90%86%E5%AF%B9" tabindex="-1"><a class="header-anchor" href="#%E4%BB%A3%E7%90%86%E5%AF%B9">代理对</a></h2>
+<ul>
+<li>
+<p>参考：<a href="https://zh.javascript.info/string" target="_blank">https://zh.javascript.info/string</a></p>
+</li>
+<li>
+<p>所有常用的字符都是一个 2 字节的代码。大多数欧洲语言，数字甚至大多数象形文字中的字母都有 2 字节的表示形式</p>
+</li>
+<li>
+<p>但 2 字节只允许 65536 个组合，这对于表示每个可能的符号是不够的。所以稀有的符号被称为“代理对”的一对 2 字节的符号编码</p>
+</li>
+<li>
+<p>代理对在 JavaScript 被创建时并不存在，因此无法被编程语言正确处理</p>
+</li>
+<li>
+<p>这些符号的 length 是 2：</p>
+<pre><code class="language-js"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;𝒳&#x27;</span>.<span class="hljs-property">length</span>); <span class="hljs-comment">// 2，大写数学符号</span>
+<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;😂&#x27;</span>.<span class="hljs-property">length</span>); <span class="hljs-comment">// 2，部分 emoji 表情</span>
+<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;𩷶&#x27;</span>.<span class="hljs-property">length</span>); <span class="hljs-comment">// 2，罕见的中国象形文字</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0" tabindex="-1"><a class="header-anchor" href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0">并发控制实现</a></h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">asyncPool</span>(<span class="hljs-params">poolLimit, array, iteratorFn</span>) {
+  <span class="hljs-keyword">const</span> ret = []; <span class="hljs-comment">// 存储所有的异步任务</span>
+  <span class="hljs-keyword">const</span> executing = []; <span class="hljs-comment">// 存储正在执行的异步任务</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> array) {
+    <span class="hljs-comment">// 调用iteratorFn函数创建异步任务</span>
+    <span class="hljs-keyword">const</span> p = <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">iteratorFn</span>(item, array));
+    ret.<span class="hljs-title function_">push</span>(p); <span class="hljs-comment">// 保存新的异步任务</span>
+
+    <span class="hljs-comment">// 当poolLimit值小于或等于总任务个数时，进行并发控制</span>
+    <span class="hljs-keyword">if</span> (poolLimit &lt;= array.<span class="hljs-property">length</span>) {
+      <span class="hljs-comment">// 当任务完成后，从正在执行的任务数组中移除已完成的任务</span>
+      <span class="hljs-keyword">const</span> e = p.<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> executing.<span class="hljs-title function_">splice</span>(executing.<span class="hljs-title function_">indexOf</span>(e), <span class="hljs-number">1</span>));
+      executing.<span class="hljs-title function_">push</span>(e); <span class="hljs-comment">// 保存正在执行的异步任务</span>
+      <span class="hljs-keyword">if</span> (executing.<span class="hljs-property">length</span> &gt;= poolLimit) {
+        <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">race</span>(executing); <span class="hljs-comment">// 等待较快的任务执行完成</span>
+      }
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(ret);
+}
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">multiRequest</span>(<span class="hljs-params">urls = [], maxNum</span>) {
+  <span class="hljs-comment">// 请求总数量</span>
+  <span class="hljs-keyword">const</span> len = urls.<span class="hljs-property">length</span>;
+  <span class="hljs-comment">// 根据请求数量创建一个数组来保存请求的结果</span>
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(len).<span class="hljs-title function_">fill</span>(<span class="hljs-literal">false</span>);
+  <span class="hljs-comment">// 当前完成的数量</span>
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    <span class="hljs-comment">// 请求maxNum个</span>
+    <span class="hljs-keyword">while</span> (count &lt; maxNum) {
+      <span class="hljs-title function_">next</span>();
+    }
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">next</span>(<span class="hljs-params"></span>) {
+      <span class="hljs-keyword">let</span> current = count++;
+      <span class="hljs-comment">// 处理边界条件</span>
+      <span class="hljs-keyword">if</span> (current &gt;= len) {
+        <span class="hljs-comment">// 请求全部完成就将promise置为成功状态, 然后将result作为promise值返回</span>
+        !result.<span class="hljs-title function_">includes</span>(<span class="hljs-literal">false</span>) &amp;&amp; <span class="hljs-title function_">resolve</span>(result);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">const</span> url = urls[current];
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`开始 <span class="hljs-subst">${current}</span>`</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toLocaleString</span>());
+      <span class="hljs-title function_">fetch</span>(url)
+        .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+          <span class="hljs-comment">// 保存请求结果</span>
+          result[current] = res;
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`完成 <span class="hljs-subst">${current}</span>`</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toLocaleString</span>());
+          <span class="hljs-comment">// 请求没有全部完成, 就递归</span>
+          <span class="hljs-keyword">if</span> (current &lt; len) {
+            <span class="hljs-title function_">next</span>();
+          }
+        })
+        .<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`结束 <span class="hljs-subst">${current}</span>`</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toLocaleString</span>());
+          result[current] = err;
+          <span class="hljs-comment">// 请求没有全部完成, 就递归</span>
+          <span class="hljs-keyword">if</span> (current &lt; len) {
+            <span class="hljs-title function_">next</span>();
+          }
+        });
+    }
+  });
+}
+</code></pre>
+<h2 id="weakmap%5Cmap-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#weakmap%5Cmap-%E5%8C%BA%E5%88%AB">WeakMap\Map 区别</a></h2>
+<ul>
+<li>Map 的键可以是任意类型，WeakMap 只接受对象作为键（null 除外），不接受其他类型的值作为键</li>
+<li>WeakMap 的键名所指向的对象，不计入垃圾回收机制，设计目的在于，有时想在某个对象上面存放一些数据，但是这会形成对于这个对象的引用。一旦不再需要这两个对象，就必须手动删除这个引用，否则垃圾回收机制就不会释放对象占用的内存</li>
+<li>Map 的键跟内存地址绑定，只要内存地址不一样，就视为两个键；WeakMap 的键是弱引用，键所指向的对象可以被垃圾回收，此时键是无效的</li>
+<li>Map 的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键；WeakMap 的键是弱引用，键所指向的对象可以被垃圾回收，此时键是无效的</li>
+</ul>
+<h2 id="escape%5Cencodeuri%5Cencodeuricomponent-%E5%8C%BA%E5%88%AB" tabindex="-1"><a class="header-anchor" href="#escape%5Cencodeuri%5Cencodeuricomponent-%E5%8C%BA%E5%88%AB">escape\encodeURI\encodeURIComponent 区别</a></h2>
+<ul>
+<li>escape 和它们不是同一类，是对字符串进行编码(而另外两种是对 url)，作用是让它们在所有电脑上可读</li>
+<li>encodeURI\encodeURIComponent 唯一区别就是编码的字符范围</li>
+<li>encodeURIComponent 比 encodeURI 编码的范围更大</li>
+</ul>
+<h2 id="%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8" tabindex="-1"><a class="header-anchor" href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8">扩展运算符的应用</a></h2>
+<ul>
+<li>
+<p>取出参数对象中的所有可遍历属性，拷贝到当前对象之中</p>
+</li>
+<li>
+<p>合并对象，覆盖对象属性</p>
+</li>
+<li>
+<p>将一个数组转为用逗号分隔的参数序列，且每次只能展开一层数组</p>
+<pre><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(...[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);
+<span class="hljs-comment">// 1 2 3</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(...[<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], <span class="hljs-number">5</span>]);
+<span class="hljs-comment">// 1 [2, 3, 4] 5</span>
+</code></pre>
+</li>
+<li>
+<p>合并数组</p>
+</li>
+<li>
+<p>字符串转真数组</p>
+<pre><code class="language-javascript">[...<span class="hljs-string">&#x27;hello&#x27;</span>]; <span class="hljs-comment">// [ &quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot; ]</span>
+</code></pre>
+</li>
+<li>
+<p>转任何部署了 Iterator 接口的对象为真数组</p>
+</li>
+</ul>
+<h2 id="%E4%BD%8D%E8%BF%90%E7%AE%97" tabindex="-1"><a class="header-anchor" href="#%E4%BD%8D%E8%BF%90%E7%AE%97">位运算</a></h2>
+<ul>
+<li>计算机对二进制数据进行的运算，加减乘除等，叫位运算</li>
+</ul>
+<h2 id="javascript-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87" tabindex="-1"><a class="header-anchor" href="#javascript-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87">JavaScript 为什么要进行变量提升</a></h2>
+<ul>
+<li>js 引擎在代码执行前有一个解析的过程，创建了执行上下文，初始化了一些代码执行时需要用到的对象</li>
+<li>当访问一个变量时，会到当前执行上下文中的作用域链中去查找</li>
+<li>提高性能 容错性更好</li>
+</ul>
+<h2 id="%E8%A7%A3%E6%9E%90%E5%92%8C%E6%89%A7%E8%A1%8C" tabindex="-1"><a class="header-anchor" href="#%E8%A7%A3%E6%9E%90%E5%92%8C%E6%89%A7%E8%A1%8C">解析和执行</a></h2>
+<p>解析: 检查语法，并对函数进行预编译。解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来，变量先赋值为 undefined，函数先声明好可使用。在一个函数执行之前，也会创建一个函数执行上下文环境，跟全局执行上下文类似，不过函数执行上下文会多出 this、arguments 和函数的参数</p>
+<p>执行: 按照代码的顺序依次执行</p>
+<h2 id="%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F" tabindex="-1"><a class="header-anchor" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F">严格模式</a></h2>
+<p>文件顶部添加 <code>'use strict'</code> 开启</p>
+<p>意义：</p>
+<ul>
+<li>消除 Javascript 语法的不合理、不严谨之处，减少怪异行为</li>
+<li>消除代码运行的不安全之处，保证代码运行的安全</li>
+<li>提高编译器效率，增加运行速度</li>
+<li>为未来新版本的 Javascript 做好铺垫</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li>禁止使用 with 语句</li>
+<li>禁止 this 关键字指向全局对象</li>
+<li>对象不能有重名的属性</li>
+</ul>
+<h2 id="dom-api" tabindex="-1"><a class="header-anchor" href="#dom-api">DOM api</a></h2>
+<h3 id="%E5%88%9B%E5%BB%BA%E6%96%B0%E8%8A%82%E7%82%B9" tabindex="-1"><a class="header-anchor" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E8%8A%82%E7%82%B9">创建新节点</a></h3>
+<ul>
+<li>createDocumentFragment() //创建一个 DOM 片段</li>
+<li>createElement() //创建一个具体的元素</li>
+<li>createTextNode() //创建一个文本节点</li>
+</ul>
+<h3 id="%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E6%9B%BF%E6%8D%A2%E3%80%81%E6%8F%92%E5%85%A5" tabindex="-1"><a class="header-anchor" href="#%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E6%9B%BF%E6%8D%A2%E3%80%81%E6%8F%92%E5%85%A5">添加、移除、替换、插入</a></h3>
+<ul>
+<li>appendChild() //添加</li>
+<li>removeChild() //移除</li>
+<li>replaceChild() //替换</li>
+<li>insertBefore() //插入</li>
+</ul>
+<h3 id="%E6%9F%A5%E6%89%BE" tabindex="-1"><a class="header-anchor" href="#%E6%9F%A5%E6%89%BE">查找</a></h3>
+<ul>
+<li>getElementsByTagName()</li>
+<li>getElementsByName()</li>
+<li>getElementById()</li>
+<li>document.querySelector()</li>
+<li>document.querySelectorAll()</li>
+</ul>
+<h2 id="%E6%89%8B%E5%86%99-ajax" tabindex="-1"><a class="header-anchor" href="#%E6%89%8B%E5%86%99-ajax">手写 Ajax</a></h2>
+<pre><code class="language-jsx"><span class="hljs-keyword">var</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();
+xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-comment">// 通信成功时，状态值为4</span>
+  <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> === <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">status</span> === <span class="hljs-number">200</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(xhr.<span class="hljs-property">responseText</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(xhr.<span class="hljs-property">statusText</span>);
+    }
+  }
+};
+xhr.<span class="hljs-property">onerror</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(xhr.<span class="hljs-property">statusText</span>);
+};
+xhr.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;http://www.example.com/page.php&#x27;</span>, <span class="hljs-literal">true</span>);
+xhr.<span class="hljs-title function_">send</span>(<span class="hljs-literal">null</span>);
+</code></pre>
+<p>XMLHttpRequest.readyState 返回一个整数，表示实例对象的当前状态。该属性只读。它可能返回以下值。</p>
+<p>0，XMLHttpRequest 实例已经生成，但是实例的 open() 方法还没有被调用。<br>
+1，open() 方法已经调用，但是实例的 send() 方法还没有调用，仍然可以使用实例的 setRequestHeader() 方法，设定 HTTP 请求的头信息。<br>
+2，实例的 send() 方法已经调用，并且服务器返回的头信息和状态码已经收到。<br>
+3，正在接收服务器传来的数据体（body ）。这时，如果实例的 responseType 属性等于 text 或者空字符串，responseText 属性就会包含已经收到的部分信息。<br>
+4，服务器返回的数据已经完全接收，或本次接收已经失败。</p>
+
+      
+        <div class="btt withToc" id="btt"></div>
+      
+    </div>
+    
+    <div class="table-of-contents"><ul><li title="Javascript"><a href="#javascript" data-anchor="#javascript">Javascript</a><ul><li title="String 原生方法"><a href="#string-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95" data-anchor="#string-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95">String 原生方法</a></li><li title="Array 原生方法"><a href="#array-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95" data-anchor="#array-%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95">Array 原生方法</a></li><li title="类数组对象"><a href="#%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1" data-anchor="#%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1">类数组对象</a></li><li title="内置对象"><a href="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1" data-anchor="#%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1">内置对象</a></li><li title="ES6 新特性"><a href="#es6-%E6%96%B0%E7%89%B9%E6%80%A7" data-anchor="#es6-%E6%96%B0%E7%89%B9%E6%80%A7">ES6 新特性</a></li><li title="var let const"><a href="#var-let-const" data-anchor="#var-let-const">var let const</a></li><li title="深浅拷贝"><a href="#%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D" data-anchor="#%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D">深浅拷贝</a></li><li title="Generator 函数"><a href="#generator-%E5%87%BD%E6%95%B0" data-anchor="#generator-%E5%87%BD%E6%95%B0">Generator 函数</a></li><li title="async/await"><a href="#async%2Fawait" data-anchor="#async%2Fawait">async/await</a></li><li title="apply、call、bind"><a href="#apply%E3%80%81call%E3%80%81bind" data-anchor="#apply%E3%80%81call%E3%80%81bind">apply、call、bind</a></li><li title="作用域"><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F" data-anchor="#%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a><ul><li title="块级作用域"><a href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F" data-anchor="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F">块级作用域</a></li><li title="作用域链"><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE" data-anchor="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE">作用域链</a></li><li title="词法作用域和动态作用域"><a href="#%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F" data-anchor="#%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F">词法作用域和动态作用域</a></li><li title="执行上下文"><a href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87" data-anchor="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87">执行上下文</a></li></ul></li><li title="参数传递"><a href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92" data-anchor="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">参数传递</a><ul><li title="按值传递"><a href="#%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92" data-anchor="#%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92">按值传递</a></li><li title="共享传递"><a href="#%E5%85%B1%E4%BA%AB%E4%BC%A0%E9%80%92" data-anchor="#%E5%85%B1%E4%BA%AB%E4%BC%A0%E9%80%92">共享传递</a></li><li title="arguments"><a href="#arguments" data-anchor="#arguments">arguments</a></li></ul></li><li title="delete 机制"><a href="#delete-%E6%9C%BA%E5%88%B6" data-anchor="#delete-%E6%9C%BA%E5%88%B6">delete 机制</a></li><li title="设置一个对象所有属性不能修改"><a href="#%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7%E4%B8%8D%E8%83%BD%E4%BF%AE%E6%94%B9" data-anchor="#%E8%AE%BE%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7%E4%B8%8D%E8%83%BD%E4%BF%AE%E6%94%B9">设置一个对象所有属性不能修改</a></li><li title="代理对"><a href="#%E4%BB%A3%E7%90%86%E5%AF%B9" data-anchor="#%E4%BB%A3%E7%90%86%E5%AF%B9">代理对</a></li><li title="并发控制实现"><a href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0" data-anchor="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0">并发控制实现</a></li><li title="WeakMap\Map 区别"><a href="#weakmap%5Cmap-%E5%8C%BA%E5%88%AB" data-anchor="#weakmap%5Cmap-%E5%8C%BA%E5%88%AB">WeakMap\Map 区别</a></li><li title="escape\encodeURI\encodeURIComponent 区别"><a href="#escape%5Cencodeuri%5Cencodeuricomponent-%E5%8C%BA%E5%88%AB" data-anchor="#escape%5Cencodeuri%5Cencodeuricomponent-%E5%8C%BA%E5%88%AB">escape\encodeURI\encodeURIComponent 区别</a></li><li title="扩展运算符的应用"><a href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8" data-anchor="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8">扩展运算符的应用</a></li><li title="位运算"><a href="#%E4%BD%8D%E8%BF%90%E7%AE%97" data-anchor="#%E4%BD%8D%E8%BF%90%E7%AE%97">位运算</a></li><li title="JavaScript 为什么要进行变量提升"><a href="#javascript-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87" data-anchor="#javascript-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87">JavaScript 为什么要进行变量提升</a></li><li title="解析和执行"><a href="#%E8%A7%A3%E6%9E%90%E5%92%8C%E6%89%A7%E8%A1%8C" data-anchor="#%E8%A7%A3%E6%9E%90%E5%92%8C%E6%89%A7%E8%A1%8C">解析和执行</a></li><li title="严格模式"><a href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F" data-anchor="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F">严格模式</a></li><li title="DOM api"><a href="#dom-api" data-anchor="#dom-api">DOM api</a><ul><li title="创建新节点"><a href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E8%8A%82%E7%82%B9" data-anchor="#%E5%88%9B%E5%BB%BA%E6%96%B0%E8%8A%82%E7%82%B9">创建新节点</a></li><li title="添加、移除、替换、插入"><a href="#%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E6%9B%BF%E6%8D%A2%E3%80%81%E6%8F%92%E5%85%A5" data-anchor="#%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E6%9B%BF%E6%8D%A2%E3%80%81%E6%8F%92%E5%85%A5">添加、移除、替换、插入</a></li><li title="查找"><a href="#%E6%9F%A5%E6%89%BE" data-anchor="#%E6%9F%A5%E6%89%BE">查找</a></li></ul></li><li title="手写 Ajax"><a href="#%E6%89%8B%E5%86%99-ajax" data-anchor="#%E6%89%8B%E5%86%99-ajax">手写 Ajax</a></li></ul></li></ul></div>
+    
+
+    <!-- bottom scripts -->
+    <script src="/resource/lib/mark.js-8.11.1/jquery.mark.min.js"></script>
+    <script src="/resource/lib/viewerjs-1.10.5/viewer.min.js"></script>
+    <script src="/resource/lib/jquery-viewer-1.0.1/jquery-viewer.min.js"></script>
+    <script src="/resource/script.js"></script>
+  </body>
+</html>
